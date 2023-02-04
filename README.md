@@ -33,10 +33,10 @@ this project is a good foundation for me to create more in depth and complex gam
 ### Out of Battle
 
 - As a user, I want to be able to create a new deck and add it to a list of decks. 
-- As a user, I want to be able to remove a deck from a list of decks. 
+- As a user, I want to be able to remove a deck from a list of decks.
+- As a user, I want to be able to select a deck, and view the cards in the deck.
 - As a user, I want to be able to select a deck, and add a card to the deck. 
-- As a user, I want to be able to select a deck, and remove a card from the deck. 
-- As a user, I want to be able to select a deck, and view the cards in the deck. 
+- As a user, I want to be able to select a deck, and remove a card from the deck.
 - As a user, I want to be able to purchase a card, and add it to my owned cards. 
 - As a user, I want to be able to sell a card from my owned cards.
 
