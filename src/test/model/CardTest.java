@@ -35,7 +35,7 @@ class CardTest {
         userDeck = new Deck("Deck");
         user = new User();
         enemy = new Enemy();
-        user.startBattle(userDeck);
+        user.startBattle();
     }
 
     @Test

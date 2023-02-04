@@ -49,14 +49,14 @@ class DeckTest {
         }
 
         assertEquals(20, deck1.getCards().size());
-        assertEquals(sampleCard1, deck2.getCards().get(19));
+        assertEquals(sampleCard1, deck1.getCards().get(19));
 
         deck1.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck2.getCards().get(20));
+        assertEquals(sampleCard2, deck1.getCards().get(20));
         assertEquals(21, deck1.getCards().size());
 
         deck1.addCard(sampleCard1);
-        assertEquals(sampleCard1, deck2.getCards().get(21));
+        assertEquals(sampleCard1, deck1.getCards().get(21));
         assertEquals(22, deck1.getCards().size());
 
         assertEquals(10, deck2.getCards().size());
@@ -80,10 +80,10 @@ class DeckTest {
         assertEquals(2, deck1.getCards().size());
         assertEquals(expected1, deck1.getCards());
 
-        deck1.addCard(sampleCard2);
-        deck1.addCard(sampleCard2);
-        deck1.addCard(sampleCard3);
-        deck1.removeCard(sampleCard2);
+        deck2.addCard(sampleCard2);
+        deck2.addCard(sampleCard2);
+        deck2.addCard(sampleCard3);
+        deck2.removeCard(sampleCard2);
 
         List<Card> expected2 = new ArrayList<>();
         expected2.add(sampleCard2);
@@ -101,7 +101,7 @@ class DeckTest {
             deck2.addCard(sampleCard1);
         }
         for (int i = 0; i < VIABLE_DECK_CARD_COUNT + 10; i++) {
-            deck2.addCard(sampleCard1);
+            deck3.addCard(sampleCard1);
         }
 
         assertFalse(deck1.checkViable());

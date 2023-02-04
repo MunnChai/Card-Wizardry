@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.User.*;
+
 /* A deck of cards, which you can add or remove cards from. To use a deck, the deck must have the exact number of
  required cards. */
 public class Deck {
@@ -15,13 +17,15 @@ public class Deck {
     // EFFECTS: Constructs an empty deck
     public Deck(String name) {
         this.name = name;
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
     // MODIFIES: this
     // EFFECTS: fills list of cards with random cards until viable number of cards are in the deck
-    public void fillRandom() {
-
+    public void fillRandom(List<Card> ownedCards) {
+        while (cards.size() != VIABLE_DECK_CARD_COUNT) {
+            cards.add(ownedCards.get((int)(Math.random() * ownedCards.size())));
+        }
     }
 
     // EFFECTS: Add given card to deck, remove from owned cards
@@ -37,9 +41,16 @@ public class Deck {
 
     // EFFECTS: Produce true if deck has viable amount of cards
     public Boolean checkViable() {
-        return false; // stub
+        return (cards.size() == VIABLE_DECK_CARD_COUNT);
     }
 
+
+    // Setters
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    // Getters
     public List<Card> getCards() {
         return cards;
     }

@@ -6,10 +6,6 @@ import java.util.List;
 // A card with an action type (string), value (int), cost (int)
 public class Card {
 
-
-    public static final List<Card> ALL_CARDS = new ArrayList<>();
-    public static final int ALL_CARD_COUNT = 60;
-
     // TODO
     // EFFECTS: returns a list of all the cards in the game
     public void makeAllCards() {
