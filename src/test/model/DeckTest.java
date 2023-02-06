@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
 
+    User user1;
+
     Deck deck1;
     Deck deck2;
     Deck deck3;
@@ -22,6 +24,7 @@ class DeckTest {
 
     @BeforeEach
     public void setup() {
+        user1 = new User();
         deck1 = new Deck("Deck 1");
         deck2 = new Deck("Deck 2");
         deck3 = new Deck("Deck 3");
@@ -33,10 +36,37 @@ class DeckTest {
     @Test
     public void testDeckConstructor() {
         assertEquals("Deck 1", deck1.getName());
-        assertEquals(0, deck1.getCards().size());
+        assertEquals(0, deck1.getCardsInDeck().size());
 
         assertEquals("Deck 2", deck2.getName());
-        assertEquals(0, deck2.getCards().size());
+        assertEquals(0, deck2.getCardsInDeck().size());
+    }
+
+    @Test
+    public void testFillRandom() {
+        deck1.fillRandom(user1);
+        assertEquals(20, deck1.getCardsInDeck().size());
+        assertEquals(30, user1.getOwnedCards().size());
+        assertEquals(10, deck1.getAvailableCards(user1).size());
+    }
+
+    @Test
+    public void testGetAvailableCards() {
+        List<Card> ownedCards = new ArrayList<>();
+        ownedCards.add(sampleCard1);
+        ownedCards.add(sampleCard2);
+        ownedCards.add(sampleCard3);
+        user1.setOwnedCards(ownedCards);
+
+        deck1.addCard(sampleCard1);
+        deck1.addCard(sampleCard2);
+        user1.setSelectedDeck(deck1);
+
+        List<Card> expected = new ArrayList<>();
+        expected.add(sampleCard3);
+
+        assertEquals(1, deck1.getAvailableCards(user1).size());
+        assertEquals(expected, deck1.getAvailableCards(user1));
     }
 
     @Test
@@ -48,23 +78,23 @@ class DeckTest {
             deck2.addCard(sampleCard1);
         }
 
-        assertEquals(20, deck1.getCards().size());
-        assertEquals(sampleCard1, deck1.getCards().get(19));
+        assertEquals(20, deck1.getCardsInDeck().size());
+        assertEquals(sampleCard1, deck1.getCardsInDeck().get(19));
 
         deck1.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck1.getCards().get(20));
-        assertEquals(21, deck1.getCards().size());
+        assertEquals(sampleCard2, deck1.getCardsInDeck().get(20));
+        assertEquals(21, deck1.getCardsInDeck().size());
 
         deck1.addCard(sampleCard1);
-        assertEquals(sampleCard1, deck1.getCards().get(21));
-        assertEquals(22, deck1.getCards().size());
+        assertEquals(sampleCard1, deck1.getCardsInDeck().get(21));
+        assertEquals(22, deck1.getCardsInDeck().size());
 
-        assertEquals(10, deck2.getCards().size());
-        assertEquals(sampleCard1, deck2.getCards().get(9));
+        assertEquals(10, deck2.getCardsInDeck().size());
+        assertEquals(sampleCard1, deck2.getCardsInDeck().get(9));
 
         deck2.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck2.getCards().get(10));
-        assertEquals(11, deck2.getCards().size());
+        assertEquals(sampleCard2, deck2.getCardsInDeck().get(10));
+        assertEquals(11, deck2.getCardsInDeck().size());
     }
 
     @Test
@@ -77,8 +107,8 @@ class DeckTest {
         List<Card> expected1 = new ArrayList<>();
         expected1.add(sampleCard1);
         expected1.add(sampleCard3);
-        assertEquals(2, deck1.getCards().size());
-        assertEquals(expected1, deck1.getCards());
+        assertEquals(2, deck1.getCardsInDeck().size());
+        assertEquals(expected1, deck1.getCardsInDeck());
 
         deck2.addCard(sampleCard2);
         deck2.addCard(sampleCard2);
@@ -88,8 +118,8 @@ class DeckTest {
         List<Card> expected2 = new ArrayList<>();
         expected2.add(sampleCard2);
         expected2.add(sampleCard3);
-        assertEquals(2, deck2.getCards().size());
-        assertEquals(expected2, deck2.getCards());
+        assertEquals(2, deck2.getCardsInDeck().size());
+        assertEquals(expected2, deck2.getCardsInDeck());
     }
 
     @Test

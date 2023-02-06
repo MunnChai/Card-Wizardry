@@ -6,12 +6,6 @@ import java.util.List;
 // A card with an action type (string), value (int), cost (int)
 public class Card {
 
-    // TODO
-    // EFFECTS: returns a list of all the cards in the game
-    public void makeAllCards() {
-
-    }
-
     public enum CardType {
         ATTACK, HEAL, SHIELD
     }
@@ -27,7 +21,7 @@ public class Card {
         VIGILANT(AdjType.SHIELD), SHIELDING(AdjType.SHIELD), SHELTERING(AdjType.SHIELD), WATCHFUL(AdjType.SHIELD),
         FORTIFYING(AdjType.SHIELD), REINFORCING(AdjType.SHIELD), STRENGTHENING(AdjType.SHIELD), BRACING(AdjType.SHIELD);
 
-        private AdjType adjType;
+        private final AdjType adjType;
 
         Adjectives(AdjType adjType) {
             this.adjType = adjType;
@@ -54,7 +48,7 @@ public class Card {
         SAFEGUARDING(NounType.SHIELD), HEALTHINESS(NounType.SHIELD), INVULNERABILITY(NounType.SHIELD),
         IMMUNITY(NounType.SHIELD);
 
-        private NounType nounType;
+        private final NounType nounType;
 
         Nouns(NounType nounType) {
             this.nounType = nounType;

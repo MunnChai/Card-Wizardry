@@ -1,10 +1,10 @@
-# Card Battler
+# Card Wizardry
 
 ### A card battling game where you draw and play different cards to defeat your opponents.
 
 ### What is this?
 
-**Card Battler** is a card game, where you battle opponents in a turn based style, playing
+**Card Wizardry** is a card game, where you battle opponents in a turn based style, playing
 different cards in your deck to do certain actions, such as *attack* or *heal*. This game will have
 many features, such as:
 - **Energy System:** During each turn of a battle, the player is given a certain amount of energy 
