@@ -45,3 +45,4 @@ this project is a good foundation for me to create more in depth and complex gam
 - As a user, I want to be able to draw a card from my deck, and add it to my hand. 
 - As a user, I want to be able to play a card, removing it from my hand and having an effect occur
 in the battle.
+- As a user, I want to be able to flee from a battle. 
