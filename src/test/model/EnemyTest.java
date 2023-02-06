@@ -56,7 +56,7 @@ public class EnemyTest {
 
     @Test
     public void testPlayCard() {
-
+        enemy1.setEnergy(10);
         Card sampleCard1 = new Card(ATTACK, 1, 1, 1);
         Card sampleCard2 = new Card(HEAL, 2, 2, 1);
         List<Card> enemyHand = new ArrayList<>();
@@ -69,12 +69,15 @@ public class EnemyTest {
         expected1.add(sampleCard2);
         assertEquals(expected1, enemy1.getHand());
         assertEquals(USER_MAX_HEALTH - 1, user1.getHealth());
+        assertEquals(9, enemy1.getEnergy());
 
         enemy1.playCard(0, enemy1);
         expected1.remove(0);
         assertEquals(expected1, enemy1.getHand());
         assertEquals(ENEMY_MAX_HEALTH, enemy1.getHealth());
+        assertEquals(7, enemy1.getEnergy());
 
+        enemy2.setEnergy(10);
         enemyHand.add(sampleCard1);
         enemyHand.add(sampleCard2);
         enemy2.setHand(enemyHand);
@@ -83,6 +86,7 @@ public class EnemyTest {
         expected2.add(sampleCard1);
         assertEquals(expected2, enemy2.getHand());
         assertEquals(ENEMY_MAX_HEALTH, enemy2.getHealth());
+        assertEquals(8, enemy2.getEnergy());
     }
 
     @Test

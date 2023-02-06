@@ -47,8 +47,11 @@ public class Shop {
         return cardsForSale;
     }
 
-    // Setters
+    public User getUser() {
+        return user;
+    }
 
+    // Setters
     public void setCardsForSale(List<Card> cardsForSale) {
         this.cardsForSale = cardsForSale;
     }

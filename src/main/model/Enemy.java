@@ -53,6 +53,7 @@ public class Enemy implements Player {
         Card card = hand.get(index);
         hand.remove(card);
         card.cardEffect(target);
+        energy -= card.getEnergyCost();
     }
 
     // MODIFIES: this

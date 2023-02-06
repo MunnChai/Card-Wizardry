@@ -27,10 +27,6 @@ public class Card {
             this.adjType = adjType;
         }
 
-        public boolean isInAdjType(AdjType adjType) {
-            return this.adjType == adjType;
-        }
-
         enum AdjType {
             ATTACK, HEAL, SHIELD
         }
@@ -52,10 +48,6 @@ public class Card {
 
         Nouns(NounType nounType) {
             this.nounType = nounType;
-        }
-
-        public boolean isInAdjType(NounType nounType) {
-            return this.nounType == nounType;
         }
 
         enum NounType {

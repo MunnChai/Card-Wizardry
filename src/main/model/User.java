@@ -168,6 +168,18 @@ public class User implements Player {
         shield += amount;
     }
 
+    public List<Card> getCanSellCards() {
+        List<Card> canSell = new ArrayList<>(ownedCards);
+        for (Deck d : decks) {
+            for (Card c : ownedCards) {
+                if (d.getCardsInDeck().contains(c)) {
+                    canSell.remove(c);
+                }
+            }
+        }
+        return canSell;
+    }
+
 
 
     // Setters
