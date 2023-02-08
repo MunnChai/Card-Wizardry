@@ -1,13 +1,11 @@
 package ui;
 
-import model.Card;
-import model.Deck;
-import model.Shop;
 import model.User;
 
 import java.util.Scanner;
 
-import static ui.ShopUI.shopOptions;
+import static ui.BattleUI.createBattle;
+import static ui.ShopUI.openShop;
 
 public class Main {
 
@@ -61,15 +59,16 @@ public class Main {
     }
 
     public static void enterShop(User user) {
-        Shop shop = new Shop(user);
         System.out.println("\nAfter wandering on and off some raggedy paths for a few hours, "
                 + "you stumble upon a small merchant's hut.");
         System.out.println("\"Welcome!\"");
-        ShopUI shopUI = new ShopUI(shop, user);
+        openShop(user);
     }
 
-    public static void startBattle() {
-
+    public static void startBattle(User user) {
+        System.out.println("\nA few hours pass, and nothing of interest comes before you. However, night is rapidly "
+                + "approaching, and a sense of dread creeps down your spine...");
+        createBattle(user);
     }
 
     public static void printSelections(String... option) {

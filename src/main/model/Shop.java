@@ -11,9 +11,9 @@ public class Shop {
     private User user;
 
     // EFFECTS: Constructs a shop with cards from the User's not owned cards
-    public Shop(User user) {
+    public Shop(User givenUser) {
         cardsForSale = new ArrayList<>();
-        this.user = user;
+        user = givenUser;
         for (int i = 0; i < SHOP_CARD_STOCK; i++) {
             int randomIndex = (int)(Math.random() * user.getNotOwnedCards().size());
             Card randomCard = user.getNotOwnedCards().get(randomIndex);
