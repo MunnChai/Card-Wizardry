@@ -5,27 +5,16 @@ import java.util.List;
 
 import static model.Card.CardType.*;
 
-public class User implements Player {
+public class User {
 
-    public static final int USER_MAX_HEALTH = 20;
-    public static final int USER_STARTING_ENERGY = 1;
-    public static final int USER_STARTING_HAND_AMOUNT = 3;
     public static final List<Card> ALL_CARDS = new ArrayList<>();
     public static final int ALL_CARD_COUNT = 60;
 
-    // Out of Battle
     private List<Deck> decks;
     private int coins;
     private List<Card> ownedCards; // owned cards, not in deck. Other owned cards are in decks
     private List<Card> notOwnedCards; // not owned cards
     private Deck selectedDeck;
-
-    // In Battle
-    private Deck currentDeck;
-    private List<Card> hand;
-    private int health;
-    private int energy;
-    private int shield;
 
     // EFFECTS: constructs user with 1 starting deck, 0 coins, all available cards in deck, and rest
     //          of cards not available
@@ -104,80 +93,22 @@ public class User implements Player {
         return fourCards;
     }
 
-    // MODIFIES: this
-    // EFFECTS: at the start of a battle, set health and energy, create a copy of deck, draw a hand from selected deck
-    public void startBattle() {
-        List<Card> copy = new ArrayList<>(selectedDeck.getCardsInDeck());
-        currentDeck = new Deck(selectedDeck.getName());
-        currentDeck.setCardsInDeck(copy);
-        hand = new ArrayList<>();
-        drawCard();
-        drawCard();
-        drawCard();
-
-        setHealth(USER_MAX_HEALTH);
-        setEnergy(USER_STARTING_ENERGY);
-        setShield(0);
+    // EFFECTS: Add given deck to list of decks
+    public void addDeck(Deck deck) {
+        decks.add(deck);
     }
 
-    // REQUIRES: current deck is not empty
-    // MODIFIES: this
-    // EFFECTS: removes a card from current deck, adds that card to hand
-    public void drawCard() {
-        int randomIndex = (int)(Math.random() * currentDeck.getCardsInDeck().size());
-        Card randomCard = currentDeck.getCardsInDeck().get(randomIndex);
-        currentDeck.removeCard(randomCard);
-        hand.add(randomCard);
-    }
-
-    // REQUIRES: hand is not empty
-    // MODIFIES: this
-    // EFFECTS: removes one card from hand, have card effect occur to given player
-    public void playCard(int index, Player target) {
-        Card card = hand.get(index);
-        hand.remove(card);
-        card.cardEffect(target);
-        energy -= card.getEnergyCost();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: decrease health by amount - shield, and decrease shield to 0
-    public void takeDamage(int amount) {
-        if (amount > shield) {
-            int remainingAmount = amount - shield;
-            shield = 0;
-            health -= remainingAmount;
-        } else {
-            shield -= amount;
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: increase health by amount, cannot increase over max health
-    public void heal(int amount) {
-        if (health + amount > USER_MAX_HEALTH) {
-            health = USER_MAX_HEALTH;
-        } else {
-            health += amount;
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: increase shield by amount
-    public void shield(int amount) {
-        shield += amount;
-    }
-
+    // EFFECTS: Produce all cards that user owns that are not in user's decks
     public List<Card> getCanSellCards() {
-        List<Card> canSell = new ArrayList<>(ownedCards);
-        for (Deck d : decks) {
-            for (Card c : ownedCards) {
-                if (d.getCardsInDeck().contains(c)) {
-                    canSell.remove(c);
+        List<Card> canSellCards = new ArrayList<>();
+        for (Card c : ownedCards) {
+            for (Deck d : decks) {
+                if (!d.getCardsInDeck().contains(c)) {
+                    canSellCards.add(c);
                 }
             }
         }
-        return canSell;
+        return canSellCards;
     }
 
 
@@ -187,28 +118,8 @@ public class User implements Player {
         this.coins = coins;
     }
 
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
-    }
-
-    public void setCurrentDeck(Deck deck) {
-        this.currentDeck = deck;
-    }
-
     public void setSelectedDeck(Deck selectedDeck) {
         this.selectedDeck = selectedDeck;
-    }
-
-    public void setEnergy(int energy) {
-        this.energy = energy;
-    }
-
-    public void setShield(int shield) {
-        this.shield = shield;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public void setOwnedCards(List<Card> ownedCards) {
@@ -220,32 +131,12 @@ public class User implements Player {
     }
 
     // Getters
-    public Deck getCurrentDeck() {
-        return currentDeck;
-    }
-
     public Deck getSelectedDeck() {
         return selectedDeck;
     }
 
-    public List<Card> getHand() {
-        return hand;
-    }
-
     public int getCoins() {
         return coins;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getShield() {
-        return shield;
     }
 
     public List<Card> getOwnedCards() {

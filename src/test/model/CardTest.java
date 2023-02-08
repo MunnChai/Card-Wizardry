@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static model.Card.CardType.*;
-import static model.Enemy.*;
-import static model.User.*;
+import static model.EnemyPlayer.*;
+import static model.UserPlayer.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -18,9 +18,9 @@ class CardTest {
     Card healCard2;
     Card shieldCard2;
 
-    Deck userDeck;
     User user;
-    Enemy enemy;
+    UserPlayer userPlayer;
+    EnemyPlayer enemy;
 
     @BeforeEach
     public void setup() {
@@ -32,10 +32,9 @@ class CardTest {
         healCard2 = new Card(HEAL, 2, 1, 1);
         shieldCard2 = new Card(SHIELD, 3, 1, 1);
 
-        userDeck = new Deck("Deck");
         user = new User();
-        enemy = new Enemy();
-        user.startBattle();
+        userPlayer = new UserPlayer(user.getSelectedDeck());
+        enemy = new EnemyPlayer();
     }
 
     @Test
@@ -65,11 +64,11 @@ class CardTest {
         shieldCard1.cardEffect(enemy);
         assertEquals(3, enemy.getShield());
 
-        shieldCard2.cardEffect(user);
-        assertEquals(3, user.getShield());
-        attackCard2.cardEffect(user);
-        assertEquals(USER_MAX_HEALTH - 3, user.getHealth());
-        healCard2.cardEffect(user);
-        assertEquals(USER_MAX_HEALTH - 1, user.getHealth());
+        shieldCard2.cardEffect(userPlayer);
+        assertEquals(3, userPlayer.getShield());
+        attackCard2.cardEffect(userPlayer);
+        assertEquals(USER_MAX_HEALTH - 3, userPlayer.getHealth());
+        healCard2.cardEffect(userPlayer);
+        assertEquals(USER_MAX_HEALTH - 1, userPlayer.getHealth());
     }
 }

@@ -21,17 +21,17 @@ public class Deck {
     // MODIFIES: this
     // EFFECTS: fills list of cards with random cards from the given player's cards until viable number of cards are in
     // the deck.
-    public void fillRandom(Player player) {
+    public void fillRandom(User user) {
         while (cardsInDeck.size() != VIABLE_DECK_CARD_COUNT) {
-            int randomInt = (int)(Math.random() * getAvailableCards(player).size());
-            cardsInDeck.add(getAvailableCards(player).get(randomInt));
+            int randomInt = (int)(Math.random() * getAvailableCards(user).size());
+            cardsInDeck.add(getAvailableCards(user).get(randomInt));
         }
     }
 
     // EFFECTS: Produce all cards that are in user's owned cards, but not in the deck's cards
-    public List<Card> getAvailableCards(Player player) {
+    public List<Card> getAvailableCards(User user) {
         List<Card> availableCards = new ArrayList<>();
-        for (Card c : player.getOwnedCards()) {
+        for (Card c : user.getOwnedCards()) {
             if (!this.cardsInDeck.contains(c)) {
                 availableCards.add(c);
             }
@@ -60,6 +60,10 @@ public class Deck {
     // Setters
     public void setCardsInDeck(List<Card> cardsInDeck) {
         this.cardsInDeck = cardsInDeck;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // Getters
