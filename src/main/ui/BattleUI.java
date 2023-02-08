@@ -114,10 +114,10 @@ public class BattleUI extends UIMethods {
     }
 
     public static void pickCard() {
-        System.out.println("\nYou have " + userPlayer.getEnergy() + " energy.");
         Scanner s = new Scanner(System.in);
         int handSize = userPlayer.getHand().size();
         printHandCards(userPlayer);
+        System.out.println("\nYou have " + userPlayer.getEnergy() + " energy.");
         System.out.println("Pick a card to play, or " + (handSize + 1) + " to go back.");
         int selection = s.nextInt() - 1;
         playCard(selection);
@@ -125,11 +125,13 @@ public class BattleUI extends UIMethods {
 
     public static void playCard(int selection) {
         if (selection < userPlayer.getHand().size()) {
-            if (userPlayer.getEnergy() >= userPlayer.getHand().get(selection).getEnergyCost()) {
-                if (userPlayer.getHand().get(selection).getType() == ATTACK) {
-                    userPlayer.playCard(selection, enemyPlayer);
+
+            Card card = userPlayer.getHand().get(selection);
+            if (userPlayer.getEnergy() >= card.getEnergyCost()) {
+                if (card.getType() == ATTACK) {
+                    userPlayer.playCard(card, enemyPlayer);
                 } else {
-                    userPlayer.playCard(selection, userPlayer);
+                    userPlayer.playCard(card, userPlayer);
                 }
                 printTurnStats();
             } else {
@@ -150,29 +152,42 @@ public class BattleUI extends UIMethods {
     public static void printHandCards(Player player) {
         int i = 1;
         for (Card c : player.getHand()) {
-            System.out.println("[" + i + "] " + c.getName() + ": \n" + c.getType().toString() + " type, "
+            System.out.println("\n[" + i + "] " + c.getName() + ": \n" + c.getType().toString() + " type, "
                     + c.getValue() + " strength, " + c.getEnergyCost() + " energy cost");
             i++;
         }
     }
 
     public static void enemyTurn() {
-        // TODO create "ai" for enemies
+        if (enemyPlayer.getEnergy() == 0) {
+            // End turn
+        } else {
+            enemyPlayer.enemyDecisionMaking(userPlayer);
+            if (enemyPlayer.getDrewCard()) {
+                System.out.println("The " + enemyPlayer.getName() + " drew a card.");
+                // End turn
+            } else {
+                System.out.println("The " + enemyPlayer.getName() + " played "
+                        + enemyPlayer.getCardPlayed().getName() + "!");
+                printTurnStats();
+                enemyTurn();
+            }
+        }
     }
 
     public static void defeatSequence() {
-        System.out.println("\"HAHAHAHAHAHHAHAHAHAHAHHAHAHAHAHHAHAHHAAHAHAHAHHAHAHHAHAHAHHAHAHAHHAHAHAHAHAHAHAH\"");
+        System.out.println("\"Haha! You're terrible at this!\"");
         System.out.println("The " + enemyPlayer.getName() + " seems very proud of its victory. You slumber away, "
                 + "hoping that your next battle will go better.");
     }
 
     public static void victorySequence() {
         user.setCoins(user.getCoins() + VICTORY_COIN_AMOUNT);
-        System.out.println("\"nonononono this cant be happening\" The " + enemyPlayer.getName() + " seems to be "
-                + "in extreme distress over its loss. ");
+        System.out.println("\"This game is stupid anyways.\" The " + enemyPlayer.getName() + " seems to be "
+                + "in denial over its loss. ");
         System.out.println("It wanders away, muttering about how 'The game is just terribly balanced', and "
                 + "how it 'would've won if the devs weren't so terrible at game design'");
-        System.out.println("Luckily, it dropped a few coins and didn't notice, so you'll gladly take them.");
+        System.out.println("You noticed that it dropped a few coins while walking away. You gladly take them.");
         System.out.println("You now have " + user.getCoins() + " coins!");
     }
 

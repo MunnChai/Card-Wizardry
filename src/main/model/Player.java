@@ -25,8 +25,7 @@ public abstract class Player {
     // REQUIRES: hand is not empty
     // MODIFIES: this
     // EFFECTS: removes one card from hand, have card effect occur to given player
-    public void playCard(int index, Player target) {
-        Card card = hand.get(index);
+    public void playCard(Card card, Player target) {
         hand.remove(card);
         card.cardEffect(target);
         energy -= card.getEnergyCost();

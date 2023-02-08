@@ -7,7 +7,11 @@ import java.util.List;
 public class Card {
 
     public enum CardType {
-        ATTACK, HEAL, SHIELD
+        ATTACK, HEAL, SHIELD;
+
+        public boolean isCardType(CardType cardType) {
+            return this == cardType;
+        }
     }
 
     enum Adjectives {

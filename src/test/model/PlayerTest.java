@@ -56,14 +56,14 @@ public class PlayerTest {
 
         user1.setHand(userHand);
         user1.setEnergy(10);
-        user1.playCard(0, enemy1);
+        user1.playCard(sampleCard1, enemy1);
         List<Card> expected1 = new ArrayList<>();
         expected1.add(sampleCard2);
         assertEquals(expected1, user1.getHand());
         assertEquals(ENEMY_MAX_HEALTH - 4, enemy1.getHealth());
         assertEquals(7, user1.getEnergy());
 
-        user1.playCard(0, user1);
+        user1.playCard(sampleCard2, user1);
         expected1.remove(0);
         assertEquals(expected1, user1.getHand());
         assertEquals(USER_MAX_HEALTH, user1.getHealth());
@@ -73,7 +73,7 @@ public class PlayerTest {
         userHand.add(sampleCard2);
         user2.setHand(userHand);
         user2.setEnergy(10);
-        user2.playCard(1, user2);
+        user2.playCard(sampleCard2, user2);
         List<Card> expected2 = new ArrayList<>();
         expected2.add(sampleCard1);
         assertEquals(expected2, user2.getHand());

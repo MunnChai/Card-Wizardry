@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.Card.CardType.*;
 import static model.User.ALL_CARDS;
+import static model.UserPlayer.USER_MAX_HEALTH;
 
 public class EnemyPlayer extends Player {
 
@@ -21,6 +23,8 @@ public class EnemyPlayer extends Player {
 
     private String name;
     private List<String> enemyIdles;
+    private Card cardPlayed;
+    private boolean drewCard;
 
     // EFFECTS: Constructs an enemy with a random deck of cards, a random hand from those cards,
     //          a name, and the starting shield, health, and energy.
@@ -67,17 +71,75 @@ public class EnemyPlayer extends Player {
 
     // EFFECTS: Produce random string for enemy idle description, reliant on enemy's health and player's health
     public String produceEnemyIdleDescription(UserPlayer user) {
-        if (health < 7) {
-            int randInt = (int)(Math.random() * 3) + 3;
+        int randInt;
+        if (health < ENEMY_MAX_HEALTH / 3) {
+            randInt = (int)(Math.random() * 3) + 3;
             return "The " + name + " " + enemyIdles.get(randInt);
-        } else if (health >= 7 && user.getHealth() < 7) {
-            int randInt = (int)(Math.random() * 3) + 6;
+        } else if (health >= ENEMY_MAX_HEALTH / 3 && user.getHealth() < USER_MAX_HEALTH / 3) {
+            randInt = (int)(Math.random() * 3) + 6;
             return "The " + name + " " + enemyIdles.get(randInt);
         } else {
-            int randInt = (int)(Math.random() * 3);
+            randInt = (int)(Math.random() * 3);
             return "The " + name + " " + enemyIdles.get(randInt);
         }
     }
+
+    // EFFECTS: Decide which card to play, depending on hand and health
+    public void enemyDecisionMaking(UserPlayer userPlayer) {
+        if (getHand().size() == 0) {
+            setDrewCard(true);
+            drawCard();
+        } else {
+            playRandomCard(userPlayer);
+        }
+    }
+
+    public void playRandomCard(UserPlayer userPlayer) {
+        int randInt = (int)(Math.random() * hand.size());
+        Card randCard = hand.get(randInt);
+        if (canPlayCard(randCard)) {
+            if (randCard.getType().isCardType(ATTACK)) {
+                setDrewCard(false);
+                setCardPlayed(randCard);
+                playCard(randCard, userPlayer);
+            } else {
+                setDrewCard(false);
+                setCardPlayed(randCard);
+                playCard(randCard, this);
+            }
+        } else {
+            setDrewCard(true);
+            drawCard();
+        }
+    }
+
+    // EFFECTS: Find card of given type in list of cards, play effect on given player
+    public void findAndPlayCard(Card.CardType desiredType, Player player) {
+        for (Card c : hand) {
+            if (c.getType().isCardType(desiredType) && canPlayCard(c)) {
+                playCard(c, player);
+                break;
+            }
+        }
+    }
+
+    public boolean canPlayCard(Card c) {
+        return energy >= c.getEnergyCost();
+    }
+
+    public boolean containsCardType(Card.CardType desiredType, List<Card> cards) {
+        return returnCardTypes(cards).contains(desiredType);
+    }
+
+    public List<Card.CardType> returnCardTypes(List<Card> cards) {
+        List<Card.CardType> cardTypes = new ArrayList<>();
+        for (Card c : cards) {
+            cardTypes.add(c.getType());
+        }
+        return cardTypes;
+    }
+
+
 
     // Getters
     public String getName() {
@@ -88,9 +150,24 @@ public class EnemyPlayer extends Player {
         return ALL_CARDS;
     }
 
-    // Setters
+    public Card getCardPlayed() {
+        return cardPlayed;
+    }
 
+    public boolean getDrewCard() {
+        return drewCard;
+    }
+
+    // Setters
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCardPlayed(Card cardPlayed) {
+        this.cardPlayed = cardPlayed;
+    }
+
+    public void setDrewCard(boolean drewCard) {
+        this.drewCard = drewCard;
     }
 }
