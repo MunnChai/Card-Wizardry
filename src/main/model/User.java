@@ -67,30 +67,30 @@ public class User {
     // REQUIRES: only implement at the START OF A GAME
     // EFFECTS: Create all playable cards in the game
     public void makeCards() {
-        ALL_CARDS.addAll(makeFourCards(ATTACK, 1, 1, 2));
-        ALL_CARDS.addAll(makeFourCards(ATTACK, 2, 2, 2));
-        ALL_CARDS.addAll(makeFourCards(ATTACK, 4, 3, 2));
-        ALL_CARDS.addAll(makeFourCards(ATTACK, 6, 4, 3));
-        ALL_CARDS.addAll(makeFourCards(ATTACK, 10, 6, 4));
-        ALL_CARDS.addAll(makeFourCards(HEAL, 2, 1, 2));
-        ALL_CARDS.addAll(makeFourCards(HEAL, 4, 2, 2));
-        ALL_CARDS.addAll(makeFourCards(HEAL, 6, 3, 2));
-        ALL_CARDS.addAll(makeFourCards(HEAL, 8, 4, 3));
-        ALL_CARDS.addAll(makeFourCards(HEAL, 10, 5, 4));
-        ALL_CARDS.addAll(makeFourCards(SHIELD, 2, 1, 2));
-        ALL_CARDS.addAll(makeFourCards(SHIELD, 4, 2, 2));
-        ALL_CARDS.addAll(makeFourCards(SHIELD, 6, 3, 2));
-        ALL_CARDS.addAll(makeFourCards(SHIELD, 8, 4, 2));
-        ALL_CARDS.addAll(makeFourCards(SHIELD, 10, 5, 2));
+        ALL_CARDS.addAll(makeCards(8, ATTACK, 2, 1, 2));
+        ALL_CARDS.addAll(makeCards(8, ATTACK, 4, 2, 2));
+        ALL_CARDS.addAll(makeCards(8, ATTACK, 6, 3, 2));
+        ALL_CARDS.addAll(makeCards(8, ATTACK, 8, 4, 3));
+        ALL_CARDS.addAll(makeCards(8, ATTACK, 12, 6, 4));
+        ALL_CARDS.addAll(makeCards(2, HEAL, 1, 1, 2));
+        ALL_CARDS.addAll(makeCards(2, HEAL, 2, 2, 2));
+        ALL_CARDS.addAll(makeCards(2, HEAL, 4, 3, 2));
+        ALL_CARDS.addAll(makeCards(2, HEAL, 6, 4, 3));
+        ALL_CARDS.addAll(makeCards(2, HEAL, 8, 5, 4));
+        ALL_CARDS.addAll(makeCards(2, SHIELD, 1, 1, 2));
+        ALL_CARDS.addAll(makeCards(2, SHIELD, 3, 2, 2));
+        ALL_CARDS.addAll(makeCards(2, SHIELD, 6, 3, 2));
+        ALL_CARDS.addAll(makeCards(2, SHIELD, 8, 4, 2));
+        ALL_CARDS.addAll(makeCards(2, SHIELD, 10, 6, 2));
     }
 
     // EFFECTS: return list of 4 different cards with given type, value, energy cost, and coin cost
-    public List<Card> makeFourCards(Card.CardType type, int value, int energyCost, int coinCost) {
-        List<Card> fourCards = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            fourCards.add(new Card(type, value, energyCost, coinCost));
+    public List<Card> makeCards(int amount, Card.CardType type, int value, int energyCost, int coinCost) {
+        List<Card> cards = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            cards.add(new Card(type, value, energyCost, coinCost));
         }
-        return fourCards;
+        return cards;
     }
 
     // EFFECTS: Add given deck to list of decks

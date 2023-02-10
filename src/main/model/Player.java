@@ -11,6 +11,8 @@ public abstract class Player {
     protected int health;
     protected int energy;
     protected int shield;
+    protected Card cardPlayed;
+    protected boolean drawnCard;
 
     // REQUIRES: current deck is not empty
     // MODIFIES: this
@@ -20,6 +22,7 @@ public abstract class Player {
         Card randomCard = deck.getCardsInDeck().get(randomIndex);
         deck.removeCard(randomCard);
         hand.add(randomCard);
+        setDrawnCard(true);
     }
 
     // REQUIRES: hand is not empty
@@ -29,6 +32,8 @@ public abstract class Player {
         hand.remove(card);
         card.cardEffect(target);
         energy -= card.getEnergyCost();
+        setCardPlayed(card);
+        setDrawnCard(false);
     }
 
     // MODIFIES: this
@@ -81,6 +86,14 @@ public abstract class Player {
         this.deck = deck;
     }
 
+    public void setCardPlayed(Card cardPlayed) {
+        this.cardPlayed = cardPlayed;
+    }
+
+    public void setDrawnCard(boolean drawnCard) {
+        this.drawnCard = drawnCard;
+    }
+
     // Getters
     public List<Card> getHand() {
         return hand;
@@ -100,5 +113,13 @@ public abstract class Player {
 
     public Deck getDeck() {
         return deck;
+    }
+
+    public Card getCardPlayed() {
+        return cardPlayed;
+    }
+
+    public boolean getDrawnCard() {
+        return drawnCard;
     }
 }

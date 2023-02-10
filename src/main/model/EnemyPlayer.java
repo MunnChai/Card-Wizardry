@@ -23,8 +23,7 @@ public class EnemyPlayer extends Player {
 
     private String name;
     private List<String> enemyIdles;
-    private Card cardPlayed;
-    private boolean drewCard;
+
 
     // EFFECTS: Constructs an enemy with a random deck of cards, a random hand from those cards,
     //          a name, and the starting shield, health, and energy.
@@ -87,7 +86,7 @@ public class EnemyPlayer extends Player {
     // EFFECTS: Decide which card to play, depending on hand and health
     public void enemyDecisionMaking(UserPlayer userPlayer) {
         if (getHand().size() == 0) {
-            setDrewCard(true);
+            setDrawnCard(true);
             drawCard();
         } else {
             playRandomCard(userPlayer);
@@ -99,16 +98,11 @@ public class EnemyPlayer extends Player {
         Card randCard = hand.get(randInt);
         if (canPlayCard(randCard)) {
             if (randCard.getType().isCardType(ATTACK)) {
-                setDrewCard(false);
-                setCardPlayed(randCard);
                 playCard(randCard, userPlayer);
             } else {
-                setDrewCard(false);
-                setCardPlayed(randCard);
                 playCard(randCard, this);
             }
         } else {
-            setDrewCard(true);
             drawCard();
         }
     }
@@ -150,24 +144,8 @@ public class EnemyPlayer extends Player {
         return ALL_CARDS;
     }
 
-    public Card getCardPlayed() {
-        return cardPlayed;
-    }
-
-    public boolean getDrewCard() {
-        return drewCard;
-    }
-
     // Setters
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setCardPlayed(Card cardPlayed) {
-        this.cardPlayed = cardPlayed;
-    }
-
-    public void setDrewCard(boolean drewCard) {
-        this.drewCard = drewCard;
     }
 }

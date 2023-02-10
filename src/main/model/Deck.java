@@ -39,6 +39,7 @@ public class Deck {
         return availableCards;
     }
 
+    // REQUIRED:
     // EFFECTS: Add given card to deck, remove from owned cards
     public void addCard(Card card) {
         cardsInDeck.add(card);

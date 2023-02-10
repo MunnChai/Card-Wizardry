@@ -7,22 +7,31 @@ import model.User;
 
 import java.util.Scanner;
 
-import static model.Deck.VIABLE_DECK_CARD_COUNT;
-import static ui.Main.startBattle;
+
 
 public class ShopUI extends UIMethods {
 
-    protected static Shop shop;
-    protected static User user;
+    protected Shop shop;
 
-    public static void openShop(User givenUser) {
+    public ShopUI(User givenUser) {
         user = givenUser;
         shop = new Shop(user);
 
+        initUI();
+    }
+
+    public void initUI() {
+        enterShop();
+    }
+
+    public void enterShop() {
+        System.out.println("\nAfter wandering on and off some raggedy paths for a few hours, "
+                + "you stumble upon a small merchant's hut.");
+        System.out.println("\"Welcome!\"");
         shopOptions();
     }
 
-    public static void shopOptions() {
+    public void shopOptions() {
         System.out.println("\"What can I get for ya?\" \nYou have " + user.getCoins() + " coins.");
         Scanner s = new Scanner(System.in);
         printSelections("\"I'd like to buy a card.\"", "\"I'd like to sell a card.\"",
@@ -36,19 +45,19 @@ public class ShopUI extends UIMethods {
                 sellCard();
                 break;
             case 3:
-                editDecks();
+                new EditDeckUI(user, this);
+                shopOptions();
                 break;
             case 4:
                 System.out.println("\"Come again!!\"\nYou leave the hut and continue your journey once more.");
-                startBattle(user);
+                new BattleUI(user);
                 break;
             default:
-                System.out.println("Sorry, that's not an option!");
                 shopOptions();
         }
     }
 
-    public static void buyCard() {
+    public void buyCard() {
         if (shop.getCardsForSale().size() == 0) {
             System.out.println("\"I've got nothing more.\"");
             shopOptions();
@@ -61,18 +70,16 @@ public class ShopUI extends UIMethods {
         }
     }
 
-    public static void pickPurchasedCard() {
+    public void pickPurchasedCard() {
         int purchaseIndex = takeIntInput("Pick a card, or " + (shop.getCardsForSale().size() + 1)
                 + " to go back.") - 1;
 
-        if (purchaseIndex >= shop.getCardsForSale().size()) {
-            System.out.println("");
-        } else {
+        if (purchaseIndex < shop.getCardsForSale().size()) {
             checkMoney(purchaseIndex);
         }
     }
 
-    public static void checkMoney(int purchaseIndex) {
+    public void checkMoney(int purchaseIndex) {
         if (shop.getUser().getCoins() >= shop.getCardsForSale().get(purchaseIndex).getCoinCost()) {
             shop.buyCard(purchaseIndex);
             System.out.println("\"Thank you for your purchase!\" The merchant giggles.");
@@ -81,7 +88,7 @@ public class ShopUI extends UIMethods {
         }
     }
 
-    public static void printShopCards() {
+    public void printShopCards() {
         int i = 1;
         for (Card c : shop.getCardsForSale()) {
             System.out.println("[" + i + "] " + c.getName() + " - " + c.getCoinCost() + " coins");
@@ -91,7 +98,7 @@ public class ShopUI extends UIMethods {
         }
     }
 
-    public static void sellCard() {
+    public void sellCard() {
         System.out.println("\nWhat card would you like to sell? \n* You can only sell cards that are not in any"
                 + " current decks.\n");
         printUserCards();
@@ -100,16 +107,14 @@ public class ShopUI extends UIMethods {
         System.out.println("Pick a card, or " + (shop.getUser().getCanSellCards().size() + 1) + " to go back.");
         int sellIndex = sell.nextInt() - 1;
 
-        if (sellIndex >= shop.getUser().getCanSellCards().size()) {
-            System.out.println("");
-        } else {
+        if (sellIndex < shop.getUser().getCanSellCards().size()) {
             Card card = shop.getUser().getCanSellCards().get(sellIndex);
             confirmSell(card);
         }
         shopOptions();
     }
 
-    public static void confirmSell(Card card) {
+    public void confirmSell(Card card) {
         Scanner confirm = new Scanner(System.in);
         System.out.println("Are you sure you want to sell your " + card.getName() + " for " + card.getCoinCost()
                 + " coins? (Stats: " + card.getType().toString() + " type, " + card.getValue() + " strength, "
@@ -120,12 +125,10 @@ public class ShopUI extends UIMethods {
         if (confirmInt == 1) {
             shop.sellCard(card);
             System.out.println("You now have: " + shop.getUser().getCoins() + " coins.");
-        } else {
-            System.out.println("");
         }
     }
 
-    public static void printUserCards() {
+    public void printUserCards() {
         int i = 1;
         for (Card c : user.getCanSellCards()) {
             System.out.println("[" + i + "] " + c.getName() + " - " + c.getCoinCost() + " coins");
