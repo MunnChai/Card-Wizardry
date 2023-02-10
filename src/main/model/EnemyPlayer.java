@@ -117,10 +117,6 @@ public class EnemyPlayer extends Player {
         }
     }
 
-    public boolean canPlayCard(Card c) {
-        return energy >= c.getEnergyCost();
-    }
-
     public boolean containsCardType(Card.CardType desiredType, List<Card> cards) {
         return returnCardTypes(cards).contains(desiredType);
     }

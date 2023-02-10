@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static model.Card.CardType.*;
@@ -14,6 +15,7 @@ public class BattleUI extends UIMethods {
 
     public static final int VICTORY_COIN_AMOUNT = 4;
 
+    // EFFECTS: Constructs battle UI.
     public BattleUI(User givenUser) {
         super.user = givenUser;
 
@@ -24,14 +26,17 @@ public class BattleUI extends UIMethods {
         initUI();
     }
 
+    // EFFECTS: Initializes battle UI.
     public void initUI() {
         beforeBattle();
     }
 
+    // EFFECTS: Choose a deck to select, construct deck editing UI, or loop if user's input does not correlate with an
+    //          option.
     public void beforeBattle() {
         System.out.println("Select a deck to battle with:");
         Scanner s = new Scanner(System.in);
-        printDecks();
+        printDecks(user.getDecks());
         System.out.println("[" + (user.getDecks().size() + 1) + "] Edit your decks");
         int index = s.nextInt() - 1;
         if (index < user.getDecks().size()) {
@@ -43,21 +48,26 @@ public class BattleUI extends UIMethods {
         }
     }
 
+    // MODIFIES: user
+    // EFFECTS: If deck has viable amount of cards, set deck as user's selected deck and start battle. Otherwise,
+    //          return to deck selection UI.
     public void selectDeckForBattle(int index) {
-        user.setSelectedDeck(user.getDecks().get(index));
         if (user.getSelectedDeck().checkViable()) {
+            user.setSelectedDeck(user.getDecks().get(index));
             System.out.println("You selected " + user.getSelectedDeck().getName() + ".");
             pause();
-            preBattleText();
+            preBattleSetup();
         } else {
             System.out.println("This deck does not have the correct number of cards.");
             beforeBattle();
         }
     }
-
-    public void preBattleText() {
+    
+    //  EFFECTS: Constructs a user player and enemy player, and sets energy to 0. Executes battle loop.
+    public void preBattleSetup() {
         userPlayer = new UserPlayer(user.getSelectedDeck());
         enemyPlayer = new EnemyPlayer();
+        turnEnergy = 0;
 
         System.out.println("\nSuddenly, out of the darkness, a " + enemyPlayer.getName() + " leaps at you!");
         System.out.println("\"Prepare to be robbed and eaten!!!\" It screeches at you. In desperation, you pull out "
@@ -72,9 +82,11 @@ public class BattleUI extends UIMethods {
         battleLoop();
     }
 
+    // EFFECTS: Execute new turn, user's turn, and enemy turn each loop. If the enemy's health is 0 after player's
+    //          turn, break out of the loop. Stop the loop when either the user's health or the enemy's health drops
+    //          below 0, and play the appropriate sequence. Then, create a shop UI.
     public void battleLoop() {
-        turnEnergy = 0;
-        while (userPlayer.getHealth() > 0 && enemyPlayer.getHealth() > 0) {
+        while (userPlayer.getHealth() > 0) {
             newTurn();
             playerTurn();
             if (enemyPlayer.getHealth() <= 0) {
@@ -91,6 +103,9 @@ public class BattleUI extends UIMethods {
         new ShopUI(user);
     }
 
+    // MODIFIES: userPlayer, enemyPlayer, this
+    // EFFECTS: Increase turn energy by 1, draw a card into both the user and enemy's hands, and set user and enemy's
+    //          energy as the turn energy.
     public void newTurn() {
         turnEnergy++;
         userPlayer.drawCard();
@@ -100,6 +115,9 @@ public class BattleUI extends UIMethods {
         System.out.println("\nA new round begins. \nYou drew a card.");
     }
 
+    // MODIFIES: userPlayer
+    // EFFECTS: If user's energy is 0, end its turn. Otherwise, user selects action. If user input out of selection
+    //          range, execute this method again. Note: If the user draws a card, its turn is ended.
     public void playerTurn() {
         if (userPlayer.getEnergy() == 0) {
             System.out.println("\nYou are out of energy.");
@@ -125,16 +143,21 @@ public class BattleUI extends UIMethods {
         }
     }
 
+    // EFFECTS: Print user's hand, and take user input.
     public void pickCard() {
         Scanner s = new Scanner(System.in);
         int handSize = userPlayer.getHand().size();
-        printHandCards(userPlayer);
+        printCards(userPlayer.getHand());
         System.out.println("\nYou have " + userPlayer.getEnergy() + " energy.");
         System.out.println("Pick a card to play, or " + (handSize + 1) + " to go back.");
         int selection = s.nextInt() - 1;
         playCard(selection);
     }
 
+    // MODIFIES: userPlayer, enemyPlayer
+    // EFFECTS: If user input is out of length of user's hand, return to player turn main menu. Otherwise, check if
+    //          user has energy to play card. If user has enough energy, play the card, otherwise, return to pick card
+    //          menu.
     public void playCard(int selection) {
         if (selection < userPlayer.getHand().size()) {
 
@@ -142,19 +165,20 @@ public class BattleUI extends UIMethods {
             if (userPlayer.getEnergy() >= card.getEnergyCost()) {
                 if (card.getType() == ATTACK) {
                     userPlayer.playCard(card, enemyPlayer);
-                } else {
+                } else if (card.getType() == HEAL || card.getType() == SHIELD) {
                     userPlayer.playCard(card, userPlayer);
                 }
                 System.out.println("You played your " + userPlayer.getCardPlayed().getName() + "!");
                 printTurnStats();
             } else {
                 System.out.println("You don't have enough energy to play that card!");
-                playerTurn();
+                pickCard();
             }
         }
         playerTurn();
     }
 
+    // EFFECTS: Print player and enemy health and shield.
     public void printTurnStats() {
         System.out.println("The " + enemyPlayer.getName() + " has " + enemyPlayer.getHealth() + " health, and "
                 + enemyPlayer.getShield() + " shield.");
@@ -163,15 +187,9 @@ public class BattleUI extends UIMethods {
         pause();
     }
 
-    public void printHandCards(Player player) {
-        int i = 1;
-        for (Card c : player.getHand()) {
-            System.out.println("\n[" + i + "] " + c.getName() + ": \n" + c.getType().toString() + " type, "
-                    + c.getValue() + " strength, " + c.getEnergyCost() + " energy cost");
-            i++;
-        }
-    }
-
+    // MODIFIES: enemyPlayer
+    // EFFECTS: If enemy's energy is 0, end its turn. Otherwise, execute enemy decision-making, and print the
+    //          corresponding message depending on the enemy's decision. If the enemy draws a card, end its turn.
     public void enemyTurn() {
         if (enemyPlayer.getEnergy() != 0) {
             enemyPlayer.enemyDecisionMaking(userPlayer);
@@ -187,12 +205,14 @@ public class BattleUI extends UIMethods {
         }
     }
 
+    // EFFECTS: Print defeat sequence text.
     public void defeatSequence() {
         System.out.println("\"Haha! You're terrible at this!\"");
         System.out.println("The " + enemyPlayer.getName() + " seems very proud of its victory. You slumber away, "
                 + "hoping that your next battle will go better.");
     }
 
+    // EFFECTS: Print victory sequence text.
     public void victorySequence() {
         user.setCoins(user.getCoins() + VICTORY_COIN_AMOUNT);
         System.out.println("\"This game is stupid anyways.\" The " + enemyPlayer.getName() + " seems to be "

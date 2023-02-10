@@ -64,6 +64,11 @@ public abstract class Player {
         shield += amount;
     }
 
+    // EFFECTS: return true if player's energy is greater or equal to the energy cost of the card, false otherwise.
+    public boolean canPlayCard(Card c) {
+        return energy >= c.getEnergyCost();
+    }
+
 
     // Setters
     public void setHand(List<Card> hand) {
