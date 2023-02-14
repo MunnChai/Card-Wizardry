@@ -2,7 +2,6 @@ package ui;
 
 import model.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 import static model.Card.CardType.*;
@@ -194,7 +193,7 @@ public class BattleUI extends UIMethods {
         if (enemyPlayer.getEnergy() != 0) {
             enemyPlayer.enemyDecisionMaking(userPlayer);
 
-            if (enemyPlayer.getDrawnCard()) {
+            if (enemyPlayer.getIfDrewCard()) {
                 System.out.println("The " + enemyPlayer.getName() + " drew a card.");
             } else {
                 System.out.println("The " + enemyPlayer.getName() + " played "

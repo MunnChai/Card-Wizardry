@@ -51,6 +51,16 @@ class DeckTest {
     }
 
     @Test
+    public void testFillRandomFull() {
+        deck1.fillRandom(user1);
+        assertEquals(20, deck1.getCardsInDeck().size());
+        assertEquals(30, user1.getOwnedCards().size());
+        assertEquals(10, deck1.getAvailableCards(user1).size());
+        deck1.fillRandom(user1);
+        assertEquals(20, deck1.getCardsInDeck().size());
+    }
+
+    @Test
     public void testGetAvailableCards() {
         List<Card> ownedCards = new ArrayList<>();
         ownedCards.add(sampleCard1);
@@ -71,11 +81,22 @@ class DeckTest {
 
     @Test
     public void testAddCard() {
-        for (int i = 0; i < 20; i++) {
-            deck1.addCard(sampleCard1);
-        }
         for (int i = 0; i < 10; i++) {
             deck2.addCard(sampleCard1);
+        }
+
+        assertEquals(10, deck2.getCardsInDeck().size());
+        assertEquals(sampleCard1, deck2.getCardsInDeck().get(9));
+
+        deck2.addCard(sampleCard2);
+        assertEquals(sampleCard2, deck2.getCardsInDeck().get(10));
+        assertEquals(11, deck2.getCardsInDeck().size());
+    }
+
+    @Test
+    public void testAddCardFull() {
+        for (int i = 0; i < 20; i++) {
+            deck1.addCard(sampleCard1);
         }
 
         assertEquals(20, deck1.getCardsInDeck().size());
@@ -88,13 +109,6 @@ class DeckTest {
         deck1.addCard(sampleCard1);
         assertEquals(sampleCard1, deck1.getCardsInDeck().get(21));
         assertEquals(22, deck1.getCardsInDeck().size());
-
-        assertEquals(10, deck2.getCardsInDeck().size());
-        assertEquals(sampleCard1, deck2.getCardsInDeck().get(9));
-
-        deck2.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck2.getCardsInDeck().get(10));
-        assertEquals(11, deck2.getCardsInDeck().size());
     }
 
     @Test
@@ -123,25 +137,28 @@ class DeckTest {
     }
 
     @Test
-    public void testCheckViable() {
-        for (int i = 0; i < VIABLE_DECK_CARD_COUNT - 10; i++) {
+    public void testCheckViableEdgeCases() {
+        for (int i = 0; i < VIABLE_DECK_CARD_COUNT - 1; i++) {
             deck1.addCard(sampleCard1);
         }
         for (int i = 0; i < VIABLE_DECK_CARD_COUNT; i++) {
             deck2.addCard(sampleCard1);
         }
-        for (int i = 0; i < VIABLE_DECK_CARD_COUNT + 10; i++) {
+        for (int i = 0; i < VIABLE_DECK_CARD_COUNT + 1; i++) {
             deck3.addCard(sampleCard1);
         }
 
         assertFalse(deck1.checkViable());
         assertTrue(deck2.checkViable());
         assertFalse(deck3.checkViable());
+    }
 
-        for (int i = 0; i < 10; i++) {
+    @Test
+    public void testCheckViableNormal() {
+        for (int i = 0; i < VIABLE_DECK_CARD_COUNT * 2; i++) {
             deck1.addCard(sampleCard1);
         }
 
-        assertTrue(deck1.checkViable());
+        assertFalse(deck1.checkViable());
     }
 }

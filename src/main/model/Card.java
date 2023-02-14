@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-// A card with an action type (string), value (int), cost (int)
+// Represents a playing card with a name, type, value (potency), energy cost, and coin cost
 public class Card {
 
     public enum CardType {

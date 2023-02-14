@@ -6,13 +6,13 @@ import static model.UserPlayer.*;
 
 public abstract class Player {
 
-    protected Deck deck;
-    protected List<Card> hand;
-    protected int health;
-    protected int energy;
-    protected int shield;
-    protected Card cardPlayed;
-    protected boolean drawnCard;
+    protected Deck deck;            // player's selected deck for battle
+    protected List<Card> hand;      // player's current hand of cards
+    protected int health;           // player's current health
+    protected int energy;           // player's current energy
+    protected int shield;           // player's current shield
+    protected Card cardPlayed;      // tracks the last card played by the player
+    protected boolean ifDrewCard;    // tracks if the last action done by player is drawing a card
 
     // REQUIRES: current deck is not empty
     // MODIFIES: this
@@ -22,7 +22,7 @@ public abstract class Player {
         Card randomCard = deck.getCardsInDeck().get(randomIndex);
         deck.removeCard(randomCard);
         hand.add(randomCard);
-        setDrawnCard(true);
+        ifDrewCard = true;
     }
 
     // REQUIRES: hand is not empty
@@ -32,8 +32,8 @@ public abstract class Player {
         hand.remove(card);
         card.cardEffect(target);
         energy -= card.getEnergyCost();
-        setCardPlayed(card);
-        setDrawnCard(false);
+        cardPlayed = card;
+        ifDrewCard = false;
     }
 
     // MODIFIES: this
@@ -95,8 +95,8 @@ public abstract class Player {
         this.cardPlayed = cardPlayed;
     }
 
-    public void setDrawnCard(boolean drawnCard) {
-        this.drawnCard = drawnCard;
+    public void setIfDrewCard(boolean ifDrewCard) {
+        this.ifDrewCard = ifDrewCard;
     }
 
     // Getters
@@ -124,7 +124,7 @@ public abstract class Player {
         return cardPlayed;
     }
 
-    public boolean getDrawnCard() {
-        return drawnCard;
+    public boolean getIfDrewCard() {
+        return ifDrewCard;
     }
 }

@@ -31,7 +31,38 @@ public class UserTest {
         assertEquals(ALL_CARD_COUNT - user1.getOwnedCards().size(), user1.getNotOwnedCards().size());
     }
 
+    @Test
+    public void testInitializeOwned() {
 
+    }
 
+    @Test
+    public void testInitializeNotOwned() {
 
+    }
+
+    @Test
+    public void testInitializeFirstDeck() {
+
+    }
+
+    @Test
+    public void testMakeAllCards() {
+
+    }
+
+    @Test
+    public void testMakeCards() {
+
+    }
+
+    @Test
+    public void testAddDeck() {
+
+    }
+
+    @Test
+    public void testCanSellCards() {
+
+    }
 }

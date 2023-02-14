@@ -62,6 +62,6 @@ abstract class UIMethods {
             i++;
         }
     }
-    
+
     public abstract void initUI();
 }

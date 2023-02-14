@@ -62,18 +62,16 @@ public class ShopTest {
         expectedNotOwnedCards.remove(sampleCard1);
 
         shop1.buyCard(0);
-        assertEquals(2, shop1.getCardsForSale().size());
-
         List<Card> expected1 = new ArrayList<>();
         expected1.add(sampleCard2);
         expected1.add(sampleCard3);
+        assertEquals(2, shop1.getCardsForSale().size());
         assertEquals(expected1, shop1.getCardsForSale());
-
+        assertEquals(10 - sampleCard1.getCoinCost(), user.getCoins());
         assertEquals(expectedOwnedCards, user.getOwnedCards());
         assertEquals(expectedNotOwnedCards, user.getNotOwnedCards());
 
-        int cost = sampleCard1.getCoinCost();
-        assertEquals(10 - cost, user.getCoins());
+
     }
 
     @Test

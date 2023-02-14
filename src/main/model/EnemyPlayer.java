@@ -7,6 +7,7 @@ import static model.Card.CardType.*;
 import static model.User.ALL_CARDS;
 import static model.UserPlayer.USER_MAX_HEALTH;
 
+// Represents an enemy in battle, with a name, deck, hand,
 public class EnemyPlayer extends Player {
 
     enum Adjectives {
@@ -21,8 +22,8 @@ public class EnemyPlayer extends Player {
     public static final int ENEMY_STARTING_ENERGY = 1;
     public static final int ENEMY_STARTING_HAND_AMOUNT = 3;
 
-    private String name;
-    private List<String> enemyIdles;
+    private String name;                    // enemy name
+    private List<String> enemyIdles;        // list of enemy's idle descriptions
 
 
     // EFFECTS: Constructs an enemy with a random deck of cards, a random hand from those cards,
@@ -68,9 +69,10 @@ public class EnemyPlayer extends Player {
         enemyIdles = possibleIdles;
     }
 
-    // EFFECTS: Produce random string for enemy idle description, reliant on enemy's health and player's health
+    // EFFECTS: Produce random string for enemy idle description, dependent on enemy's health and player's health
     public String produceEnemyIdleDescription(UserPlayer user) {
         int randInt;
+
         if (health < ENEMY_MAX_HEALTH / 3) {
             randInt = (int)(Math.random() * 3) + 3;
             return "The " + name + " " + enemyIdles.get(randInt);
@@ -86,7 +88,7 @@ public class EnemyPlayer extends Player {
     // EFFECTS: Decide which card to play, depending on hand and health
     public void enemyDecisionMaking(UserPlayer userPlayer) {
         if (getHand().size() == 0) {
-            setDrawnCard(true);
+            setIfDrewCard(true);
             drawCard();
         } else {
             playRandomCard(userPlayer);
@@ -107,37 +109,11 @@ public class EnemyPlayer extends Player {
         }
     }
 
-    // EFFECTS: Find card of given type in list of cards, play effect on given player
-    public void findAndPlayCard(Card.CardType desiredType, Player player) {
-        for (Card c : hand) {
-            if (c.getType().isCardType(desiredType) && canPlayCard(c)) {
-                playCard(c, player);
-                break;
-            }
-        }
-    }
-
-    public boolean containsCardType(Card.CardType desiredType, List<Card> cards) {
-        return returnCardTypes(cards).contains(desiredType);
-    }
-
-    public List<Card.CardType> returnCardTypes(List<Card> cards) {
-        List<Card.CardType> cardTypes = new ArrayList<>();
-        for (Card c : cards) {
-            cardTypes.add(c.getType());
-        }
-        return cardTypes;
-    }
-
 
 
     // Getters
     public String getName() {
         return name;
-    }
-
-    public List<Card> getAllCards() {
-        return ALL_CARDS;
     }
 
     // Setters

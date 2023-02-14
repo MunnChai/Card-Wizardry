@@ -19,7 +19,7 @@ public class User {
     // EFFECTS: constructs user with 1 starting deck, 0 coins, all available cards in deck, and rest
     //          of cards not available
     public User() {
-        makeCards();
+        makeAllCards();
 
         initializeOwned();
         initializeNotOwned();
@@ -66,7 +66,7 @@ public class User {
 
     // REQUIRES: only implement at the START OF A GAME
     // EFFECTS: Create all playable cards in the game
-    public void makeCards() {
+    public void makeAllCards() {
         ALL_CARDS.addAll(makeCards(8, ATTACK, 2, 1, 2));
         ALL_CARDS.addAll(makeCards(8, ATTACK, 4, 2, 2));
         ALL_CARDS.addAll(makeCards(8, ATTACK, 6, 3, 2));

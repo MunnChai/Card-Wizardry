@@ -3,13 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import static model.Card.CardType.*;
 import static model.Deck.VIABLE_DECK_CARD_COUNT;
 import static model.EnemyPlayer.*;
-import static model.UserPlayer.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemyPlayerTest {
@@ -20,7 +15,7 @@ public class EnemyPlayerTest {
 
     @BeforeEach
     public void setup() {
-        user = new User();
+        user = new User(); // User must be instantiated for ALL_CARDS
         enemy1 = new EnemyPlayer();
     }
 
@@ -31,5 +26,30 @@ public class EnemyPlayerTest {
         assertEquals(ENEMY_MAX_HEALTH, enemy1.getHealth());
         assertEquals(ENEMY_STARTING_ENERGY, enemy1.getEnergy());
         assertEquals(0, enemy1.getShield());
+    }
+
+    @Test
+    public void testProduceRandomName() {
+
+    }
+
+    @Test
+    public void testCreateRandomIdles() {
+
+    }
+
+    @Test
+    public void testProduceEnemyIdleDescription() {
+
+    }
+
+    @Test
+    public void testEnemyDecisionMaking() {
+
+    }
+
+    @Test
+    public void testPlayRandomCard() {
+
     }
 }

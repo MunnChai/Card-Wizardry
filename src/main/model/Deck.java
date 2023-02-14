@@ -3,8 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/* A deck of cards, which you can add or remove cards from. To use a deck, the deck must have the exact number of
- required cards. */
+// Represents a deck of cards, with a name, and a list of all the cards in the deck
 public class Deck {
 
     public static final int VIABLE_DECK_CARD_COUNT = 20;
@@ -22,7 +21,7 @@ public class Deck {
     // EFFECTS: fills list of cards with random cards from the given player's cards until viable number of cards are in
     // the deck.
     public void fillRandom(User user) {
-        while (cardsInDeck.size() != VIABLE_DECK_CARD_COUNT) {
+        while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT) {
             int randomInt = (int)(Math.random() * getAvailableCards(user).size());
             cardsInDeck.add(getAvailableCards(user).get(randomInt));
         }
