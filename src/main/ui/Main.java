@@ -2,6 +2,8 @@ package ui;
 
 import model.User;
 
+import java.util.Scanner;
+
 // Print intro sequence, and instantiate a User and ShopUI to begin the gameplay loop.
 public class Main {
 
@@ -10,6 +12,9 @@ public class Main {
                 + " and battle ferocious enemies. ");
         System.out.println("Your journey begins in a dark forest, where you've been wandering for days on end,"
                 + " lost beyond lost.");
+        Scanner pause = new Scanner(System.in);
+        System.out.println("Enter anything to continue.");
+        pause.nextLine();
         User user = new User();
         ShopUI shopUI = new ShopUI(user);
     }

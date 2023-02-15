@@ -14,6 +14,9 @@ public abstract class UIMethods {
 
     protected User user;
 
+    // EFFECTS: Abstract method for initializing a UI class
+    public abstract void initUI();
+
     // EFFECTS: Prints the given question, and takes the user's input as a string.
     public String takeStringInput(String question) {
         Scanner s = new Scanner(System.in);
@@ -63,6 +66,4 @@ public abstract class UIMethods {
             i++;
         }
     }
-
-    public abstract void initUI();
 }
