@@ -4,6 +4,7 @@ import java.util.List;
 
 import static model.UserPlayer.*;
 
+// An abstract class for any player in a battle. The player has a deck, hand, health, energy, and shield.
 public abstract class Player {
 
     protected Deck deck;            // player's selected deck for battle

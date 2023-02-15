@@ -7,7 +7,7 @@ import static model.Card.CardType.*;
 import static model.User.ALL_CARDS;
 import static model.UserPlayer.USER_MAX_HEALTH;
 
-// Represents an enemy in battle, with a name, deck, hand,
+// Represents an enemy in battle, with a name, list of idle descriptions, and all the traits from the Player superclass
 public class EnemyPlayer extends Player {
 
     enum Adjectives {
