@@ -78,7 +78,7 @@ public class EnemyPlayer extends Player {
         if (health < ENEMY_MAX_HEALTH / 3) {
             randInt = (int)(Math.random() * 3) + 3;
             return "The " + name + " " + enemyIdles.get(randInt);
-        } else if (health >= ENEMY_MAX_HEALTH / 3 && user.getHealth() < USER_MAX_HEALTH / 3) {
+        } else if (user.getHealth() < USER_MAX_HEALTH / 3) {
             randInt = (int)(Math.random() * 3) + 6;
             return "The " + name + " " + enemyIdles.get(randInt);
         } else {
