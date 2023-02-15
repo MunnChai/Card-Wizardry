@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a user in battle. Has a starting health, starting energy, and starting hand amount, but all other fields
+// are inherited from the superclass Player.
 public class UserPlayer extends Player {
 
     public static final int USER_MAX_HEALTH = 20;

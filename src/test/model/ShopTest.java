@@ -38,13 +38,6 @@ public class ShopTest {
         assertEquals(SHOP_CARD_STOCK, shop2.getCardsForSale().size());
     }
 
-    // MODIFIES: Shop, Player
-    // EFFECTS: Buy a card from cards for sale, decided using the index, coin value is deducted from player coins
-    //          purchased card is removed from not owned cards, and added to owned cards
-    public void buyCard(int index) {
-
-    }
-
     @Test
     public void testBuyCard() {
 

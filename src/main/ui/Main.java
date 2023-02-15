@@ -1,10 +1,8 @@
 package ui;
 
-import model.Shop;
 import model.User;
 
-import java.util.Scanner;
-
+// Print intro sequence, and instantiate a User and ShopUI to begin the gameplay loop.
 public class Main {
 
     public static void main(String[] args) {

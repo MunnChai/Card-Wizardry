@@ -7,7 +7,8 @@ import static model.Card.CardType.*;
 import static model.User.ALL_CARDS;
 import static model.UserPlayer.USER_MAX_HEALTH;
 
-// Represents an enemy in battle, with a name, list of idle descriptions, and all the traits from the Player superclass
+// Represents an enemy in battle, with a name, list of idle descriptions, and inherits all the traits from the Player
+// superclass
 public class EnemyPlayer extends Player {
 
     enum Adjectives {
@@ -42,7 +43,7 @@ public class EnemyPlayer extends Player {
         setHealth(ENEMY_MAX_HEALTH);
         setEnergy(ENEMY_STARTING_ENERGY);
         setShield(0);
-        createRandomIdles();
+        createIdles();
     }
 
     // EFFECTS: Produce random string name
@@ -52,7 +53,7 @@ public class EnemyPlayer extends Player {
         return Adjectives.values()[randInt1].name() + " " + Nouns.values()[randInt2].name();
     }
 
-    public void createRandomIdles() {
+    public List<String> createIdles() {
         List<String> possibleIdles = new ArrayList<>();
         possibleIdles.add("flips through its hand.");
         possibleIdles.add("yawns, and spits on the ground.");
@@ -67,6 +68,7 @@ public class EnemyPlayer extends Player {
         possibleIdles.add("starts doing pushups.");
 
         enemyIdles = possibleIdles;
+        return possibleIdles;
     }
 
     // EFFECTS: Produce random string for enemy idle description, dependent on enemy's health and player's health
@@ -85,16 +87,19 @@ public class EnemyPlayer extends Player {
         }
     }
 
-    // EFFECTS: Decide which card to play, depending on hand and health
+    // EFFECTS: If hand is empty, draw a card. Otherwise, play a random card.
     public void enemyDecisionMaking(UserPlayer userPlayer) {
         if (getHand().size() == 0) {
             setIfDrewCard(true);
             drawCard();
         } else {
+            setIfDrewCard(false);
             playRandomCard(userPlayer);
         }
     }
 
+    // EFFECTS: Picks a random card to play. If enemy has enough energy to play the card, it plays the card. Otherwise,
+    //          it draws a card.
     public void playRandomCard(UserPlayer userPlayer) {
         int randInt = (int)(Math.random() * hand.size());
         Card randCard = hand.get(randInt);

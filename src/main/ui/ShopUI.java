@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
+// UI class for shops. From this class, a user can buy and sell cards, and access the deck editing UI class.
 public class ShopUI extends UIMethods {
 
     protected Shop shop;

@@ -5,6 +5,9 @@ import java.util.List;
 
 import static model.Card.CardType.*;
 
+// Represents the user's overall profile. Has a list of decks, a list of all the user's owned cards, a list of all the
+// user's not owned cards, and the user's current selected deck. Instantiating a user also instantiates all the cards
+// in the game, so User MUST be instantiated before anything can occur.
 public class User {
 
     public static final List<Card> ALL_CARDS = new ArrayList<>();
@@ -66,25 +69,29 @@ public class User {
 
     // REQUIRES: only implement at the START OF A GAME
     // EFFECTS: Create all playable cards in the game
-    public void makeAllCards() {
-        ALL_CARDS.addAll(makeCards(8, ATTACK, 2, 1, 2));
-        ALL_CARDS.addAll(makeCards(8, ATTACK, 4, 2, 2));
-        ALL_CARDS.addAll(makeCards(8, ATTACK, 6, 3, 2));
-        ALL_CARDS.addAll(makeCards(8, ATTACK, 8, 4, 3));
-        ALL_CARDS.addAll(makeCards(8, ATTACK, 12, 6, 4));
-        ALL_CARDS.addAll(makeCards(2, HEAL, 1, 1, 2));
-        ALL_CARDS.addAll(makeCards(2, HEAL, 2, 2, 2));
-        ALL_CARDS.addAll(makeCards(2, HEAL, 4, 3, 2));
-        ALL_CARDS.addAll(makeCards(2, HEAL, 6, 4, 3));
-        ALL_CARDS.addAll(makeCards(2, HEAL, 8, 5, 4));
-        ALL_CARDS.addAll(makeCards(2, SHIELD, 1, 1, 2));
-        ALL_CARDS.addAll(makeCards(2, SHIELD, 3, 2, 2));
-        ALL_CARDS.addAll(makeCards(2, SHIELD, 6, 3, 2));
-        ALL_CARDS.addAll(makeCards(2, SHIELD, 8, 4, 2));
-        ALL_CARDS.addAll(makeCards(2, SHIELD, 10, 6, 2));
+    public List<Card> makeAllCards() {
+        List<Card> allCards = new ArrayList<>();
+        allCards.addAll(makeCards(8, ATTACK, 2, 1, 2));
+        allCards.addAll(makeCards(8, ATTACK, 4, 2, 2));
+        allCards.addAll(makeCards(8, ATTACK, 6, 3, 2));
+        allCards.addAll(makeCards(8, ATTACK, 8, 4, 3));
+        allCards.addAll(makeCards(8, ATTACK, 12, 6, 4));
+        allCards.addAll(makeCards(2, HEAL, 1, 1, 2));
+        allCards.addAll(makeCards(2, HEAL, 2, 2, 2));
+        allCards.addAll(makeCards(2, HEAL, 4, 3, 2));
+        allCards.addAll(makeCards(2, HEAL, 6, 4, 3));
+        allCards.addAll(makeCards(2, HEAL, 8, 5, 4));
+        allCards.addAll(makeCards(2, SHIELD, 1, 1, 2));
+        allCards.addAll(makeCards(2, SHIELD, 3, 2, 2));
+        allCards.addAll(makeCards(2, SHIELD, 6, 3, 2));
+        allCards.addAll(makeCards(2, SHIELD, 8, 4, 2));
+        allCards.addAll(makeCards(2, SHIELD, 10, 6, 2));
+
+        ALL_CARDS.addAll(allCards);
+        return allCards;
     }
 
-    // EFFECTS: return list of 4 different cards with given type, value, energy cost, and coin cost
+    // EFFECTS: return list of n cards with given type, value, energy cost, and coin cost
     public List<Card> makeCards(int amount, Card.CardType type, int value, int energyCost, int coinCost) {
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
@@ -98,7 +105,8 @@ public class User {
         decks.add(deck);
     }
 
-    // EFFECTS: Produce all cards that user owns that are not in user's decks
+    // REQUIRES: User must have at least 1 deck
+    // EFFECTS: Produce all cards that are not in user's decks
     public List<Card> getCanSellCards() {
         List<Card> canSellCards = new ArrayList<>();
         for (Card c : ownedCards) {

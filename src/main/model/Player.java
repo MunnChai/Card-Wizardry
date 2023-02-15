@@ -4,16 +4,16 @@ import java.util.List;
 
 import static model.UserPlayer.*;
 
-// An abstract class for any player in a battle. The player has a deck, hand, health, energy, and shield.
-public abstract class Player {
+// A class for any player in a battle. The player has a deck, hand, health, energy, and shield.
+public class Player {
 
     protected Deck deck;            // player's selected deck for battle
     protected List<Card> hand;      // player's current hand of cards
     protected int health;           // player's current health
     protected int energy;           // player's current energy
     protected int shield;           // player's current shield
-    protected Card cardPlayed;      // tracks the last card played by the player
-    protected boolean ifDrewCard;    // tracks if the last action done by player is drawing a card
+    protected Card lastCardPlayed;      // tracks the last card played by the player
+    protected boolean ifDrewCard;   // tracks if the last action done by player is drawing a card
 
     // REQUIRES: current deck is not empty
     // MODIFIES: this
@@ -33,7 +33,7 @@ public abstract class Player {
         hand.remove(card);
         card.cardEffect(target);
         energy -= card.getEnergyCost();
-        cardPlayed = card;
+        lastCardPlayed = card;
         ifDrewCard = false;
     }
 
@@ -92,8 +92,8 @@ public abstract class Player {
         this.deck = deck;
     }
 
-    public void setCardPlayed(Card cardPlayed) {
-        this.cardPlayed = cardPlayed;
+    public void setLastCardPlayed(Card lastCardPlayed) {
+        this.lastCardPlayed = lastCardPlayed;
     }
 
     public void setIfDrewCard(boolean ifDrewCard) {
@@ -121,8 +121,8 @@ public abstract class Player {
         return deck;
     }
 
-    public Card getCardPlayed() {
-        return cardPlayed;
+    public Card getLastCardPlayed() {
+        return lastCardPlayed;
     }
 
     public boolean getIfDrewCard() {

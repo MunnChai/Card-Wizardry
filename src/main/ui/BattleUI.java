@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import static model.Card.CardType.*;
 
+// UI class for battles. After being instantiated, it will loop the user turn, enemy turn, and new turn methods. If
+// either the enemy or user's health goes below 0, the loop is broken out of, and it the class will play either the
+// victory or defeat sequence.
 public class BattleUI extends UIMethods {
 
     private UserPlayer userPlayer;
@@ -90,7 +93,7 @@ public class BattleUI extends UIMethods {
         while (userPlayer.getHealth() > 0) {
             newTurn();
             try {
-                playerTurn();
+                userTurn();
             } catch (EnemyDead enemyDead) {
                 break;
             }
@@ -124,7 +127,7 @@ public class BattleUI extends UIMethods {
     // MODIFIES: userPlayer
     // EFFECTS: If user's energy is 0, end its turn. Otherwise, user selects action. If user input out of selection
     //          range, execute this method again. Note: If the user draws a card, its turn is ended.
-    public void playerTurn() throws EnemyDead {
+    public void userTurn() throws EnemyDead {
         if (userPlayer.getEnergy() == 0) {
             System.out.println("\nYou are out of energy.");
             pause();
@@ -144,7 +147,7 @@ public class BattleUI extends UIMethods {
                     System.out.println("You drew a card.");
                     break;
                 default:
-                    playerTurn();
+                    userTurn();
             }
         }
     }
@@ -174,7 +177,7 @@ public class BattleUI extends UIMethods {
                 } else if (card.getType() == HEAL || card.getType() == SHIELD) {
                     userPlayer.playCard(card, userPlayer);
                 }
-                System.out.println("You played your " + userPlayer.getCardPlayed().getName() + "!");
+                System.out.println("You played your " + userPlayer.getLastCardPlayed().getName() + "!");
                 printTurnStats();
                 if (enemyPlayer.getHealth() <= 0) {
                     throw new EnemyDead();
@@ -184,7 +187,7 @@ public class BattleUI extends UIMethods {
                 pickCard();
             }
         }
-        playerTurn();
+        userTurn();
     }
 
     // EFFECTS: Print player and enemy health and shield.
@@ -207,7 +210,7 @@ public class BattleUI extends UIMethods {
                 System.out.println("The " + enemyPlayer.getName() + " drew a card.");
             } else {
                 System.out.println("The " + enemyPlayer.getName() + " played "
-                        + enemyPlayer.getCardPlayed().getName() + "!");
+                        + enemyPlayer.getLastCardPlayed().getName() + "!");
                 printTurnStats();
                 if (userPlayer.getHealth() <= 0) {
                     throw new UserDead();

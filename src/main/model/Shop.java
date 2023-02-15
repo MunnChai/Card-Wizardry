@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// A randomized shop with a list of cards that can be purchased.
 public class Shop {
 
     public static final int SHOP_CARD_STOCK = 4;

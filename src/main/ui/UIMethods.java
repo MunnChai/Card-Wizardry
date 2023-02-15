@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 import static model.Deck.VIABLE_DECK_CARD_COUNT;
 
-abstract class UIMethods {
+// Abstract UI class for any other UI class. Contains commonly used methods.
+public abstract class UIMethods {
 
     protected User user;
 
