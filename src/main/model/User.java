@@ -134,10 +134,6 @@ public class User {
         this.ownedCards = ownedCards;
     }
 
-    public void setNotOwnedCards(List<Card> notOwnedCards) {
-        this.notOwnedCards = notOwnedCards;
-    }
-
     // Getters
     public Deck getSelectedDeck() {
         return selectedDeck;

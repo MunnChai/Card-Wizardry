@@ -161,4 +161,11 @@ class DeckTest {
 
         assertFalse(deck1.checkViable());
     }
+
+    @Test
+    public void testSetName() {
+        Deck newDeck = new Deck("Starting name");
+        newDeck.setName("New name");
+        assertEquals("New name", newDeck.getName());
+    }
 }

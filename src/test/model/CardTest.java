@@ -222,4 +222,25 @@ class CardTest {
         assertEquals(USER_MAX_HEALTH, userPlayer.getHealth());
         assertEquals(1, userPlayer.getShield());
     }
+
+    @Test
+    public void testIsCardTypeTrue() {
+        Card.CardType attackType = ATTACK;
+        assertTrue(attackType.isCardType(ATTACK));
+    }
+
+    @Test
+    public void testIsCardTypeFalse() {
+        Card.CardType attackType = SHIELD;
+        assertFalse(attackType.isCardType(HEAL));
+    }
+
+    @Test
+    public void testSetName() {
+        Card card = new Card(ATTACK, 1, 1, 1);
+        String initialName = card.getName();
+        card.setName("New name");
+        assertEquals("New name", card.getName());
+        assertNotSame(card.getName(), initialName);
+    }
 }

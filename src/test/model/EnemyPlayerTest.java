@@ -142,7 +142,27 @@ public class EnemyPlayerTest {
     }
 
     @Test
-    public void testPlayRandomCardHasEnergy() {
+    public void testPlayRandomCardHasEnergyAttackCard() {
+        List<Card> attackCards = new ArrayList<>();
+        Card attackCard = new Card(ATTACK, 1, 1, 1);
+        attackCards.add(attackCard);
+        attackCards.add(attackCard);
+        attackCards.add(attackCard);
+        enemy1.setHand(attackCards);
+        int enemyInitialHandSize = enemy1.getHand().size();
+        enemy1.setEnergy(200);
+        enemy1.playRandomCard(user1);
+        assertEquals(enemyInitialHandSize - 1, enemy1.getHand().size());
+    }
+
+    @Test
+    public void testPlayRandomCardHasEnergyHealCard() {
+        List<Card> healCards = new ArrayList<>();
+        Card healCard = new Card(HEAL, 1, 1, 1);
+        healCards.add(healCard);
+        healCards.add(healCard);
+        healCards.add(healCard);
+        enemy1.setHand(healCards);
         int enemyInitialHandSize = enemy1.getHand().size();
         enemy1.setEnergy(200);
         enemy1.playRandomCard(user1);

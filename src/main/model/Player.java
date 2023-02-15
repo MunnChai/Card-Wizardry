@@ -88,13 +88,6 @@ public class Player {
         this.health = health;
     }
 
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
-
-    public void setLastCardPlayed(Card lastCardPlayed) {
-        this.lastCardPlayed = lastCardPlayed;
-    }
 
     public void setIfDrewCard(boolean ifDrewCard) {
         this.ifDrewCard = ifDrewCard;

@@ -63,8 +63,6 @@ public class ShopTest {
         assertEquals(10 - sampleCard1.getCoinCost(), user.getCoins());
         assertEquals(expectedOwnedCards, user.getOwnedCards());
         assertEquals(expectedNotOwnedCards, user.getNotOwnedCards());
-
-
     }
 
     @Test
