@@ -3,6 +3,7 @@ package model;
 // Represents a playing card with a name, type, value (potency), energy cost, and coin cost
 public class Card {
 
+    // Types of cards.
     public enum CardType {
         ATTACK, HEAL, SHIELD;
 
@@ -11,6 +12,7 @@ public class Card {
         }
     }
 
+    // Different adjectives used to generate card names. Sorted by adjective types that correspond with card types.
     enum Adjectives {
 
         DEADLY(AdjType.ATTACK), EVIL(AdjType.ATTACK), MONSTROUS(AdjType.ATTACK), LETHAL(AdjType.ATTACK),
@@ -33,6 +35,7 @@ public class Card {
         }
     }
 
+    // Different nouns used to generate card names. Sorted by noun types that correspond with card types.
     enum Nouns {
 
         DOOM(NounType.ATTACK), CATACLYSM(NounType.ATTACK), DISASTER(NounType.ATTACK), MISHAP(NounType.ATTACK),
@@ -62,7 +65,6 @@ public class Card {
     private int energyCost;
     private int coinCost;
 
-    // REQUIRES: value > 0, cost >= 0, type is one of card types
     // EFFECTS: Constructs a card, with given name, type, value, and cost
     public Card(CardType type, int value, int energyCost, int coinCost) {
         this.type = type;
@@ -108,7 +110,7 @@ public class Card {
         return Nouns.values()[randomInt].name();
     }
 
-    // MODIFIES: user OR enemy
+    // MODIFIES: player
     // EFFECTS: increases player shield/player health by this.value, or decrease enemy health by this.value,
     //          player energy - energy cost
     public void cardEffect(Player player) {
@@ -124,6 +126,8 @@ public class Card {
         }
     }
 
+
+    // Setters
     public void setName(String name) {
         this.name = name;
     }
@@ -132,6 +136,7 @@ public class Card {
         return name;
     }
 
+    // Getters
     public CardType getType() {
         return type;
     }

@@ -94,21 +94,23 @@ class DeckTest {
     }
 
     @Test
-    public void testAddCardFull() {
-        for (int i = 0; i < 20; i++) {
+    // Note: Decks can hold more cards than the viable amount, but you cannot start a battle using a deck
+    //       that does not have the viable amount of cards.
+    public void testAddCardMoreThanViable() {
+        for (int i = 0; i < VIABLE_DECK_CARD_COUNT; i++) {
             deck1.addCard(sampleCard1);
         }
 
-        assertEquals(20, deck1.getCardsInDeck().size());
+        assertEquals(VIABLE_DECK_CARD_COUNT, deck1.getCardsInDeck().size());
         assertEquals(sampleCard1, deck1.getCardsInDeck().get(19));
 
         deck1.addCard(sampleCard2);
         assertEquals(sampleCard2, deck1.getCardsInDeck().get(20));
-        assertEquals(21, deck1.getCardsInDeck().size());
+        assertEquals(VIABLE_DECK_CARD_COUNT + 1, deck1.getCardsInDeck().size());
 
         deck1.addCard(sampleCard1);
         assertEquals(sampleCard1, deck1.getCardsInDeck().get(21));
-        assertEquals(22, deck1.getCardsInDeck().size());
+        assertEquals(VIABLE_DECK_CARD_COUNT + 2, deck1.getCardsInDeck().size());
     }
 
     @Test
@@ -165,6 +167,7 @@ class DeckTest {
     @Test
     public void testSetName() {
         Deck newDeck = new Deck("Starting name");
+        assertEquals("Starting name", newDeck.getName());
         newDeck.setName("New name");
         assertEquals("New name", newDeck.getName());
     }

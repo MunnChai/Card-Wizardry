@@ -7,7 +7,7 @@ import static model.Card.CardType.*;
 
 // Represents the user's overall profile. Has a list of decks, a list of all the user's owned cards, a list of all the
 // user's not owned cards, and the user's current selected deck. Instantiating a user also instantiates all the cards
-// in the game, so User MUST be instantiated before anything can occur.
+// in the game, so User MUST be instantiated for any cards to exist.
 public class User {
 
     public static final List<Card> ALL_CARDS = new ArrayList<>();
@@ -31,6 +31,8 @@ public class User {
         setSelectedDeck(decks.get(0));
     }
 
+    // REQUIRES: user has enough owned cards to fill a deck
+    // MODIFIES: this
     // EFFECTS: create player's decks, fill first deck with random cards from player owned cards
     public void initializeFirstDeck() {
         decks = new ArrayList<>();
@@ -39,6 +41,8 @@ public class User {
         decks.add(firstDeck);
     }
 
+    // REQUIRES: ALL_CARDS has been initialized
+    // MODIFIES: this
     // EFFECTS: Half of all cards go into owned cards
     public void initializeOwned() {
         ownedCards = new ArrayList<>();
@@ -53,6 +57,8 @@ public class User {
         }
     }
 
+    // REQUIRES: ALL_CARDS has been initialized
+    // MODIFIES: this
     // EFFECTS: Half of all cards go into not owned cards
     public void initializeNotOwned() {
         notOwnedCards = new ArrayList<>();
@@ -67,7 +73,6 @@ public class User {
         }
     }
 
-    // REQUIRES: only implement at the START OF A GAME
     // EFFECTS: Create all playable cards in the game
     public List<Card> makeAllCards() {
         List<Card> allCards = new ArrayList<>();
@@ -100,6 +105,7 @@ public class User {
         return cards;
     }
 
+    // MODIFIES: this
     // EFFECTS: Add given deck to list of decks
     public void addDeck(Deck deck) {
         decks.add(deck);

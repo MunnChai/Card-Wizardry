@@ -140,7 +140,7 @@ public class EditDeckUI extends UIMethods {
         deckSelector();
     }
 
-    // MODIFIES: deck
+    // MODIFIES: user
     // EFFECTS: Print deletion confirmation, and delete deck from user's decks if user confirms. Return to deck editor
     //          menu after.
     public void deckDelete(Deck deck) {

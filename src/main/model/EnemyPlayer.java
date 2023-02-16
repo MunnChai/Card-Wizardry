@@ -8,7 +8,7 @@ import static model.User.ALL_CARDS;
 import static model.UserPlayer.USER_MAX_HEALTH;
 
 // Represents an enemy in battle, with a name, list of idle descriptions, and inherits all the traits from the Player
-// superclass
+// superclass. This enemy also has a basic function to decide what action to do during its turn.
 public class EnemyPlayer extends Player {
 
     enum Adjectives {
@@ -46,13 +46,14 @@ public class EnemyPlayer extends Player {
         createIdles();
     }
 
-    // EFFECTS: Produce random string name
+    // EFFECTS: Produce random string name using random adjectives and nouns
     public String produceRandomEnemyName() {
         int randInt1 = (int)(Math.random() * Adjectives.values().length);
         int randInt2 = (int)(Math.random() * Nouns.values().length);
         return Adjectives.values()[randInt1].name() + " " + Nouns.values()[randInt2].name();
     }
 
+    // EFFECTS: Produce list of all possible enemy idle descriptions
     public List<String> createIdles() {
         List<String> possibleIdles = new ArrayList<>();
         possibleIdles.add("flips through its hand.");
@@ -87,6 +88,7 @@ public class EnemyPlayer extends Player {
         }
     }
 
+    // MODIFIES: this, userPlayer
     // EFFECTS: If hand is empty, draw a card. Otherwise, play a random card.
     public void enemyDecisionMaking(UserPlayer userPlayer) {
         if (getHand().size() == 0) {
@@ -98,6 +100,7 @@ public class EnemyPlayer extends Player {
         }
     }
 
+    // MODIFIES: this, userPlayer
     // EFFECTS: Picks a random card to play. If enemy has enough energy to play the card, it plays the card. Otherwise,
     //          it draws a card.
     public void playRandomCard(UserPlayer userPlayer) {

@@ -11,10 +11,13 @@ public class UserPlayer extends Player {
     public static final int USER_STARTING_ENERGY = 1;
     public static final int USER_STARTING_HAND_AMOUNT = 3;
 
+    // EFFECTS: Constructs a user player in battle with the given deck of cards, a hand, and the starting amount of
+    //          health, energy, and shield.
     public UserPlayer(Deck selectedDeck) {
         List<Card> copy = new ArrayList<>(selectedDeck.getCardsInDeck());
         deck = new Deck(selectedDeck.getName());
         deck.setCardsInDeck(copy);
+
         hand = new ArrayList<>();
         drawCard();
         drawCard();

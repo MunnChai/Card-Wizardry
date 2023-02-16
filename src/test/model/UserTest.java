@@ -43,9 +43,15 @@ public class UserTest {
 
     @Test
     public void testInitializeFirstDeck() {
+        Deck firstDeck = user1.getDecks().get(0);
+
         assertEquals(1, user1.getDecks().size());
-        assertEquals(20, user1.getDecks().get(0).getCardsInDeck().size());
-        assertEquals("Starter Deck", user1.getDecks().get(0).getName());
+        assertEquals(20, firstDeck.getCardsInDeck().size());
+        assertEquals("Starter Deck", firstDeck.getName());
+
+        for (Card c : firstDeck.getCardsInDeck()) {
+            assertTrue(user1.getOwnedCards().contains(c));
+        }
     }
 
     @Test

@@ -3,7 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// A randomized shop with a list of cards that can be purchased.
+// A randomized shop with a list of cards that can be purchased. Holds given user, to access user's owned and not
+// owned cards. Has methods for buying and selling cards from the shop.
 public class Shop {
 
     public static final int SHOP_CARD_STOCK = 4;
@@ -22,7 +23,7 @@ public class Shop {
         }
     }
 
-    // MODIFIES: Shop, Player
+    // MODIFIES: this, Player
     // EFFECTS: Buy a card from cards for sale, decided using the index, coin value is deducted from player coins
     //          purchased card is removed from not owned cards, and added to owned cards
     public void buyCard(int index) {

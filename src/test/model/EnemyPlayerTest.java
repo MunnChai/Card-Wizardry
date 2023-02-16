@@ -51,21 +51,26 @@ public class EnemyPlayerTest {
         assertTrue(randomNames.contains("NEFARIOUS GOBLIN"));
         assertTrue(randomNames.contains("SHADY CYCLOPS"));
         assertTrue(randomNames.contains("VILE OGRE"));
+        assertTrue(randomNames.contains("FELONIOUS PILE_OF_ROCKS"));
     }
 
     @Test
+    // Tests that a set few idle strings are in the enemy idles.
     public void testCreateIdles() {
-        assertEquals(9, enemy1.createIdles().size());
-        assertTrue(enemy1.createIdles().contains("flips through its hand."));
-        assertTrue(enemy1.createIdles().contains("yawns, and spits on the ground."));
-        assertTrue(enemy1.createIdles().contains("scratches its head."));
-        assertTrue(enemy1.createIdles().contains("bites its nails."));
-        assertTrue(enemy1.createIdles().contains("glances around angrily, perhaps looking for a rock to throw"
+        List<String> enemyIdles = enemy1.createIdles();
+
+        assertEquals(9, enemyIdles.size());
+
+        assertTrue(enemyIdles.contains("flips through its hand."));
+        assertTrue(enemyIdles.contains("yawns, and spits on the ground."));
+        assertTrue(enemyIdles.contains("scratches its head."));
+        assertTrue(enemyIdles.contains("bites its nails."));
+        assertTrue(enemyIdles.contains("glances around angrily, perhaps looking for a rock to throw"
                 + " at you?"));
-        assertTrue(enemy1.createIdles().contains("starts to tear up."));
-        assertTrue(enemy1.createIdles().contains("does a backflip."));
-        assertTrue(enemy1.createIdles().contains("smirks at you."));
-        assertTrue(enemy1.createIdles().contains("starts doing pushups."));
+        assertTrue(enemyIdles.contains("starts to tear up."));
+        assertTrue(enemyIdles.contains("does a backflip."));
+        assertTrue(enemyIdles.contains("smirks at you."));
+        assertTrue(enemyIdles.contains("starts doing pushups."));
     }
 
     @Test
@@ -80,7 +85,8 @@ public class EnemyPlayerTest {
 
         // Test randomness a large amount of times
         for (int i = 0; i < 1000; i++) {
-            assertTrue(expectedStrings.contains(enemy1.produceEnemyIdleDescription(user1)));
+            String idleDescription = enemy1.produceEnemyIdleDescription(user1);
+            assertTrue(expectedStrings.contains(idleDescription));
         }
     }
 
@@ -96,7 +102,8 @@ public class EnemyPlayerTest {
 
         // Test randomness a large amount of times
         for (int i = 0; i < 1000; i++) {
-            assertTrue(expectedStrings.contains(enemy1.produceEnemyIdleDescription(user1)));
+            String idleDescription = enemy1.produceEnemyIdleDescription(user1);
+            assertTrue(expectedStrings.contains(idleDescription));
         }
     }
 
@@ -113,7 +120,8 @@ public class EnemyPlayerTest {
 
         // Test randomness a large amount of times
         for (int i = 0; i < 1000; i++) {
-            assertTrue(expectedStrings.contains(enemy1.produceEnemyIdleDescription(user1)));
+            String idleDescription = enemy1.produceEnemyIdleDescription(user1);
+            assertTrue(expectedStrings.contains(idleDescription));
         }
     }
 

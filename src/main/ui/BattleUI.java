@@ -33,17 +33,19 @@ public class BattleUI extends UIMethods {
         beforeBattle();
     }
 
+    // MODIFIES: user
     // EFFECTS: Choose a deck to select, construct deck editing UI, or loop if user's input does not correlate with an
     //          option.
     public void beforeBattle() {
+        int userDecksSize = user.getDecks().size();
         System.out.println("Select a deck to battle with:");
         Scanner s = new Scanner(System.in);
         printDecks(user.getDecks());
-        System.out.println("[" + (user.getDecks().size() + 1) + "] Edit your decks");
-        int index = s.nextInt() - 1;
-        if (index < user.getDecks().size()) {
-            selectDeckForBattle(index);
-        } else if (index == user.getDecks().size()) {
+        System.out.println("[" + (userDecksSize + 1) + "] Edit your decks");
+        int selectionIndex = s.nextInt() - 1;
+        if (selectionIndex < userDecksSize) {
+            selectDeckForBattle(selectionIndex);
+        } else if (selectionIndex == userDecksSize) {
             new EditDeckUI(user, this);
         } else {
             beforeBattle();
@@ -64,8 +66,9 @@ public class BattleUI extends UIMethods {
             beforeBattle();
         }
     }
-    
-    //  EFFECTS: Constructs a user player and enemy player, and sets energy to 0. Executes battle loop.
+
+    // MODIFIES: userPlayer, enemyPlayer
+    // EFFECTS: Constructs a user player and enemy player, and sets energy to 0. Executes battle loop.
     public void preBattleSetup() {
         userPlayer = new UserPlayer(user.getSelectedDeck());
         enemyPlayer = new EnemyPlayer();
@@ -84,6 +87,7 @@ public class BattleUI extends UIMethods {
         battleLoop();
     }
 
+    // MODIFIES: userPlayer, enemyPlayer
     // EFFECTS: Execute new turn, user's turn, and enemy turn each loop. If the enemy's health is 0 after player's
     //          turn, break out of the loop. Stop the loop when either the user's health or the enemy's health drops
     //          below 0, and play the appropriate sequence. Then, create a shop UI.
@@ -219,6 +223,7 @@ public class BattleUI extends UIMethods {
                 + "hoping that your next battle will go better.");
     }
 
+    // MODIFIES: user
     // EFFECTS: Print victory sequence text.
     public void victorySequence() {
         user.setCoins(user.getCoins() + VICTORY_COIN_AMOUNT);

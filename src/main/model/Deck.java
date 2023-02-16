@@ -6,7 +6,7 @@ import java.util.List;
 // Represents a deck of cards, with a name, and a list of all the cards in the deck
 public class Deck {
 
-    public static final int VIABLE_DECK_CARD_COUNT = 20;
+    public static final int VIABLE_DECK_CARD_COUNT = 20;    // A deck must have this many cards to be viable for battle
 
     private String name;
     private List<Card> cardsInDeck;
@@ -17,6 +17,7 @@ public class Deck {
         cardsInDeck = new ArrayList<>();
     }
 
+    // REQUIRES: User owns enough cards to fill the deck
     // MODIFIES: this
     // EFFECTS: fills list of cards with random cards from the given player's cards until viable number of cards are in
     // the deck.
@@ -38,12 +39,13 @@ public class Deck {
         return availableCards;
     }
 
-    // REQUIRED:
+    // MODIFIES: this
     // EFFECTS: Add given card to deck, remove from owned cards
     public void addCard(Card card) {
         cardsInDeck.add(card);
     }
 
+    // MODIFIES: this
     // REQUIRES: given card must be in deck
     // EFFECTS: Remove given card from deck, add to owned cards
     public void removeCard(Card card) {
