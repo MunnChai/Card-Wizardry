@@ -3,7 +3,11 @@ package ui;
 import model.Card;
 import model.Deck;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +15,7 @@ import static model.Deck.VIABLE_DECK_CARD_COUNT;
 
 // Abstract UI class for any other UI class. Contains commonly used methods.
 public abstract class UIMethods {
+    private static final String JSON_STORE = "./data/user.json";
 
     protected User user;
 
@@ -64,6 +69,27 @@ public abstract class UIMethods {
             System.out.println("\n[" + i + "] " + c.getName() + ": \n" + c.getType().toString() + " type, "
                     + c.getValue() + " strength, " + c.getEnergyCost() + " energy cost");
             i++;
+        }
+    }
+
+    public void save() {
+        JsonWriter jsonWriter = new JsonWriter("./data/user.json");
+        try {
+            jsonWriter.open();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File not found. Could not save to file.");
+        }
+        jsonWriter.write(user);
+        jsonWriter.close();
+    }
+
+    public void load() {
+        JsonReader jsonReader = new JsonReader("./data/user.json");
+        try {
+            user = jsonReader.read();
+            System.out.println("Loaded " + user.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

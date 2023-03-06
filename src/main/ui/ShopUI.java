@@ -39,25 +39,34 @@ public class ShopUI extends UIMethods {
         System.out.println("\"What can I get for ya?\" \nYou have " + user.getCoins() + " coins.");
         Scanner s = new Scanner(System.in);
         printSelections("\"I'd like to buy a card.\"", "\"I'd like to sell a card.\"",
-                "\"I'd like to edit my deck\"", "\"I'd better get going.\"");
+                "\"I'd like to edit my decks.\"", "\"I'd better get going.\"", "Save Game",
+                "Load Game", "Quit Game");
         int index = s.nextInt();
-        switch (index) {
-            case 1:
-                buyCard();
-                break;
-            case 2:
-                sellCard();
-                break;
-            case 3:
-                new EditDeckUI(user, this);
-                shopOptions();
-                break;
-            case 4:
-                System.out.println("\"Come again!!\"\nYou leave the hut and continue your journey once more.");
-                new BattleUI(user);
-                break;
-            default:
-                shopOptions();
+        userSelection(index);
+    }
+
+    // EFFECTS: execute methods depending on given index
+    private void userSelection(int index) {
+        if (index == 1) {
+            buyCard();
+        } else if (index == 2) {
+            sellCard();
+        } else if (index == 3) {
+            new EditDeckUI(user, this);
+            shopOptions();
+        } else if (index == 4) {
+            System.out.println("\"Come again!!\"\nYou leave the hut and continue your journey once more.");
+            new BattleUI(user);
+        } else if (index == 5) {
+            save();
+            shopOptions();
+        } else if (index == 6) {
+            load();
+            shopOptions();
+        } else if (index == 7) {
+            System.out.println("\"Ciao\"");
+        } else {
+            shopOptions();
         }
     }
 

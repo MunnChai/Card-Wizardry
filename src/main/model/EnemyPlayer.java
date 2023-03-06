@@ -31,7 +31,7 @@ public class EnemyPlayer extends Player {
     //          a name, and the starting shield, health, and energy.
     public EnemyPlayer() {
         deck = new Deck("Enemy Deck");
-        User tempAllCardsUser = new User();
+        User tempAllCardsUser = new User("Name");
         tempAllCardsUser.setOwnedCards(ALL_CARDS);
         deck.fillRandom(tempAllCardsUser);
         hand = new ArrayList<>();

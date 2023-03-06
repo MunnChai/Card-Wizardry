@@ -24,7 +24,7 @@ class DeckTest {
 
     @BeforeEach
     public void setup() {
-        user1 = new User();
+        user1 = new User("Name");
         deck1 = new Deck("Deck 1");
         deck2 = new Deck("Deck 2");
         deck3 = new Deck("Deck 3");

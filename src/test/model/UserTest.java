@@ -19,7 +19,7 @@ public class UserTest {
 
     @BeforeEach
     public void setup() {
-        user1 = new User();
+        user1 = new User("Name");
     }
 
     @Test

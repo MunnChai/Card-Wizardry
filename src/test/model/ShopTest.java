@@ -23,7 +23,7 @@ public class ShopTest {
 
     @BeforeEach
     public void setup() {
-        user = new User();
+        user = new User("Name");
         shop1 = new Shop(user);
         shop2 = new Shop(user);
 

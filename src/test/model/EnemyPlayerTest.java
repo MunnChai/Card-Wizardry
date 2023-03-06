@@ -20,7 +20,7 @@ public class EnemyPlayerTest {
 
     @BeforeEach
     public void setup() {
-        user = new User(); // User must be instantiated for ALL_CARDS
+        user = new User("Name"); // User must be instantiated for ALL_CARDS
         enemy1 = new EnemyPlayer();
         Deck testDeck = new Deck("Test Deck");
         testDeck.fillRandom(user);

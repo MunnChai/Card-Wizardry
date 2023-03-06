@@ -25,7 +25,7 @@ public class PlayerTest {
 
     @BeforeEach
     public void setup() {
-        user = new User();
+        user = new User("Name");
         user1 = new UserPlayer(user.getSelectedDeck());
         enemy1 = new EnemyPlayer();
 

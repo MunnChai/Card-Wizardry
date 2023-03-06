@@ -35,7 +35,7 @@ class CardTest {
         healCard2 = new Card(HEAL, 2, 1, 1);
         shieldCard2 = new Card(SHIELD, 3, 1, 1);
 
-        user = new User();
+        user = new User("Name");
         userPlayer = new UserPlayer(user.getSelectedDeck());
         enemy = new EnemyPlayer();
     }

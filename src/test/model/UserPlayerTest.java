@@ -14,7 +14,7 @@ public class UserPlayerTest {
 
     @BeforeEach
     public void setup() {
-        user = new User();
+        user = new User("Name");
         userPlayer = new UserPlayer(user.getSelectedDeck());
     }
 

@@ -39,6 +39,8 @@ this project is a good foundation for me to create more in depth and complex gam
 - As a user, I want to be able to select a deck, and remove a card from the deck.
 - As a user, I want to be able to purchase a card, and add it to my owned cards. 
 - As a user, I want to be able to sell a card from my owned cards.
+- As a user, I want to be able to save my game. 
+- As a user, I want to be able to load a saved game. 
 
 ### In Battle
 

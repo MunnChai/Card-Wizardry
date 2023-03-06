@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,7 @@ public class User {
     public static final List<Card> ALL_CARDS = new ArrayList<>();
     public static final int ALL_CARD_COUNT = 60;
 
+    private String name; // This user's name
     private List<Deck> decks;
     private int coins;
     private List<Card> ownedCards; // owned cards, not in deck. Other owned cards are in decks
@@ -21,7 +25,9 @@ public class User {
 
     // EFFECTS: constructs user with 1 starting deck, 0 coins, all available cards in deck, and rest
     //          of cards not available
-    public User() {
+    public User(String name) {
+        this.name = name;
+
         makeAllCards();
 
         initializeOwned();
@@ -115,16 +121,68 @@ public class User {
     // EFFECTS: Produce all cards that are not in user's decks
     public List<Card> getCanSellCards() {
         List<Card> canSellCards = new ArrayList<>();
+        List<Card> cardsInDecks = new ArrayList<>();
+
+        for (Deck d : decks) {
+            cardsInDecks.addAll(d.getCardsInDeck());
+        }
+
         for (Card c : ownedCards) {
-            for (Deck d : decks) {
-                if (!d.getCardsInDeck().contains(c)) {
-                    canSellCards.add(c);
-                }
+            if (!cardsInDecks.contains(c)) {
+                canSellCards.add(c);
             }
         }
         return canSellCards;
     }
 
+    // EFFECTS: returns this as JSON object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("coins", coins);
+        json.put("decks", decksToJson(decks));
+        json.put("ownedCards", cardsToJson(ownedCards));
+        json.put("notOwnedCards", cardsToJson(notOwnedCards));
+        json.put("selectedDeck", deckToJson(selectedDeck));
+        return json;
+    }
+
+    // EFFECTS: returns decks as JSON Array
+    public JSONArray decksToJson(List<Deck> decks) {
+        JSONArray jsonArray = new JSONArray();
+        for (Deck deck : decks) {
+            jsonArray.put(deckToJson(deck));
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns deck as JSON Object
+    public JSONObject deckToJson(Deck deck) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", deck.getName());
+        jsonObject.put("cardsInDeck", deck.getCardsInDeck());
+        return jsonObject;
+    }
+
+    // EFFECTS: returns owned cards as JSON Array
+    public JSONArray cardsToJson(List<Card> cards) {
+        JSONArray jsonArray = new JSONArray();
+        for (Card card : cards) {
+            jsonArray.put(cardToJson(card));
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns card as JSON Object
+    public JSONObject cardToJson(Card card) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", card.getName());
+        jsonObject.put("type", card.getType());
+        jsonObject.put("value", card.getValue());
+        jsonObject.put("energyCost", card.getEnergyCost());
+        jsonObject.put("coinCost", card.getCoinCost());
+        return jsonObject;
+    }
 
 
     // Setters
@@ -140,7 +198,15 @@ public class User {
         this.ownedCards = ownedCards;
     }
 
+    public void setNotOwnedCards(List<Card> notOwnedCards) {
+        this.notOwnedCards = notOwnedCards;
+    }
+
     // Getters
+    public String getName() {
+        return name;
+    }
+
     public Deck getSelectedDeck() {
         return selectedDeck;
     }
