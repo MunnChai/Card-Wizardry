@@ -76,11 +76,11 @@ public abstract class UIMethods {
         JsonWriter jsonWriter = new JsonWriter("./data/user.json");
         try {
             jsonWriter.open();
+            jsonWriter.write(user);
+            jsonWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File not found. Could not save to file.");
         }
-        jsonWriter.write(user);
-        jsonWriter.close();
     }
 
     public void load() {

@@ -202,6 +202,10 @@ public class User {
         this.notOwnedCards = notOwnedCards;
     }
 
+    public void setDecks(List<Deck> decks) {
+        this.decks = decks;
+    }
+
     // Getters
     public String getName() {
         return name;

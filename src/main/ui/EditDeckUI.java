@@ -3,9 +3,7 @@ package ui;
 import model.Card;
 import model.Deck;
 import model.User;
-import persistence.JsonWriter;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static model.Deck.VIABLE_DECK_CARD_COUNT;
@@ -44,14 +42,6 @@ public class EditDeckUI extends UIMethods {
         } else if (index == user.getDecks().size()) {
             Deck newDeck = new Deck("New Deck");
             user.addDeck(newDeck);
-            JsonWriter jsonWriter = new JsonWriter("./data/user.json");
-            try {
-                jsonWriter.open();
-            } catch (FileNotFoundException e) {
-                System.out.println("File not found. Could not save to file.");
-            }
-            jsonWriter.write(user);
-            jsonWriter.close();
             deckSelector();
         } else if (index == user.getDecks().size() + 1) {
             previousUI.initUI();
@@ -79,14 +69,19 @@ public class EditDeckUI extends UIMethods {
         switch (select) {
             case 1:
                 deckAddCard(deck);
+                break;
             case 2:
                 deckRemoveCard(deck);
+                break;
             case 3:
                 deckFillRandom(deck);
+                break;
             case 4:
                 deckRename(deck);
+                break;
             case 5:
                 deckDelete(deck);
+                break;
             default:
                 deckSelector();
         }

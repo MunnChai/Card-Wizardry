@@ -53,7 +53,6 @@ public class ShopUI extends UIMethods {
             sellCard();
         } else if (index == 3) {
             new EditDeckUI(user, this);
-            shopOptions();
         } else if (index == 4) {
             System.out.println("\"Come again!!\"\nYou leave the hut and continue your journey once more.");
             new BattleUI(user);
