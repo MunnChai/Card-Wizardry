@@ -243,4 +243,9 @@ class CardTest {
         assertEquals("New name", card.getName());
         assertNotSame(card.getName(), initialName);
     }
+
+    @Test
+    public void testToJson() {
+        // TODO
+    }
 }

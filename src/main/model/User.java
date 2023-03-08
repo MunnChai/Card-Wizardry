@@ -11,7 +11,7 @@ import static model.Card.CardType.*;
 // Represents the user's overall profile. Has a list of decks, a list of all the user's owned cards, a list of all the
 // user's not owned cards, and the user's current selected deck. Instantiating a user also instantiates all the cards
 // in the game, so User MUST be instantiated for any cards to exist.
-public class User {
+public class User implements Writable {
 
     public static final List<Card> ALL_CARDS = new ArrayList<>();
     public static final int ALL_CARD_COUNT = 60;
@@ -143,7 +143,7 @@ public class User {
         json.put("decks", decksToJson(decks));
         json.put("ownedCards", cardsToJson(ownedCards));
         json.put("notOwnedCards", cardsToJson(notOwnedCards));
-        json.put("selectedDeck", deckToJson(selectedDeck));
+        json.put("selectedDeck", selectedDeck.toJson());
         return json;
     }
 
@@ -151,38 +151,21 @@ public class User {
     public JSONArray decksToJson(List<Deck> decks) {
         JSONArray jsonArray = new JSONArray();
         for (Deck deck : decks) {
-            jsonArray.put(deckToJson(deck));
+            jsonArray.put(deck.toJson());
         }
         return jsonArray;
-    }
-
-    // EFFECTS: returns deck as JSON Object
-    public JSONObject deckToJson(Deck deck) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", deck.getName());
-        jsonObject.put("cardsInDeck", deck.getCardsInDeck());
-        return jsonObject;
     }
 
     // EFFECTS: returns owned cards as JSON Array
     public JSONArray cardsToJson(List<Card> cards) {
         JSONArray jsonArray = new JSONArray();
         for (Card card : cards) {
-            jsonArray.put(cardToJson(card));
+            jsonArray.put(card.toJson());
         }
         return jsonArray;
     }
 
-    // EFFECTS: returns card as JSON Object
-    public JSONObject cardToJson(Card card) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", card.getName());
-        jsonObject.put("type", card.getType());
-        jsonObject.put("value", card.getValue());
-        jsonObject.put("energyCost", card.getEnergyCost());
-        jsonObject.put("coinCost", card.getCoinCost());
-        return jsonObject;
-    }
+
 
 
     // Setters

@@ -171,4 +171,9 @@ class DeckTest {
         newDeck.setName("New name");
         assertEquals("New name", newDeck.getName());
     }
+
+    @Test
+    public void testToJson() {
+        // TODO
+    }
 }

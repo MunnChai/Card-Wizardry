@@ -72,6 +72,7 @@ public abstract class UIMethods {
         }
     }
 
+    // EFFECTS: Saves user to file
     public void save() {
         JsonWriter jsonWriter = new JsonWriter("./data/user.json");
         try {
@@ -83,6 +84,8 @@ public abstract class UIMethods {
         }
     }
 
+    // MODIFIES: user
+    // EFFECTS: Loads user from file
     public void load() {
         JsonReader jsonReader = new JsonReader("./data/user.json");
         try {

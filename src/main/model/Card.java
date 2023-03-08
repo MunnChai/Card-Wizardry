@@ -1,7 +1,9 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a playing card with a name, type, value (potency), energy cost, and coin cost
-public class Card {
+public class Card implements Writable {
 
     // Types of cards.
     public enum CardType {
@@ -124,6 +126,17 @@ public class Card {
             default:
                 player.shield(this.getValue());
         }
+    }
+
+    // EFFECTS: returns card as JSON Object
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", this.getName());
+        jsonObject.put("type", this.getType());
+        jsonObject.put("value", this.getValue());
+        jsonObject.put("energyCost", this.getEnergyCost());
+        jsonObject.put("coinCost", this.getCoinCost());
+        return jsonObject;
     }
 
 

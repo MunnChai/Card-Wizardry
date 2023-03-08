@@ -16,15 +16,21 @@ public class JsonWriter {
         this.destination = destination;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Opens this writer, throws FileNotFoundException if destination is not a valid file that can be opened
     public void open() throws FileNotFoundException {
         writer = new PrintWriter(new File(destination));
     }
 
+    // MODIFIES: this
+    // EFFECTS: Writes user into destination file in json form
     public void write(User user) {
         JSONObject json = user.toJson();
         writer.print(json.toString(TAB));
     }
 
+    // MODIFIES: this
+    // EFFECTS: Closes this writer
     public void close() {
         writer.close();
     }

@@ -114,4 +114,19 @@ public class UserTest {
 
         assertEquals(0, user1.getCanSellCards().size());
     }
+
+    @Test
+    public void testToJson() {
+        // TODO
+    }
+
+    @Test
+    public void testCardsToJson() {
+        // TODO
+    }
+
+    @Test
+    public void testDecksToJson() {
+        // TODO
+    }
 }

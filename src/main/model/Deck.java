@@ -1,10 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a deck of cards, with a name, and a list of all the cards in the deck
-public class Deck {
+public class Deck implements Writable {
 
     public static final int VIABLE_DECK_CARD_COUNT = 20;    // A deck must have this many cards to be viable for battle
 
@@ -57,7 +59,13 @@ public class Deck {
         return (cardsInDeck.size() == VIABLE_DECK_CARD_COUNT);
     }
 
-
+    // EFFECTS: returns deck as JSON Object
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", getName());
+        jsonObject.put("cardsInDeck", getCardsInDeck());
+        return jsonObject;
+    }
 
     // Setters
     public void setCardsInDeck(List<Card> cardsInDeck) {

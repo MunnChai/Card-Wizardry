@@ -66,6 +66,8 @@ public class JsonReader {
         user.setDecks(decksToAdd);
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses cards from JSON Object and adds them to user's owned cards
     private void addOwnedCards(User user, JSONObject jsonObject) {
         JSONArray ownedCards = jsonObject.getJSONArray("ownedCards");
         List<Card> toBeAdded = new ArrayList<>();
@@ -76,6 +78,8 @@ public class JsonReader {
         user.setOwnedCards(toBeAdded);
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses cards from JSON Object and adds them to user's not owned cards
     private void addNotOwnedCards(User user, JSONObject jsonObject) {
         JSONArray notOwnedCards = jsonObject.getJSONArray("notOwnedCards");
         List<Card> toBeAdded = new ArrayList<>();
@@ -86,6 +90,7 @@ public class JsonReader {
         user.setNotOwnedCards(toBeAdded);
     }
 
+    // EFFECTS: Parses card from JSON Object and returns it
     private Card parseCard(JSONObject card) {
         String cardName = card.getString("name");
         Card.CardType cardType = Card.CardType.valueOf(card.getString("type"));
@@ -97,6 +102,7 @@ public class JsonReader {
         return c;
     }
 
+    // EFFECTS: Parses deck from JSON Object and returns it
     private Deck parseDeck(JSONObject jsonObject) {
         String deckName = jsonObject.getString("name");
         Deck deck = new Deck(deckName);
