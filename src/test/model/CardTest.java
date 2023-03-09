@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -245,7 +246,14 @@ class CardTest {
     }
 
     @Test
-    public void testToJson() {
-        // TODO
+    public void testCardToJson() {
+        attackCard1.setName("Attack Card");
+        JSONObject jsonObject = attackCard1.toJson();
+
+        assertEquals("Attack Card", jsonObject.get("name"));
+        assertEquals(ATTACK, jsonObject.get("type"));
+        assertEquals(2, jsonObject.get("value"));
+        assertEquals(1, jsonObject.get("coinCost"));
+        assertEquals(1, jsonObject.get("energyCost"));
     }
 }

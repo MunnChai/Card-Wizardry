@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -117,16 +118,9 @@ public class UserTest {
 
     @Test
     public void testToJson() {
-        // TODO
-    }
+        JSONObject jsonObject = user1.toJson();
 
-    @Test
-    public void testCardsToJson() {
-        // TODO
-    }
-
-    @Test
-    public void testDecksToJson() {
-        // TODO
+        assertEquals("Name", jsonObject.get("name"));
+        assertEquals(0, jsonObject.get("coins"));
     }
 }

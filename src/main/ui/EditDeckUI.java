@@ -45,6 +45,8 @@ public class EditDeckUI extends UIMethods {
             deckSelector();
         } else if (index == user.getDecks().size() + 1) {
             previousUI.initUI();
+        } else {
+            deckSelector();
         }
     }
 

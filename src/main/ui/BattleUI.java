@@ -7,8 +7,8 @@ import java.util.Scanner;
 import static model.Card.CardType.*;
 
 // UI class for battles. After being instantiated, it will loop the user turn, enemy turn, and new turn methods. If
-// either the enemy or user's health goes below 0, the loop is broken out of, and it the class will play either the
-// victory or defeat sequence.
+// either the enemy or user's health goes below 0, the loop is broken out of, and this class will print either the
+// victory or defeat sequence and create a new ShopUI.
 public class BattleUI extends UIMethods {
 
     private UserPlayer userPlayer;
@@ -44,6 +44,7 @@ public class BattleUI extends UIMethods {
         System.out.println("[" + (userDecksSize + 1) + "] Edit your decks");
         int selectionIndex = s.nextInt() - 1;
         if (selectionIndex < userDecksSize) {
+            user.setSelectedDeck(user.getDecks().get(selectionIndex));
             selectDeckForBattle(selectionIndex);
         } else if (selectionIndex == userDecksSize) {
             new EditDeckUI(user, this);

@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -173,7 +174,24 @@ class DeckTest {
     }
 
     @Test
-    public void testToJson() {
-        // TODO
+    public void testEmptyDeckToJson() {
+        JSONObject jsonObject = deck1.toJson();
+
+        assertEquals("Deck 1", jsonObject.get("name"));
+        assertEquals("[]", jsonObject.get("cardsInDeck").toString());
+    }
+
+    @Test
+    public void testGeneralDeckToJson() {
+        sampleCard1.setName("Card 1");
+        sampleCard2.setName("Card 2");
+        deck1.addCard(sampleCard1);
+        deck1.addCard(sampleCard2);
+        JSONObject jsonObject = deck1.toJson();
+
+        assertEquals("Deck 1", jsonObject.get("name"));
+        assertEquals("[{\"name\":\"Card 1\",\"type\":\"ATTACK\",\"value\":3,\"coinCost\":1,\"energyCost\":2},"
+                + "{\"name\":\"Card 2\",\"type\":\"HEAL\",\"value\":1,\"coinCost\":1,\"energyCost\":1}]",
+                jsonObject.get("cardsInDeck").toString());
     }
 }
