@@ -2,88 +2,67 @@
     "selectedDeck": {
         "cardsInDeck": [
             {
-                "name": "VICIOUS Spell Of SABOTAGE",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "WICKED Spell Of DEATH",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "ETERNAL Spell Of PROSPERITY",
-                "type": "HEAL",
-                "value": 4,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "HOLY Spell Of GLEE",
-                "type": "HEAL",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 2
-            },
-            {
-                "name": "VILLAINOUS Spell Of DEATH",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "VILLAINOUS Spell Of DISTRESS",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "VICIOUS Spell Of MISHAP",
+                "name": "DEADLY Spell Of SABOTAGE",
                 "type": "ATTACK",
                 "value": 4,
                 "coinCost": 2,
                 "energyCost": 2
             },
             {
-                "name": "VILLAINOUS Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 6,
+                "name": "HOLY Spell Of HAPPINESS",
+                "type": "HEAL",
+                "value": 4,
                 "coinCost": 2,
                 "energyCost": 3
             },
             {
-                "name": "TRANSCENDENT Spell Of PLENTEOUSNESS",
+                "name": "HOLY Spell Of HAPPINESS",
                 "type": "HEAL",
-                "value": 1,
+                "value": 8,
+                "coinCost": 4,
+                "energyCost": 5
+            },
+            {
+                "name": "WICKED Spell Of SABOTAGE",
+                "type": "ATTACK",
+                "value": 8,
+                "coinCost": 3,
+                "energyCost": 4
+            },
+            {
+                "name": "HOLY Spell Of PLENTEOUSNESS",
+                "type": "HEAL",
+                "value": 2,
+                "coinCost": 2,
+                "energyCost": 2
+            },
+            {
+                "name": "VILLAINOUS Spell Of JUDGEMENT",
+                "type": "ATTACK",
+                "value": 8,
+                "coinCost": 3,
+                "energyCost": 4
+            },
+            {
+                "name": "DEADLY Spell Of MISHAP",
+                "type": "ATTACK",
+                "value": 2,
                 "coinCost": 2,
                 "energyCost": 1
             },
             {
-                "name": "HEAVENLY Spell Of FORTUNE",
+                "name": "DIVINE Spell Of HAPPINESS",
                 "type": "HEAL",
                 "value": 6,
                 "coinCost": 3,
                 "energyCost": 4
             },
             {
-                "name": "MONSTROUS Spell Of DISASTER",
+                "name": "VICIOUS Spell Of JUDGEMENT",
                 "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "VICIOUS Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
+                "value": 8,
+                "coinCost": 3,
+                "energyCost": 4
             },
             {
                 "name": "EVIL Spell Of MISHAP",
@@ -93,53 +72,74 @@
                 "energyCost": 1
             },
             {
-                "name": "MONSTROUS Spell Of SABOTAGE",
+                "name": "LETHAL Spell Of DISTRESS",
                 "type": "ATTACK",
                 "value": 6,
                 "coinCost": 2,
                 "energyCost": 3
             },
             {
-                "name": "HEAVENLY Spell Of WELLBEING",
+                "name": "HEAVENLY Spell Of DELIGHT",
                 "type": "HEAL",
-                "value": 8,
-                "coinCost": 4,
-                "energyCost": 5
+                "value": 2,
+                "coinCost": 2,
+                "energyCost": 2
             },
             {
-                "name": "HEAVENLY Spell Of GLEE",
-                "type": "HEAL",
+                "name": "LETHAL Spell Of SABOTAGE",
+                "type": "ATTACK",
+                "value": 6,
+                "coinCost": 2,
+                "energyCost": 3
+            },
+            {
+                "name": "MONSTROUS Spell Of MISHAP",
+                "type": "ATTACK",
                 "value": 8,
-                "coinCost": 4,
-                "energyCost": 5
+                "coinCost": 3,
+                "energyCost": 4
+            },
+            {
+                "name": "SACRED Spell Of FORTUNE",
+                "type": "HEAL",
+                "value": 1,
+                "coinCost": 2,
+                "energyCost": 1
+            },
+            {
+                "name": "ANGELIC Spell Of PROSPERITY",
+                "type": "HEAL",
+                "value": 1,
+                "coinCost": 2,
+                "energyCost": 1
+            },
+            {
+                "name": "LETHAL Spell Of CATACLYSM",
+                "type": "ATTACK",
+                "value": 2,
+                "coinCost": 2,
+                "energyCost": 1
             },
             {
                 "name": "MYSTICAL Spell Of GLEE",
                 "type": "HEAL",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 2
-            },
-            {
-                "name": "MONSTROUS Spell Of CATACLYSM",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "WICKED Spell Of DOOM",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "MALICIOUS Spell Of CATACLYSM",
-                "type": "ATTACK",
                 "value": 4,
                 "coinCost": 2,
-                "energyCost": 2
+                "energyCost": 3
+            },
+            {
+                "name": "HEAVENLY Spell Of FORTUNE",
+                "type": "HEAL",
+                "value": 8,
+                "coinCost": 4,
+                "energyCost": 5
+            },
+            {
+                "name": "LETHAL Spell Of CATACLYSM",
+                "type": "ATTACK",
+                "value": 2,
+                "coinCost": 2,
+                "energyCost": 1
             }
         ],
         "name": "Starter Deck"
@@ -147,428 +147,42 @@
     "coins": 0,
     "notOwnedCards": [
         {
-            "name": "VICIOUS Spell Of JUDGEMENT",
+            "name": "VILLAINOUS Spell Of SABOTAGE",
             "type": "ATTACK",
             "value": 4,
             "coinCost": 2,
             "energyCost": 2
         },
         {
-            "name": "MONSTROUS Spell Of DOOM",
+            "name": "EVIL Spell Of CATACLYSM",
             "type": "ATTACK",
             "value": 4,
             "coinCost": 2,
             "energyCost": 2
-        },
-        {
-            "name": "EVIL Spell Of DOOM",
-            "type": "ATTACK",
-            "value": 4,
-            "coinCost": 2,
-            "energyCost": 2
-        },
-        {
-            "name": "MONSTROUS Spell Of DISTRESS",
-            "type": "ATTACK",
-            "value": 4,
-            "coinCost": 2,
-            "energyCost": 2
-        },
-        {
-            "name": "VILLAINOUS Spell Of DOOM",
-            "type": "ATTACK",
-            "value": 4,
-            "coinCost": 2,
-            "energyCost": 2
-        },
-        {
-            "name": "LETHAL Spell Of DEATH",
-            "type": "ATTACK",
-            "value": 4,
-            "coinCost": 2,
-            "energyCost": 2
-        },
-        {
-            "name": "WICKED Spell Of JUDGEMENT",
-            "type": "ATTACK",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "VILLAINOUS Spell Of MISHAP",
-            "type": "ATTACK",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
         },
         {
             "name": "DEADLY Spell Of DISASTER",
             "type": "ATTACK",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "EVIL Spell Of MISHAP",
-            "type": "ATTACK",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "VICIOUS Spell Of JUDGEMENT",
-            "type": "ATTACK",
-            "value": 8,
-            "coinCost": 3,
-            "energyCost": 4
-        },
-        {
-            "name": "LETHAL Spell Of JUDGEMENT",
-            "type": "ATTACK",
-            "value": 8,
-            "coinCost": 3,
-            "energyCost": 4
-        },
-        {
-            "name": "MONSTROUS Spell Of DISASTER",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "EVIL Spell Of MISHAP",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "VICIOUS Spell Of CATACLYSM",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "LETHAL Spell Of DEATH",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "LETHAL Spell Of CATACLYSM",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "VILLAINOUS Spell Of SABOTAGE",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "DEADLY Spell Of SABOTAGE",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "MALICIOUS Spell Of DEATH",
-            "type": "ATTACK",
-            "value": 12,
-            "coinCost": 4,
-            "energyCost": 6
-        },
-        {
-            "name": "STRENGTHENING Spell Of SAFEGUARDING",
-            "type": "SHIELD",
-            "value": 1,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "STRENGTHENING Spell Of HEALTHINESS",
-            "type": "SHIELD",
-            "value": 1,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "VIGILANT Spell Of IMMUNITY",
-            "type": "SHIELD",
-            "value": 3,
+            "value": 4,
             "coinCost": 2,
             "energyCost": 2
-        },
-        {
-            "name": "BRACING Spell Of HEALTHINESS",
-            "type": "SHIELD",
-            "value": 3,
-            "coinCost": 2,
-            "energyCost": 2
-        },
-        {
-            "name": "WATCHFUL Spell Of SECURITY",
-            "type": "SHIELD",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "WATCHFUL Spell Of INVULNERABILITY",
-            "type": "SHIELD",
-            "value": 6,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "FORTIFYING Spell Of IMMUNITY",
-            "type": "SHIELD",
-            "value": 8,
-            "coinCost": 2,
-            "energyCost": 4
-        },
-        {
-            "name": "VIGILANT Spell Of HEALTHINESS",
-            "type": "SHIELD",
-            "value": 8,
-            "coinCost": 2,
-            "energyCost": 4
-        },
-        {
-            "name": "SHIELDING Spell Of SECURITY",
-            "type": "SHIELD",
-            "value": 10,
-            "coinCost": 2,
-            "energyCost": 6
-        },
-        {
-            "name": "FORTIFYING Spell Of SAFEGUARDING",
-            "type": "SHIELD",
-            "value": 10,
-            "coinCost": 2,
-            "energyCost": 6
-        }
-    ],
-    "name": "Bob",
-    "decks": [{
-        "cardsInDeck": [
-            {
-                "name": "VICIOUS Spell Of SABOTAGE",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "WICKED Spell Of DEATH",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "ETERNAL Spell Of PROSPERITY",
-                "type": "HEAL",
-                "value": 4,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "HOLY Spell Of GLEE",
-                "type": "HEAL",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 2
-            },
-            {
-                "name": "VILLAINOUS Spell Of DEATH",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "VILLAINOUS Spell Of DISTRESS",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "VICIOUS Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 4,
-                "coinCost": 2,
-                "energyCost": 2
-            },
-            {
-                "name": "VILLAINOUS Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "TRANSCENDENT Spell Of PLENTEOUSNESS",
-                "type": "HEAL",
-                "value": 1,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "HEAVENLY Spell Of FORTUNE",
-                "type": "HEAL",
-                "value": 6,
-                "coinCost": 3,
-                "energyCost": 4
-            },
-            {
-                "name": "MONSTROUS Spell Of DISASTER",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "VICIOUS Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "EVIL Spell Of MISHAP",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "MONSTROUS Spell Of SABOTAGE",
-                "type": "ATTACK",
-                "value": 6,
-                "coinCost": 2,
-                "energyCost": 3
-            },
-            {
-                "name": "HEAVENLY Spell Of WELLBEING",
-                "type": "HEAL",
-                "value": 8,
-                "coinCost": 4,
-                "energyCost": 5
-            },
-            {
-                "name": "HEAVENLY Spell Of GLEE",
-                "type": "HEAL",
-                "value": 8,
-                "coinCost": 4,
-                "energyCost": 5
-            },
-            {
-                "name": "MYSTICAL Spell Of GLEE",
-                "type": "HEAL",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 2
-            },
-            {
-                "name": "MONSTROUS Spell Of CATACLYSM",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "WICKED Spell Of DOOM",
-                "type": "ATTACK",
-                "value": 2,
-                "coinCost": 2,
-                "energyCost": 1
-            },
-            {
-                "name": "MALICIOUS Spell Of CATACLYSM",
-                "type": "ATTACK",
-                "value": 4,
-                "coinCost": 2,
-                "energyCost": 2
-            }
-        ],
-        "name": "Starter Deck"
-    }],
-    "ownedCards": [
-        {
-            "name": "VILLAINOUS Spell Of CATACLYSM",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
         },
         {
             "name": "MONSTROUS Spell Of CATACLYSM",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "WICKED Spell Of DEATH",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "VICIOUS Spell Of SABOTAGE",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "MONSTROUS Spell Of DISASTER",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "WICKED Spell Of DOOM",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "EVIL Spell Of MISHAP",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "VICIOUS Spell Of MISHAP",
-            "type": "ATTACK",
-            "value": 2,
-            "coinCost": 2,
-            "energyCost": 1
-        },
-        {
-            "name": "VICIOUS Spell Of MISHAP",
             "type": "ATTACK",
             "value": 4,
             "coinCost": 2,
             "energyCost": 2
         },
         {
-            "name": "MALICIOUS Spell Of CATACLYSM",
+            "name": "VICIOUS Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 4,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "VILLAINOUS Spell Of DISASTER",
             "type": "ATTACK",
             "value": 4,
             "coinCost": 2,
@@ -582,84 +196,487 @@
             "energyCost": 3
         },
         {
-            "name": "VILLAINOUS Spell Of DEATH",
+            "name": "VILLAINOUS Spell Of DISTRESS",
             "type": "ATTACK",
             "value": 6,
             "coinCost": 2,
             "energyCost": 3
         },
         {
-            "name": "MONSTROUS Spell Of SABOTAGE",
+            "name": "WICKED Spell Of MISHAP",
             "type": "ATTACK",
             "value": 6,
             "coinCost": 2,
             "energyCost": 3
         },
         {
-            "name": "VILLAINOUS Spell Of MISHAP",
+            "name": "DEADLY Spell Of DOOM",
             "type": "ATTACK",
             "value": 6,
             "coinCost": 2,
             "energyCost": 3
         },
         {
-            "name": "WICKED Spell Of DOOM",
+            "name": "MALICIOUS Spell Of DISASTER",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "LETHAL Spell Of DEATH",
+            "name": "EVIL Spell Of DOOM",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "VILLAINOUS Spell Of DOOM",
+            "name": "EVIL Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "VILLAINOUS Spell Of SABOTAGE",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "VILLAINOUS Spell Of DISTRESS",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "WICKED Spell Of CATACLYSM",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "DEADLY Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "DEADLY Spell Of SABOTAGE",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "EVIL Spell Of DISTRESS",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "MALICIOUS Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 12,
+            "coinCost": 4,
+            "energyCost": 6
+        },
+        {
+            "name": "STRENGTHENING Spell Of IMMUNITY",
+            "type": "SHIELD",
+            "value": 1,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "SHELTERING Spell Of INVULNERABILITY",
+            "type": "SHIELD",
+            "value": 1,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "SHIELDING Spell Of SECURITY",
+            "type": "SHIELD",
+            "value": 3,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "STRENGTHENING Spell Of HEALTHINESS",
+            "type": "SHIELD",
+            "value": 3,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "FORTIFYING Spell Of SAFETY",
+            "type": "SHIELD",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "REINFORCING Spell Of PRESERVATION",
+            "type": "SHIELD",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "FORTIFYING Spell Of SECURITY",
+            "type": "SHIELD",
+            "value": 8,
+            "coinCost": 2,
+            "energyCost": 4
+        },
+        {
+            "name": "SHELTERING Spell Of SAFEGUARDING",
+            "type": "SHIELD",
+            "value": 8,
+            "coinCost": 2,
+            "energyCost": 4
+        },
+        {
+            "name": "VIGILANT Spell Of HEALTHINESS",
+            "type": "SHIELD",
+            "value": 10,
+            "coinCost": 2,
+            "energyCost": 6
+        },
+        {
+            "name": "BRACING Spell Of SAFEGUARDING",
+            "type": "SHIELD",
+            "value": 10,
+            "coinCost": 2,
+            "energyCost": 6
+        }
+    ],
+    "name": "Munn",
+    "decks": [
+        {
+            "cardsInDeck": [
+                {
+                    "name": "DEADLY Spell Of SABOTAGE",
+                    "type": "ATTACK",
+                    "value": 4,
+                    "coinCost": 2,
+                    "energyCost": 2
+                },
+                {
+                    "name": "HOLY Spell Of HAPPINESS",
+                    "type": "HEAL",
+                    "value": 4,
+                    "coinCost": 2,
+                    "energyCost": 3
+                },
+                {
+                    "name": "HOLY Spell Of HAPPINESS",
+                    "type": "HEAL",
+                    "value": 8,
+                    "coinCost": 4,
+                    "energyCost": 5
+                },
+                {
+                    "name": "WICKED Spell Of SABOTAGE",
+                    "type": "ATTACK",
+                    "value": 8,
+                    "coinCost": 3,
+                    "energyCost": 4
+                },
+                {
+                    "name": "HOLY Spell Of PLENTEOUSNESS",
+                    "type": "HEAL",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 2
+                },
+                {
+                    "name": "VILLAINOUS Spell Of JUDGEMENT",
+                    "type": "ATTACK",
+                    "value": 8,
+                    "coinCost": 3,
+                    "energyCost": 4
+                },
+                {
+                    "name": "DEADLY Spell Of MISHAP",
+                    "type": "ATTACK",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 1
+                },
+                {
+                    "name": "DIVINE Spell Of HAPPINESS",
+                    "type": "HEAL",
+                    "value": 6,
+                    "coinCost": 3,
+                    "energyCost": 4
+                },
+                {
+                    "name": "VICIOUS Spell Of JUDGEMENT",
+                    "type": "ATTACK",
+                    "value": 8,
+                    "coinCost": 3,
+                    "energyCost": 4
+                },
+                {
+                    "name": "EVIL Spell Of MISHAP",
+                    "type": "ATTACK",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 1
+                },
+                {
+                    "name": "LETHAL Spell Of DISTRESS",
+                    "type": "ATTACK",
+                    "value": 6,
+                    "coinCost": 2,
+                    "energyCost": 3
+                },
+                {
+                    "name": "HEAVENLY Spell Of DELIGHT",
+                    "type": "HEAL",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 2
+                },
+                {
+                    "name": "LETHAL Spell Of SABOTAGE",
+                    "type": "ATTACK",
+                    "value": 6,
+                    "coinCost": 2,
+                    "energyCost": 3
+                },
+                {
+                    "name": "MONSTROUS Spell Of MISHAP",
+                    "type": "ATTACK",
+                    "value": 8,
+                    "coinCost": 3,
+                    "energyCost": 4
+                },
+                {
+                    "name": "SACRED Spell Of FORTUNE",
+                    "type": "HEAL",
+                    "value": 1,
+                    "coinCost": 2,
+                    "energyCost": 1
+                },
+                {
+                    "name": "ANGELIC Spell Of PROSPERITY",
+                    "type": "HEAL",
+                    "value": 1,
+                    "coinCost": 2,
+                    "energyCost": 1
+                },
+                {
+                    "name": "LETHAL Spell Of CATACLYSM",
+                    "type": "ATTACK",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 1
+                },
+                {
+                    "name": "MYSTICAL Spell Of GLEE",
+                    "type": "HEAL",
+                    "value": 4,
+                    "coinCost": 2,
+                    "energyCost": 3
+                },
+                {
+                    "name": "HEAVENLY Spell Of FORTUNE",
+                    "type": "HEAL",
+                    "value": 8,
+                    "coinCost": 4,
+                    "energyCost": 5
+                },
+                {
+                    "name": "LETHAL Spell Of CATACLYSM",
+                    "type": "ATTACK",
+                    "value": 2,
+                    "coinCost": 2,
+                    "energyCost": 1
+                }
+            ],
+            "name": "Starter Deck"
+        },
+        {
+            "cardsInDeck": [],
+            "name": "New Deck"
+        },
+        {
+            "cardsInDeck": [],
+            "name": "APFOJFAOFJ"
+        }
+    ],
+    "ownedCards": [
+        {
+            "name": "LETHAL Spell Of CATACLYSM",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "EVIL Spell Of MISHAP",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "VICIOUS Spell Of DISTRESS",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "DEADLY Spell Of DOOM",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "LETHAL Spell Of CATACLYSM",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "DEADLY Spell Of MISHAP",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "VILLAINOUS Spell Of DISTRESS",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "LETHAL Spell Of MISHAP",
+            "type": "ATTACK",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 1
+        },
+        {
+            "name": "DEADLY Spell Of SABOTAGE",
+            "type": "ATTACK",
+            "value": 4,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "WICKED Spell Of CATACLYSM",
+            "type": "ATTACK",
+            "value": 4,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "LETHAL Spell Of DISTRESS",
+            "type": "ATTACK",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "LETHAL Spell Of SABOTAGE",
+            "type": "ATTACK",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "DEADLY Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "MALICIOUS Spell Of DEATH",
+            "type": "ATTACK",
+            "value": 6,
+            "coinCost": 2,
+            "energyCost": 3
+        },
+        {
+            "name": "WICKED Spell Of SABOTAGE",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "VICIOUS Spell Of DEATH",
+            "name": "MONSTROUS Spell Of MISHAP",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "MONSTROUS Spell Of JUDGEMENT",
+            "name": "VICIOUS Spell Of JUDGEMENT",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "DEADLY Spell Of CATACLYSM",
+            "name": "LETHAL Spell Of DOOM",
             "type": "ATTACK",
             "value": 8,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "TRANSCENDENT Spell Of PLENTEOUSNESS",
+            "name": "VILLAINOUS Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 8,
+            "coinCost": 3,
+            "energyCost": 4
+        },
+        {
+            "name": "EVIL Spell Of JUDGEMENT",
+            "type": "ATTACK",
+            "value": 8,
+            "coinCost": 3,
+            "energyCost": 4
+        },
+        {
+            "name": "ANGELIC Spell Of PROSPERITY",
             "type": "HEAL",
             "value": 1,
             "coinCost": 2,
             "energyCost": 1
         },
         {
-            "name": "HEAVENLY Spell Of WELLBEING",
+            "name": "SACRED Spell Of FORTUNE",
             "type": "HEAL",
             "value": 1,
             "coinCost": 2,
             "energyCost": 1
         },
         {
-            "name": "HOLY Spell Of GLEE",
+            "name": "HEAVENLY Spell Of DELIGHT",
+            "type": "HEAL",
+            "value": 2,
+            "coinCost": 2,
+            "energyCost": 2
+        },
+        {
+            "name": "HOLY Spell Of PLENTEOUSNESS",
             "type": "HEAL",
             "value": 2,
             "coinCost": 2,
@@ -668,47 +685,40 @@
         {
             "name": "MYSTICAL Spell Of GLEE",
             "type": "HEAL",
-            "value": 2,
+            "value": 4,
             "coinCost": 2,
-            "energyCost": 2
+            "energyCost": 3
         },
         {
-            "name": "ETERNAL Spell Of PROSPERITY",
+            "name": "HOLY Spell Of HAPPINESS",
             "type": "HEAL",
             "value": 4,
             "coinCost": 2,
             "energyCost": 3
         },
         {
-            "name": "DIVINE Spell Of DELIGHT",
-            "type": "HEAL",
-            "value": 4,
-            "coinCost": 2,
-            "energyCost": 3
-        },
-        {
-            "name": "TRANSCENDENT Spell Of DELIGHT",
+            "name": "DIVINE Spell Of HAPPINESS",
             "type": "HEAL",
             "value": 6,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "HEAVENLY Spell Of FORTUNE",
+            "name": "HOLY Spell Of FORTUNE",
             "type": "HEAL",
             "value": 6,
             "coinCost": 3,
             "energyCost": 4
         },
         {
-            "name": "HEAVENLY Spell Of GLEE",
+            "name": "HOLY Spell Of HAPPINESS",
             "type": "HEAL",
             "value": 8,
             "coinCost": 4,
             "energyCost": 5
         },
         {
-            "name": "HEAVENLY Spell Of WELLBEING",
+            "name": "HEAVENLY Spell Of FORTUNE",
             "type": "HEAL",
             "value": 8,
             "coinCost": 4,

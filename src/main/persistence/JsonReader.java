@@ -13,6 +13,7 @@ import model.Deck;
 import model.User;
 import org.json.*;
 
+// Represents a reader that reads a JSON representation of a user from a file
 public class JsonReader {
     private String source;
 
