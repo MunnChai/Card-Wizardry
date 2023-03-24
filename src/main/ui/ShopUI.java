@@ -3,7 +3,11 @@ package ui;
 import model.Card;
 import model.Shop;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,9 +62,12 @@ public class ShopUI extends UIMethods {
             new BattleUI(user);
         } else if (index == 5) {
             save();
+            saveShop();
             shopOptions();
         } else if (index == 6) {
             load();
+            loadShop();
+            shop.setUser(user);
             shopOptions();
         } else if (index == 7) {
             System.out.println("\"Ciao\"");
@@ -149,6 +156,30 @@ public class ShopUI extends UIMethods {
             System.out.println("Type: " + c.getType().toString() + "\nStrength: " + c.getValue()
                     + "\nEnergy Cost: " + c.getEnergyCost() + "\n");
             i++;
+        }
+    }
+
+    // EFFECTS: Saves JSON representation of shop to file
+    public void saveShop() {
+        JsonWriter shopWriter = new JsonWriter("./data/shop.json");
+        try {
+            shopWriter.open();
+            shopWriter.write(shop);
+            shopWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File not found. Could not save to file.");
+        }
+    }
+
+    // MODIFIES: user
+    // EFFECTS: Loads user from file
+    public void loadShop() {
+        JsonReader jsonReader = new JsonReader("./data/shop.json");
+        try {
+            shop = jsonReader.readShop();
+            System.out.println("Loaded " + user.getName() + " from ./data/shop.json");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: ./data/shop.json");
         }
     }
 }

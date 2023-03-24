@@ -1,6 +1,7 @@
 package persistence;
 
 import model.User;
+import model.Writable;
 import org.json.*;
 import java.io.*;
 
@@ -24,8 +25,8 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: Writes user into destination file in json form
-    public void write(User user) {
-        JSONObject json = user.toJson();
+    public void write(Writable thingToWrite) {
+        JSONObject json = thingToWrite.toJson();
         writer.print(json.toString(TAB));
     }
 

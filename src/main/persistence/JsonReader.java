@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import model.Card;
 import model.Deck;
+import model.Shop;
 import model.User;
 import org.json.*;
 
@@ -113,5 +114,28 @@ public class JsonReader {
             deck.addCard(parseCard(nextCard));
         }
         return deck;
+    }
+
+    // EFFECTS: parses shop from JSON object and returns it
+    public Shop readShop() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseShop(jsonObject);
+    }
+
+    // EFFECTS: parses shop from JSON object and returns it
+    private Shop parseShop(JSONObject jsonObject) {
+        User user = new User("Temp User");
+
+        JSONArray forSale = jsonObject.getJSONArray("cardsForSale");
+        List<Card> toBeAdded = new ArrayList<>();
+        for (Object card : forSale) {
+            JSONObject nextCard = (JSONObject) card;
+            toBeAdded.add(parseCard(nextCard));
+        }
+        Shop shop = new Shop(user);
+        shop.setCardsForSale(toBeAdded);
+
+        return shop;
     }
 }

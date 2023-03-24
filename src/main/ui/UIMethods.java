@@ -2,7 +2,9 @@ package ui;
 
 import model.Card;
 import model.Deck;
+import model.Shop;
 import model.User;
+import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -74,11 +76,11 @@ public abstract class UIMethods {
 
     // EFFECTS: Saves user to file
     public void save() {
-        JsonWriter jsonWriter = new JsonWriter("./data/user.json");
+        JsonWriter userWriter = new JsonWriter("./data/user.json");
         try {
-            jsonWriter.open();
-            jsonWriter.write(user);
-            jsonWriter.close();
+            userWriter.open();
+            userWriter.write(user);
+            userWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File not found. Could not save to file.");
         }

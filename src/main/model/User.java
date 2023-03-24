@@ -147,7 +147,7 @@ public class User implements Writable {
         return json;
     }
 
-    // EFFECTS: returns decks as JSON Array
+    // EFFECTS: returns list of decks as JSON Array
     public JSONArray decksToJson(List<Deck> decks) {
         JSONArray jsonArray = new JSONArray();
         for (Deck deck : decks) {
@@ -156,7 +156,7 @@ public class User implements Writable {
         return jsonArray;
     }
 
-    // EFFECTS: returns owned cards as JSON Array
+    // EFFECTS: returns list of cards as JSON Array
     public JSONArray cardsToJson(List<Card> cards) {
         JSONArray jsonArray = new JSONArray();
         for (Card card : cards) {

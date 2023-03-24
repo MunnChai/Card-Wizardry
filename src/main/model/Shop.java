@@ -1,11 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // A randomized shop with a list of cards that can be purchased. Holds given user, to access user's owned and not
 // owned cards. Has methods for buying and selling cards from the shop.
-public class Shop {
+public class Shop implements Writable {
 
     public static final int SHOP_CARD_STOCK = 4;
 
@@ -42,6 +45,22 @@ public class Shop {
         user.setCoins(user.getCoins() + card.getCoinCost());
     }
 
+    // EFFECTS: returns shop as a JSONObject
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("cardsForSale", cardsToJson(cardsForSale));
+        return json;
+    }
+
+    // EFFECTS: returns list of cards as JSON Array
+    public JSONArray cardsToJson(List<Card> cards) {
+        JSONArray jsonArray = new JSONArray();
+        for (Card card : cards) {
+            jsonArray.put(card.toJson());
+        }
+        return jsonArray;
+    }
+
 
 
     // Getters
@@ -52,5 +71,9 @@ public class Shop {
     // Setters
     public void setCardsForSale(List<Card> cardsForSale) {
         this.cardsForSale = cardsForSale;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
