@@ -13,6 +13,8 @@ import static model.Card.CardType.*;
 // in the game, so User MUST be instantiated for any cards to exist.
 public class User implements Writable {
 
+    private static User instance;
+
     public static final List<Card> ALL_CARDS = new ArrayList<>();
     public static final int ALL_CARD_COUNT = 60;
 
@@ -163,6 +165,13 @@ public class User implements Writable {
             jsonArray.put(card.toJson());
         }
         return jsonArray;
+    }
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User("Temp Name");
+        }
+        return instance;
     }
 
 

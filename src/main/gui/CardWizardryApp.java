@@ -1,18 +1,24 @@
 package gui;
 
+import model.User;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class CardWizardryApp {
-    public static final int WINDOW_WIDTH = 1600;
-    public static final int WINDOW_HEIGHT = 900;
+    public static final int WINDOW_WIDTH = 1280;
+    public static final int WINDOW_HEIGHT = 720;
 
     private CardLayout layout;
     private JFrame frame;
     private JPanel cardPanel;
 
+    private User user;
+
     public CardWizardryApp() {
         frame = new JFrame();
+
+        user = User.getInstance();
 
         frame.setTitle("Card Wizardry");
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

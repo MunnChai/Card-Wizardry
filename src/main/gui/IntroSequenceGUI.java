@@ -1,5 +1,7 @@
 package gui;
 
+import model.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

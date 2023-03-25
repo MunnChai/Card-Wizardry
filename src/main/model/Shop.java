@@ -19,10 +19,14 @@ public class Shop implements Writable {
     public Shop(User givenUser) {
         cardsForSale = new ArrayList<>();
         user = givenUser;
-        for (int i = 0; i < SHOP_CARD_STOCK; i++) {
+        int i = 0;
+        while (i < SHOP_CARD_STOCK) {
             int randomIndex = (int)(Math.random() * user.getNotOwnedCards().size());
             Card randomCard = user.getNotOwnedCards().get(randomIndex);
-            cardsForSale.add(randomCard);
+            if (!cardsForSale.contains(randomCard)) {
+                cardsForSale.add(randomCard);
+                i++;
+            }
         }
     }
 

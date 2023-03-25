@@ -11,7 +11,7 @@ public class TitleScreenGUI extends Panel {
 
         int buttonOffset = 120;
 
-        addText("Card Wizardry", "#124e89", 1000, 200, CENTER_X, 200, 120);
+        this.add(createText("Card Wizardry", "#124e89", 1000, 200, CENTER_X, 200, 120));
 
         ActionListener newGame = switchPanelAction("IntroSequenceGUI", parent);
         ActionListener loadGame = switchPanelAction("SaveScreenGUI", parent);

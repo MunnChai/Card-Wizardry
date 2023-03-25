@@ -35,28 +35,22 @@ public abstract class Panel extends JPanel {
         return button;
     }
 
-    public void addText(String text, String colorHex, int width, int height, int x, int y, int textSize) {
-        JPanel panel = new JPanel();
-        panel.setSize(width, height);
-        panel.setLocation(x - panel.getWidth() / 2, y - panel.getHeight() / 2);
+    public JLabel createText(String text, String colorHex, int width, int height, int x, int y, int textSize) {
+        JLabel label = new JLabel(text, SwingConstants.CENTER);
+        label.setSize(width, height);
+        label.setLocation(x - label.getWidth() / 2, y - label.getHeight() / 2);
 
-        JLabel label = new JLabel(text);
+
         label.setFont(new Font(FONT, Font.BOLD, textSize));
         label.setForeground(Color.decode(colorHex));
-
-        panel.add(label);
-        panel.setOpaque(false);
-        this.add(panel, BorderLayout.CENTER);
+        return label;
     }
 
     public ActionListener switchPanelAction(String panelLayoutName, Component parent) {
         JPanel parentPanel = (JPanel)parent;
         CardLayout parentLayout = (CardLayout)parentPanel.getLayout();
-        ActionListener action = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parentLayout.show(parentPanel, panelLayoutName);
-            }
+        ActionListener action = e -> {
+            parentLayout.show(parentPanel, panelLayoutName);
         };
         return action;
     }
@@ -64,7 +58,7 @@ public abstract class Panel extends JPanel {
     public JPanel createInteractionPanel(String hexColour, String borderHexColour) {
         JPanel panel = new JPanel();
         panel.setSize(WINDOW_WIDTH, 300);
-        panel.setLocation(0, WINDOW_HEIGHT - panel.getHeight());
+        panel.setLocation(0, WINDOW_HEIGHT - panel.getHeight()  - 35);
         panel.setBorder(BorderFactory.createLineBorder(Color.decode(borderHexColour)));
         panel.setBackground(Color.decode(hexColour));
         return panel;
