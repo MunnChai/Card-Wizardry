@@ -6,7 +6,6 @@ import model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ShopGUI extends Panel {
@@ -23,7 +22,6 @@ public class ShopGUI extends Panel {
     private JPanel sellCardScrollPanel;
 
     private Shop shop;
-    private User user;
 
     public ShopGUI(Component parent) {
         super(parent,"#ead4aa");
@@ -51,8 +49,6 @@ public class ShopGUI extends Panel {
         interactionPanel.add(makeSelectionPanel());
         interactionPanel.add(makeBuyCardPanel());
         interactionPanel.add(makeSellCardPanel());
-
-
     }
 
     private JPanel makeSelectionPanel() {
@@ -67,18 +63,15 @@ public class ShopGUI extends Panel {
         ActionListener sellCardAction = e -> {
             interactionLayout.show(interactionPanel, "SellCardPanel");
             backToTitleButton.setVisible(false);
+            updateSellableCards();
         };
         ActionListener editDecksAction = switchPanelAction("EditDecksGUI", parent);
         ActionListener battleAction = switchPanelAction("BattleScreenGUI", parent);
 
-        selectionPanel.add(createButton("BUY A CARD", "#b86f50", 280, 200, 0, 0,
-                buyCardAction, 30));
-        selectionPanel.add(createButton("SELL A CARD", "#b86f50", 280, 200, 0, 0,
-                sellCardAction, 30));
-        selectionPanel.add(createButton("EDIT DECKS", "#b86f50", 280, 200, 0, 0,
-                editDecksAction, 30));
-        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0,
-                battleAction, 30));
+        selectionPanel.add(createButton("BUY A CARD", "#b86f50", 280, 200, 0, 0, buyCardAction, 30));
+        selectionPanel.add(createButton("SELL A CARD", "#b86f50", 280, 200, 0, 0, sellCardAction, 30));
+        selectionPanel.add(createButton("EDIT DECKS", "#b86f50", 280, 200, 0, 0, editDecksAction, 30));
+        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
         interactionLayout.addLayoutComponent("SelectionPanel", selectionPanel);
         return selectionPanel;
     }
@@ -138,15 +131,20 @@ public class ShopGUI extends Panel {
         sellCardPanel.add(createButton("BACK", "#b86f50", 256, 300, 128, 150,
                 backToSelection, 40));
 
-        addCardPanels();
+        sellCardScrollPanel = new JPanel();
+        sellCardScrollPanel.setLayout(new GridLayout());
+        JScrollPane scrollPane = new JScrollPane(sellCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(1024,300));
+        scrollPane.setLocation(768, 150);
+        sellCardPanel.add(scrollPane);
 
         interactionLayout.addLayoutComponent("SellCardPanel", sellCardPanel);
         return sellCardPanel;
     }
 
-    private void addCardPanels() {
-        sellCardScrollPanel = new JPanel();
-        sellCardScrollPanel.setLayout(new GridLayout());
+    private void updateSellableCards() {
+        sellCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
         for (Card card : user.getCanSellCards()) {
             CardGUI cardGUI = new CardGUI(card);
@@ -156,23 +154,17 @@ public class ShopGUI extends Panel {
             scrollPanelWidth += 256;
         }
         sellCardScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth,300));
-        JScrollPane scrollPane = new JScrollPane(sellCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(1024,300));
-        scrollPane.setLocation(768, 150);
-        sellCardPanel.add(scrollPane);
     }
 
     private JButton makeSellButton(CardGUI cardGUI) {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
             shop.sellCard(card);
-
             coinCount.setText("You have " + user.getCoins() + " coins.");
-
             int guiIndex = sellCardScrollPanel.getComponentZOrder(cardGUI);
             sellCardScrollPanel.remove(guiIndex);
             sellCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
+            updateSellableCards();
         };
         JButton button = createButton("SELL: $" + card.getCoinCost(), "#feae34",200, 60,
                 128, 220, action, 20);

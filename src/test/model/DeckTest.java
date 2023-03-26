@@ -48,7 +48,7 @@ class DeckTest {
         deck1.fillRandom(user1);
         assertEquals(20, deck1.getCardsInDeck().size());
         assertEquals(30, user1.getOwnedCards().size());
-        assertEquals(10, deck1.getAvailableCards(user1).size());
+        assertEquals(10, deck1.getCanAddCards(user1).size());
     }
 
     @Test
@@ -56,7 +56,7 @@ class DeckTest {
         deck1.fillRandom(user1);
         assertEquals(20, deck1.getCardsInDeck().size());
         assertEquals(30, user1.getOwnedCards().size());
-        assertEquals(10, deck1.getAvailableCards(user1).size());
+        assertEquals(10, deck1.getCanAddCards(user1).size());
         deck1.fillRandom(user1);
         assertEquals(20, deck1.getCardsInDeck().size());
     }
@@ -76,8 +76,8 @@ class DeckTest {
         List<Card> expected = new ArrayList<>();
         expected.add(sampleCard3);
 
-        assertEquals(1, deck1.getAvailableCards(user1).size());
-        assertEquals(expected, deck1.getAvailableCards(user1));
+        assertEquals(1, deck1.getCanAddCards(user1).size());
+        assertEquals(expected, deck1.getCanAddCards(user1));
     }
 
     @Test
@@ -87,10 +87,10 @@ class DeckTest {
         }
 
         assertEquals(10, deck2.getCardsInDeck().size());
-        assertEquals(sampleCard1, deck2.getCardsInDeck().get(9));
+        assertEquals(sampleCard1, deck2.getCardsInDeck().get(0));
 
         deck2.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck2.getCardsInDeck().get(10));
+        assertEquals(sampleCard2, deck2.getCardsInDeck().get(0));
         assertEquals(11, deck2.getCardsInDeck().size());
     }
 
@@ -103,14 +103,14 @@ class DeckTest {
         }
 
         assertEquals(VIABLE_DECK_CARD_COUNT, deck1.getCardsInDeck().size());
-        assertEquals(sampleCard1, deck1.getCardsInDeck().get(19));
+        assertEquals(sampleCard1, deck1.getCardsInDeck().get(0));
 
         deck1.addCard(sampleCard2);
-        assertEquals(sampleCard2, deck1.getCardsInDeck().get(20));
+        assertEquals(sampleCard2, deck1.getCardsInDeck().get(0));
         assertEquals(VIABLE_DECK_CARD_COUNT + 1, deck1.getCardsInDeck().size());
 
         deck1.addCard(sampleCard1);
-        assertEquals(sampleCard1, deck1.getCardsInDeck().get(21));
+        assertEquals(sampleCard1, deck1.getCardsInDeck().get(0));
         assertEquals(VIABLE_DECK_CARD_COUNT + 2, deck1.getCardsInDeck().size());
     }
 
@@ -122,8 +122,8 @@ class DeckTest {
         deck1.removeCard(sampleCard2);
 
         List<Card> expected1 = new ArrayList<>();
-        expected1.add(sampleCard1);
         expected1.add(sampleCard3);
+        expected1.add(sampleCard1);
         assertEquals(2, deck1.getCardsInDeck().size());
         assertEquals(expected1, deck1.getCardsInDeck());
 
@@ -133,8 +133,8 @@ class DeckTest {
         deck2.removeCard(sampleCard2);
 
         List<Card> expected2 = new ArrayList<>();
-        expected2.add(sampleCard2);
         expected2.add(sampleCard3);
+        expected2.add(sampleCard2);
         assertEquals(2, deck2.getCardsInDeck().size());
         assertEquals(expected2, deck2.getCardsInDeck());
     }
@@ -190,8 +190,8 @@ class DeckTest {
         JSONObject jsonObject = deck1.toJson();
 
         assertEquals("Deck 1", jsonObject.get("name"));
-        assertEquals("[{\"name\":\"Card 1\",\"type\":\"ATTACK\",\"value\":3,\"coinCost\":1,\"energyCost\":2},"
-                + "{\"name\":\"Card 2\",\"type\":\"HEAL\",\"value\":1,\"coinCost\":1,\"energyCost\":1}]",
+        assertEquals("[{\"name\":\"Card 2\",\"type\":\"HEAL\",\"value\":1,\"coinCost\":1,\"energyCost\":1},"
+                + "{\"name\":\"Card 1\",\"type\":\"ATTACK\",\"value\":3,\"coinCost\":1,\"energyCost\":2}]",
                 jsonObject.get("cardsInDeck").toString());
     }
 }

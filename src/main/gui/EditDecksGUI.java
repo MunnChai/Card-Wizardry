@@ -14,14 +14,14 @@ public class EditDecksGUI extends Panel {
     private CardLayout interactionLayout;
 
     private JButton backToShopButton;
+    private JPanel cardPanel;
+    private JScrollPane cardScrollPane;
+    private JLabel deckName;
+
+    private JPanel addableCardPanel;
 
     private JPanel mainPanel;
     private JPanel mainScrollPanel;
-
-    private User user;
-    private Deck currentlyEditingDeck;
-
-
 
     public EditDecksGUI(Component parent) {
         super(parent, "#8b9bb4");
@@ -38,7 +38,7 @@ public class EditDecksGUI extends Panel {
                 backToShop, 30);
         this.add(backToShopButton);
 
-        // TODO Make JPanel to display cards
+        initializeCardPanel();
 
         interactionPanel.add(createMainPanel());
         interactionLayout.show(interactionPanel, "MainPanel");
@@ -59,6 +59,25 @@ public class EditDecksGUI extends Panel {
         return mainPanel;
     }
 
+    private void initializeCardPanel() {
+        cardPanel = new JPanel();
+        cardPanel.setLayout(new GridLayout());
+        cardPanel.setBackground(Color.decode("#5a6988"));
+        cardPanel.setLocation(70, 70);
+        cardScrollPane = new JScrollPane(cardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        cardScrollPane.setSize(1140,300);
+        cardScrollPane.setLocation(70, 70);
+        this.add(cardScrollPane);
+        deckName = new JLabel("Temp Text");
+        deckName.setBounds(CENTER_X - 200, 10,400,60);
+        deckName.setFont(new Font(FONT, Font.BOLD, 50));
+        deckName.setHorizontalAlignment(JLabel.CENTER);
+        deckName.setVerticalAlignment(JLabel.CENTER);
+        this.add(deckName);
+        setCardPanelVisibility(false);
+    }
+
     private JScrollPane makeDecksScrollPane() {
         mainScrollPanel = new JPanel();
         mainScrollPanel.setLayout(new GridLayout());
@@ -66,8 +85,6 @@ public class EditDecksGUI extends Panel {
         int scrollPanelWidth = 0;
         for (Deck deck : user.getDecks()) {
             JPanel deckPanel = makeDeckPanel(deck);
-            JButton editButton = makeEditButton(deck);
-            deckPanel.add(editButton);
             mainScrollPanel.add(deckPanel);
             interactionPanel.add(makeEditDeckPanel(deck, deckPanel));
             scrollPanelWidth += 256;
@@ -106,24 +123,58 @@ public class EditDecksGUI extends Panel {
                 panel.getWidth() / 2, 125, 20));
 
         panel.setBorder(BorderFactory.createLineBorder(Color.black));
-        JButton editButton = makeEditButton(deck);
+        JButton editButton = makeEditButton(panel, deck);
         JButton deleteButton = makeDeleteButton(panel, deck);
         panel.add(editButton);
         panel.add(deleteButton);
         return panel;
     }
 
-    private JButton makeEditButton(Deck deck) {
+    private JButton makeEditButton(JPanel deckPanel, Deck deck) {
         ActionListener editDeckAction = e -> {
             interactionLayout.show(interactionPanel, "EditDeck" + deck.hashCode());
-            currentlyEditingDeck = deck;
             backToShopButton.setVisible(false);
             System.out.println("Currently Editing Deck " + deck.hashCode());
+            decorateCardPanel(deckPanel, deck);
+            decorateAddCardPanel(deckPanel, deck);
+            setCardPanelVisibility(true);
         };
         JButton button = createButton("EDIT", "#8b9bb4", 200, 60, 128, 200,
                 editDeckAction, 40);
 
         return button;
+    }
+
+    private void setCardPanelVisibility(Boolean visible) {
+        cardScrollPane.setVisible(visible);
+        deckName.setVisible(visible);
+    }
+
+    private void decorateCardPanel(JPanel deckPanel, Deck deck) {
+        deckName.setText(deck.getName());
+
+        cardPanel.removeAll();
+        for (Card card : deck.getCardsInDeck()) {
+            CardGUI cardGUI = new CardGUI(card);
+            ActionListener removeAction = createRemoveCardAction(deckPanel, deck, card, cardGUI);
+            JButton removeButton = createButton("REMOVE", "#a22633",200, 60, 128, 230, removeAction, 20);
+            cardGUI.add(removeButton);
+            cardPanel.add(cardGUI);
+        }
+        cardPanel.setPreferredSize(new Dimension(cardPanel.getComponentCount() * 256, 300));
+        cardPanel.revalidate();
+    }
+
+    private ActionListener createRemoveCardAction(JPanel deckPanel, Deck deck, Card card, CardGUI cardGUI) {
+        ActionListener removeCardAction = e -> {
+            deck.removeCard(card);
+            cardPanel.remove(cardGUI);
+            decorateCardPanel(deckPanel, deck);
+            decorateAddCardPanel(deckPanel, deck);
+            JLabel cardCount = (JLabel)deckPanel.getComponent(1);
+            cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
+        };
+        return removeCardAction;
     }
 
     private JButton makeDeleteButton(JPanel panel, Deck deck) {
@@ -144,30 +195,122 @@ public class EditDecksGUI extends Panel {
     private JPanel makeEditDeckPanel(Deck deck, JPanel parentPanel) {
         JPanel editDeckPanel = new JPanel();
         editDeckPanel.setLayout(new GridLayout());
+        interactionLayout.addLayoutComponent("EditDeck" + deck.hashCode(), editDeckPanel);
 
-        ActionListener backAction = e -> {
+        addRequiredPanels(parentPanel, deck);
+
+        ActionListener backButtonAction = makeBackButtonAction(deck, parentPanel);
+        ActionListener addButtonAction = makeAddButtonAction(deck, parentPanel);
+        ActionListener fillRandomButtonAction = makeFillRandomAction(deck, parentPanel);
+        ActionListener renameButtonAction = makeRenameButtonAction(deck, parentPanel);
+
+        editDeckPanel.add(createButton("BACK", "#5a6988", 0, 0, 0, 0, backButtonAction, 30));
+        editDeckPanel.add(createButton("ADD CARD", "#5a6988", 0, 0, 0, 0, addButtonAction, 30));
+        editDeckPanel.add(createButton("FILL RANDOMLY", "#5a6988", 0, 0, 0, 0, fillRandomButtonAction, 30));
+        editDeckPanel.add(createButton("RENAME DECK", "#5a6988", 0, 0, 0, 0, renameButtonAction, 30));
+
+        return editDeckPanel;
+    }
+
+    private ActionListener makeAddButtonAction(Deck deck, JPanel parentPanel) {
+        ActionListener addButtonAction = e -> {
+            interactionLayout.show(interactionPanel, "AddCard" + deck.hashCode());
+            decorateAddCardPanel(parentPanel, deck);
+        };
+        return addButtonAction;
+    }
+
+    private ActionListener makeBackButtonAction(Deck deck, JPanel parentPanel) {
+        ActionListener backButtonAction = e -> {
             interactionLayout.show(interactionPanel, "MainPanel");
             backToShopButton.setVisible(true);
+            cardPanel.removeAll();
+            setCardPanelVisibility(false);
         };
-        ActionListener addAction = e -> {
-            // TODO
-        };
-        ActionListener removeAction = e -> {
-            // TODO
-        };
-        ActionListener renameAction = e -> {
+        return backButtonAction;
+    }
+
+    private ActionListener makeRenameButtonAction(Deck deck, JPanel parentPanel) {
+        ActionListener renameButtonAction = e -> {
             interactionLayout.show(interactionPanel, "RenameDeck" + deck.hashCode());
         };
+        return renameButtonAction;
+    }
 
-        editDeckPanel.add(createButton("BACK", "#5a6988", 0, 0, 0, 0, backAction, 30));
-        editDeckPanel.add(createButton("ADD CARD", "#5a6988", 0, 0, 0, 0, addAction, 30));
-        editDeckPanel.add(createButton("REMOVE CARD", "#5a6988", 0, 0, 0, 0, removeAction, 30));
-        editDeckPanel.add(createButton("RENAME DECK", "#5a6988", 0, 0, 0, 0, renameAction, 30));
-        interactionLayout.addLayoutComponent("EditDeck" + deck.hashCode(), editDeckPanel);
+    private void addRequiredPanels(JPanel parentPanel, Deck deck) {
+        JPanel addCardPanel = makeAddCardPanel(deck, parentPanel);
+        interactionPanel.add(addCardPanel);
+        interactionLayout.addLayoutComponent("AddCard" + deck.hashCode(), addCardPanel);
         JPanel renamePanel = makeRenamePanel(deck, parentPanel);
         interactionPanel.add(renamePanel);
         interactionLayout.addLayoutComponent("RenameDeck" + deck.hashCode(), renamePanel);
-        return editDeckPanel;
+    }
+
+    private ActionListener makeFillRandomAction(Deck deck, JPanel parentPanel) {
+        ActionListener fillRandomAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deck.fillRandom(user);
+                cardPanel.removeAll();
+                decorateCardPanel(parentPanel, deck);
+                JLabel cardCount = (JLabel) parentPanel.getComponent(1);
+                cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
+            }
+        };
+        return fillRandomAction;
+    }
+
+    private JPanel makeAddCardPanel(Deck deck, JPanel grandparentPanel) {
+        JPanel addCardPanel = new JPanel();
+        addCardPanel.setLayout(new GridLayout());
+        addCardPanel.setBackground(Color.decode("#5a6988"));
+
+        ActionListener backAction = e -> {
+            interactionLayout.show(interactionPanel, "EditDeck" + deck.hashCode());
+            decorateCardPanel(grandparentPanel, deck);
+        };
+        addCardPanel.add(createButton("BACK", "#5a6988", 0, 0, 0, 0, backAction, 30));
+
+        addableCardPanel = new JPanel();
+        addableCardPanel.setLayout(new GridLayout());
+        addableCardPanel.setBackground(Color.decode("#5a6988"));
+        JScrollPane addableCardScrollPane = new JScrollPane(addableCardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        decorateAddCardPanel(grandparentPanel, deck);
+        addCardPanel.add(addableCardScrollPane);
+        return addCardPanel;
+    }
+
+    private void decorateAddCardPanel(JPanel deckPanel, Deck deck) {
+        addableCardPanel.removeAll();
+
+        int cardPanelWidth = 0;
+        for (Card card : deck.getCanAddCards(user)) {
+            CardGUI cardGUI = new CardGUI(card);
+            ActionListener addAction = makeAddCardAction(addableCardPanel, deckPanel, deck, card, cardGUI);
+            JButton addButton = createButton("ADD", "#3e8948",200, 60, 128, 230, addAction, 20);
+            cardGUI.add(addButton);
+            addableCardPanel.add(cardGUI);
+            cardPanelWidth += 256;
+        }
+        addableCardPanel.setPreferredSize(new Dimension(cardPanelWidth, 300));
+        addableCardPanel.revalidate();
+    }
+
+    private ActionListener makeAddCardAction(JPanel addCardPanel, JPanel deckPanel, Deck deck, Card card,
+                                             CardGUI cardGUI) {
+        ActionListener addCardAction = e -> {
+            deck.addCard(card);
+            addCardPanel.remove(cardGUI);
+            decorateAddCardPanel(deckPanel, deck);
+            cardGUI.remove(cardGUI.getComponentCount() - 1);
+            cardPanel.add(cardGUI);
+            decorateCardPanel(deckPanel, deck);
+            JLabel cardCount = (JLabel)deckPanel.getComponent(1);
+            cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
+
+        };
+        return addCardAction;
     }
 
     private JPanel makeRenamePanel(Deck deck, JPanel grandparentPanel) {
@@ -191,6 +334,7 @@ public class EditDecksGUI extends Panel {
         JTextField renameTextField = new JTextField(deck.getName());
         renameTextField.setBounds(170, 100, 300, 100);
         renameTextField.setHorizontalAlignment(JTextField.CENTER);
+        renameTextField.setFont(new Font(FONT, Font.BOLD, 40));
         innerRenamePanel.add(renameTextField);
 
         ActionListener renameAction = makeRenameAction(renameTextField, deck, grandparentPanel, innerRenamePanel);
@@ -213,6 +357,7 @@ public class EditDecksGUI extends Panel {
             deckPanelLabel.setText(deck.getName());
             JLabel renamePanelLabel = (JLabel) parentPanel.getComponent(0);
             renamePanelLabel.setText("RENAME \"" + deck.getName() + "\" TO:");
+            deckName.setText(deck.getName());
         };
         return renameAction;
     }

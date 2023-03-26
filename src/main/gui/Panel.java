@@ -1,5 +1,7 @@
 package gui;
 
+import model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ public abstract class Panel extends JPanel {
     protected static final int CENTER_Y = WINDOW_HEIGHT / 2;
     protected static final String FONT = "OpenSymbol";
     protected Component parent;
+    protected User user;
 
     public Panel(Component parent, String backgroundHexColor) {
         this.parent = parent;
@@ -47,6 +50,7 @@ public abstract class Panel extends JPanel {
     }
 
     public ActionListener switchPanelAction(String panelLayoutName, Component parent) {
+        user = User.getInstance();
         JPanel parentPanel = (JPanel)parent;
         CardLayout parentLayout = (CardLayout)parentPanel.getLayout();
         ActionListener action = e -> {

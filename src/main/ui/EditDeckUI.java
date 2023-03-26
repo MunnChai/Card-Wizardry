@@ -93,7 +93,7 @@ public class EditDeckUI extends UIMethods {
     //          to select card to add.
     public void deckAddCard(Deck deck) {
         Deck addableDeck = new Deck("Addable Cards");
-        for (Card c : deck.getAvailableCards(user)) {
+        for (Card c : deck.getCanAddCards(user)) {
             addableDeck.addCard(c);
         }
         printCards(addableDeck.getCardsInDeck());

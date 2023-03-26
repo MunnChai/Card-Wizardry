@@ -19,19 +19,22 @@ public class Deck implements Writable {
         cardsInDeck = new ArrayList<>();
     }
 
-    // REQUIRES: User owns enough cards to fill the deck
     // MODIFIES: this
     // EFFECTS: fills list of cards with random cards from the given player's cards until viable number of cards are in
     // the deck.
     public void fillRandom(User user) {
-        while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT) {
-            int randomInt = (int)(Math.random() * getAvailableCards(user).size());
-            cardsInDeck.add(getAvailableCards(user).get(randomInt));
+        if (user.getOwnedCards().size() < 1) {
+            System.out.println("You hava no cards, you fucked up frfr");
+        } else {
+            while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT) {
+                int randomInt = (int)(Math.random() * getCanAddCards(user).size());
+                cardsInDeck.add(getCanAddCards(user).get(randomInt));
+            }
         }
     }
 
     // EFFECTS: Produce all cards that are in user's owned cards, but not in the deck's cards
-    public List<Card> getAvailableCards(User user) {
+    public List<Card> getCanAddCards(User user) {
         List<Card> availableCards = new ArrayList<>();
         for (Card c : user.getOwnedCards()) {
             if (!this.cardsInDeck.contains(c)) {
@@ -42,14 +45,13 @@ public class Deck implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: Add given card to deck, remove from owned cards
+    // EFFECTS: Add given card to deck at index 0
     public void addCard(Card card) {
-        cardsInDeck.add(card);
+        cardsInDeck.add(0, card);
     }
 
     // MODIFIES: this
-    // REQUIRES: given card must be in deck
-    // EFFECTS: Remove given card from deck, add to owned cards
+    // EFFECTS: Remove given card from deck
     public void removeCard(Card card) {
         cardsInDeck.remove(card);
     }

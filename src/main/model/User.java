@@ -174,6 +174,10 @@ public class User implements Writable {
         return instance;
     }
 
+    public static void setInstance(User user) {
+        instance = user;
+    }
+
 
 
 
