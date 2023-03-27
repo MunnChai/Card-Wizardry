@@ -91,11 +91,10 @@ public class EditDecksGUI extends Panel {
     }
 
     public void updateDecksScrollPane() {
-        user = User.getInstance();
         mainScrollPanel.removeAll();
 
         int scrollPanelWidth = 0;
-        for (Deck deck : user.getDecks()) {
+        for (Deck deck : User.getInstance().getDecks()) {
             JPanel deckPanel = makeDeckPanel(deck);
             mainScrollPanel.add(deckPanel);
             interactionPanel.add(makeEditDeckPanel(deck, deckPanel));
@@ -108,7 +107,7 @@ public class EditDecksGUI extends Panel {
     private ActionListener createNewDeckAction() {
         ActionListener action = e -> {
             Deck newDeck = new Deck("New Deck");
-            user.addDeck(newDeck);
+            User.getInstance().addDeck(newDeck);
             JPanel newDeckPanel = makeDeckPanel(newDeck);
             mainScrollPanel.add(newDeckPanel);
             mainScrollPanel.setPreferredSize(new Dimension(mainScrollPanel.getComponentCount() * 256, 300));
@@ -187,7 +186,7 @@ public class EditDecksGUI extends Panel {
 
     private JButton makeDeleteButton(JPanel panel, Deck deck) {
         ActionListener deleteAction = e -> {
-            user.getDecks().remove(deck);
+            User.getInstance().getDecks().remove(deck);
             mainScrollPanel.remove(panel);
             mainScrollPanel.setPreferredSize(new Dimension(mainScrollPanel.getComponentCount() * 256, 300));
             interactionPanel.revalidate();
@@ -258,7 +257,7 @@ public class EditDecksGUI extends Panel {
         ActionListener fillRandomAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deck.fillRandom(user);
+                deck.fillRandom(User.getInstance());
                 cardPanel.removeAll();
                 decorateCardPanel(parentPanel, deck);
                 JLabel cardCount = (JLabel) parentPanel.getComponent(1);
@@ -293,7 +292,7 @@ public class EditDecksGUI extends Panel {
         addableCardPanel.removeAll();
 
         int cardPanelWidth = 0;
-        for (Card card : deck.getCanAddCards(user)) {
+        for (Card card : deck.getCanAddCards(User.getInstance())) {
             CardGUI cardGUI = new CardGUI(card);
             ActionListener addAction = makeAddCardAction(addableCardPanel, deckPanel, deck, card, cardGUI);
             JButton addButton = createButton("ADD", "#3e8948",200, 60, 128, 230, addAction, 20);
@@ -316,7 +315,6 @@ public class EditDecksGUI extends Panel {
             decorateCardPanel(deckPanel, deck);
             JLabel cardCount = (JLabel)deckPanel.getComponent(1);
             cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
-
         };
         return addCardAction;
     }

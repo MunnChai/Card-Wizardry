@@ -20,13 +20,8 @@ public abstract class Panel extends JPanel {
 
     protected JButton saveButton;
 
-    protected User user;
-    protected Shop shop;
-
     public Panel(JPanel parent, String backgroundHexColor, String thisPanelName) {
-        user = User.getInstance();
-        Shop.setInstance(new Shop(user));
-        shop = Shop.getInstance();
+        Shop.setInstance(new Shop(User.getInstance()));
         this.parent = parent;
         backgroundColor = Color.decode(backgroundHexColor);
         this.setBackground(backgroundColor);
@@ -63,7 +58,6 @@ public abstract class Panel extends JPanel {
     }
 
     public ActionListener switchPanelAction(String panelLayoutName) {
-        user = User.getInstance();
         ActionListener action = e -> {
             parentLayout.show(parent, panelLayoutName);
         };

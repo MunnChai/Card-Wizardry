@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 // Represents a playing card with a name, type, value (potency), energy cost, and coin cost
 public class Card implements Writable {
 
@@ -139,6 +141,23 @@ public class Card implements Writable {
         return jsonObject;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Card)) {
+            return false;
+        }
+        Card card = (Card) o;
+        return value == card.value && energyCost == card.energyCost && coinCost == card.coinCost
+                && Objects.equals(name, card.name) && type == card.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, value, energyCost, coinCost);
+    }
 
     // Setters
     public void setName(String name) {

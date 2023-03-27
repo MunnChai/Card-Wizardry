@@ -26,8 +26,8 @@ public class ShopGUI extends Panel {
     public ShopGUI(JPanel parent) {
         super(parent,"#ead4aa", "ShopGUI");
 
-        coinCount = createText("You have " + user.getCoins() + " coins.", "#733e39", 400, 100,
-                180, 220, 30);
+        coinCount = createText("You have " + User.getInstance().getCoins() + " coins.", "#733e39", 400,
+                100, 180, 220, 30);
 
         this.add(createText("Shop", "#733e39", 200, 100, 170, 140, 60));
         this.add(coinCount);
@@ -49,10 +49,9 @@ public class ShopGUI extends Panel {
     }
 
     public void updateShop() {
-        user = User.getInstance();
-        shop = Shop.getInstance();
         updateSellCardScrollPanel();
         updateBuyCardScrollPanel();
+        coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
     }
 
     private JPanel makeSelectionPanel() {
@@ -111,10 +110,9 @@ public class ShopGUI extends Panel {
     }
 
     private void updateBuyCardScrollPanel() {
-        user = User.getInstance();
         buyCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
-        for (Card card : shop.getCardsForSale()) {
+        for (Card card : Shop.getInstance().getCardsForSale()) {
             CardGUI cardGUI = new CardGUI(card);
             JButton buyButton = makeBuyButton(cardGUI);
             cardGUI.add(buyButton);
@@ -127,12 +125,11 @@ public class ShopGUI extends Panel {
     private JButton makeBuyButton(CardGUI cardGUI) {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
-            if (user.getCoins() >= card.getCoinCost()) {
-                int index = shop.getCardsForSale().indexOf(card);
-                shop.buyCard(index);
-                Shop.setInstance(shop);
+            if (User.getInstance().getCoins() >= card.getCoinCost()) {
+                int index = Shop.getInstance().getCardsForSale().indexOf(card);
+                Shop.getInstance().buyCard(index);
 
-                coinCount.setText("You have " + user.getCoins() + " coins.");
+                coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
 
                 int guiIndex = buyCardScrollPanel.getComponentZOrder(cardGUI);
                 buyCardScrollPanel.remove(guiIndex);
@@ -171,10 +168,9 @@ public class ShopGUI extends Panel {
     }
 
     private void updateSellCardScrollPanel() {
-        user = User.getInstance();
         sellCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
-        for (Card card : user.getCanSellCards()) {
+        for (Card card : User.getInstance().getCanSellCards()) {
             CardGUI cardGUI = new CardGUI(card);
             JButton sellButton = makeSellButton(cardGUI);
             cardGUI.add(sellButton);
@@ -187,9 +183,8 @@ public class ShopGUI extends Panel {
     private JButton makeSellButton(CardGUI cardGUI) {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
-            shop.sellCard(card);
-            Shop.setInstance(shop);
-            coinCount.setText("You have " + user.getCoins() + " coins.");
+            Shop.getInstance().sellCard(card);
+            coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
             int guiIndex = sellCardScrollPanel.getComponentZOrder(cardGUI);
             sellCardScrollPanel.remove(guiIndex);
             sellCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
@@ -208,6 +203,6 @@ public class ShopGUI extends Panel {
     }
 
     public void setShop(Shop shop) {
-        this.shop = shop;
+        Shop.setInstance(shop);
     }
 }

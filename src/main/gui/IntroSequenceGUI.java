@@ -39,7 +39,8 @@ public class IntroSequenceGUI extends Panel {
     }
 
     public void createShop() {
-        Shop.setInstance(new Shop(user));
+        Shop.setInstance(new Shop(User.getInstance()));
+        shopGUI.updateShop();
     }
 
     public void createUser() {

@@ -41,6 +41,7 @@ public class TitleScreenGUI extends Panel {
         ActionListener action = f -> {
             loadUser();
             loadShop();
+            shopGUI.updateShop();
             parentLayout.show(parent, "ShopGUI");
         };
         return action;
@@ -48,10 +49,12 @@ public class TitleScreenGUI extends Panel {
 
     private void loadUser() {
         JsonReader jsonReader = new JsonReader("./data/user.json");
+        User user;
         try {
             user = jsonReader.read();
-            System.out.println("Loaded " + user.getName() + " from ./data/user.json");
+            System.out.println("Loaded " + User.getInstance().getName() + " from ./data/user.json");
         } catch (IOException e) {
+            user = new User("Failed To Load");
             System.out.println("Unable to read from file: ./data/user.json");
         }
         User.setInstance(user);
@@ -64,11 +67,10 @@ public class TitleScreenGUI extends Panel {
             shop = shopReader.readShop();
             System.out.println("Loaded shop from ./data/shop.json");
         } catch (IOException e) {
-            shop = new Shop(user);
+            shop = new Shop(User.getInstance());
             System.out.println("Unable to read from file: ./data/shop.json");
         }
         Shop.setInstance(shop);
-        shopGUI.updateShop();
     }
 
     private ActionListener quitGameAction() {

@@ -98,11 +98,10 @@ public class SavePanelGUI extends Panel {
     }
 
     private void saveShop() {
-        shop = Shop.getInstance();
         JsonWriter shopWriter = new JsonWriter("./data/shop.json");
         try {
             shopWriter.open();
-            shopWriter.write(shop);
+            shopWriter.write(Shop.getInstance());
             shopWriter.close();
             System.out.println("Saved shop to ./data/shop.json");
         } catch (FileNotFoundException e) {
@@ -111,13 +110,12 @@ public class SavePanelGUI extends Panel {
     }
 
     private void saveUser() {
-        user = User.getInstance();
         JsonWriter userWriter = new JsonWriter("./data/user.json");
         try {
             userWriter.open();
             userWriter.write(User.getInstance());
             userWriter.close();
-            System.out.println("Saved " + user.getName() + " to ./data/shop.json");
+            System.out.println("Saved " + User.getInstance().getName() + " to ./data/shop.json");
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File not found. Could not save to file.");
         }
