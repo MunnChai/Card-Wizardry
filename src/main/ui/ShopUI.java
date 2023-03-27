@@ -177,7 +177,7 @@ public class ShopUI extends UIMethods {
         JsonReader jsonReader = new JsonReader("./data/shop.json");
         try {
             shop = jsonReader.readShop();
-            System.out.println("Loaded " + user.getName() + " from ./data/shop.json");
+            System.out.println("Loaded shop from ./data/shop.json");
         } catch (IOException e) {
             System.out.println("Unable to read from file: ./data/shop.json");
         }

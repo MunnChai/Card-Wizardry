@@ -13,12 +13,10 @@ public class CardWizardryApp {
     private JFrame frame;
     private JPanel cardPanel;
 
-    private User user;
+    private ShopGUI shopGUI;
 
     public CardWizardryApp() {
         frame = new JFrame();
-
-        user = User.getInstance();
 
         frame.setTitle("Card Wizardry");
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -26,12 +24,13 @@ public class CardWizardryApp {
         layout = new CardLayout();
         cardPanel = new JPanel(layout);
 
-        addGuiPanel(new TitleScreenGUI(cardPanel), "TitleScreenGUI");
-        addGuiPanel(new ShopGUI(cardPanel), "ShopGUI");
-        addGuiPanel(new SaveScreenGUI(cardPanel), "SaveScreenGUI");
-        addGuiPanel(new IntroSequenceGUI(cardPanel), "IntroSequenceGUI");
+        shopGUI = new ShopGUI(cardPanel);
+        addGuiPanel(new TitleScreenGUI(cardPanel, shopGUI), "TitleScreenGUI");
+        addGuiPanel(shopGUI, "ShopGUI");
+        addGuiPanel(new IntroSequenceGUI(cardPanel, shopGUI), "IntroSequenceGUI");
         addGuiPanel(new BattleScreenGUI(cardPanel), "BattleScreenGUI");
         addGuiPanel(new EditDecksGUI(cardPanel), "EditDecksGUI");
+        addGuiPanel(new SavePanelGUI(cardPanel), "SavePanelGUI");
 
         frame.add(cardPanel);
 

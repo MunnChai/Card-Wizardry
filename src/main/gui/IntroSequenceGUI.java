@@ -1,6 +1,8 @@
 package gui;
 
 import model.Card;
+import model.Shop;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +14,18 @@ import static gui.CardWizardryApp.WINDOW_WIDTH;
 public class IntroSequenceGUI extends Panel {
     private JPanel interactionPanel;
 
-    public IntroSequenceGUI(Component parent) {
-        super(parent, "#63c74d");
+    private ShopGUI shopGUI;
 
-        ActionListener toShop = switchPanelAction("ShopGUI", parent);
+    public IntroSequenceGUI(JPanel parent, ShopGUI shopGUI) {
+        super(parent, "#63c74d", "IntroSequenceGUI");
+
+        this.shopGUI = shopGUI;
+
+        ActionListener toShop = e -> {
+            createUser();
+            createShop();
+            parentLayout.show(parent, "ShopGUI");
+        };
         this.add(createButton("CONTINUE", "#b86f50", 280, 80, WINDOW_WIDTH - 200,
                 WINDOW_HEIGHT - 150, toShop, 40));
 
@@ -24,6 +34,16 @@ public class IntroSequenceGUI extends Panel {
         text.setFont(new Font(FONT, Font.BOLD, 30));
         interactionPanel.add(text);
         this.add(interactionPanel);
+
+        saveButton.setVisible(false);
+    }
+
+    public void createShop() {
+        Shop.setInstance(new Shop(user));
+    }
+
+    public void createUser() {
+        User.setInstance(new User("New User"));
     }
 
 

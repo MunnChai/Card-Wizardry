@@ -1,16 +1,7 @@
-{"cardsForSale": [
-    {
-        "name": "WATCHFUL Spell Of INVULNERABILITY",
-        "type": "SHIELD",
-        "value": 10,
-        "coinCost": 2,
-        "energyCost": 6
-    },
-    {
-        "name": "DEADLY Spell Of DOOM",
-        "type": "ATTACK",
-        "value": 6,
-        "coinCost": 2,
-        "energyCost": 3
-    }
-]}
+{"cardsForSale": [{
+    "name": "WICKED Spell Of SABOTAGE",
+    "type": "ATTACK",
+    "value": 6,
+    "coinCost": 2,
+    "energyCost": 3
+}]}

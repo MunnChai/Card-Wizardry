@@ -9,6 +9,7 @@ import java.util.List;
 // A randomized shop with a list of cards that can be purchased. Holds given user, to access user's owned and not
 // owned cards. Has methods for buying and selling cards from the shop.
 public class Shop implements Writable {
+    private static Shop instance;
 
     public static final int SHOP_CARD_STOCK = 4;
 
@@ -72,6 +73,14 @@ public class Shop implements Writable {
         return cardsForSale;
     }
 
+    public static Shop getInstance() {
+        if (instance == null) {
+            instance = new Shop(new User("Temp User"));
+            System.out.println("Temporary Shop Created");
+        }
+        return instance;
+    }
+
     // Setters
     public void setCardsForSale(List<Card> cardsForSale) {
         this.cardsForSale = cardsForSale;
@@ -79,5 +88,9 @@ public class Shop implements Writable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public static void setInstance(Shop shop) {
+        instance = shop;
     }
 }

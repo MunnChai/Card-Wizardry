@@ -1,10 +1,10 @@
 package gui;
 
+import model.Shop;
 import model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static gui.CardWizardryApp.*;
@@ -14,15 +14,28 @@ public abstract class Panel extends JPanel {
     protected static final int CENTER_X = WINDOW_WIDTH / 2;
     protected static final int CENTER_Y = WINDOW_HEIGHT / 2;
     protected static final String FONT = "OpenSymbol";
-    protected Component parent;
-    protected User user;
 
-    public Panel(Component parent, String backgroundHexColor) {
+    protected JPanel parent;
+    protected CardLayout parentLayout;
+
+    protected JButton saveButton;
+
+    protected User user;
+    protected Shop shop;
+
+    public Panel(JPanel parent, String backgroundHexColor, String thisPanelName) {
+        user = User.getInstance();
+        Shop.setInstance(new Shop(user));
+        shop = Shop.getInstance();
         this.parent = parent;
         backgroundColor = Color.decode(backgroundHexColor);
         this.setBackground(backgroundColor);
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setLayout(null);
+
+        parentLayout = (CardLayout) parent.getLayout();
+
+        addSaveButton(thisPanelName);
     }
 
     public JButton createButton(String text, String colorHex, int width, int height, int x, int y,
@@ -49,12 +62,10 @@ public abstract class Panel extends JPanel {
         return label;
     }
 
-    public ActionListener switchPanelAction(String panelLayoutName, Component parent) {
+    public ActionListener switchPanelAction(String panelLayoutName) {
         user = User.getInstance();
-        JPanel parentPanel = (JPanel)parent;
-        CardLayout parentLayout = (CardLayout)parentPanel.getLayout();
         ActionListener action = e -> {
-            parentLayout.show(parentPanel, panelLayoutName);
+            parentLayout.show(parent, panelLayoutName);
         };
         return action;
     }
@@ -66,6 +77,17 @@ public abstract class Panel extends JPanel {
         panel.setBorder(BorderFactory.createLineBorder(Color.decode(borderHexColour)));
         panel.setBackground(Color.decode(hexColour));
         return panel;
+    }
+
+    public void addSaveButton(String previousPanelName) {
+        ActionListener makeSavePanel = e -> {
+            SavePanelGUI savePanel = (SavePanelGUI)parent.getComponent(5);
+            savePanel.setPreviousPanel(previousPanelName);
+            savePanel.resetSaveScreen();
+            parentLayout.show(parent, "SavePanelGUI");
+        };
+        saveButton = createButton("SAVE", "#c0cbdc", 40, 40,WINDOW_WIDTH - 60, 40, makeSavePanel, 10);
+        this.add(saveButton);
     }
 
 //    @Override

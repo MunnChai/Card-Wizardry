@@ -13,21 +13,18 @@ public class ShopGUI extends Panel {
     private CardLayout interactionLayout;
 
     private JButton backToTitleButton;
-
-    private JPanel selectionPanel;
-    private JPanel buyCardPanel;
-    private JPanel sellCardPanel;
     private JLabel coinCount;
 
+    private JPanel selectionPanel;
+
+    private JPanel buyCardPanel;
+    private JPanel buyCardScrollPanel;
+
+    private JPanel sellCardPanel;
     private JPanel sellCardScrollPanel;
 
-    private Shop shop;
-
-    public ShopGUI(Component parent) {
-        super(parent,"#ead4aa");
-
-        user = User.getInstance();
-        shop = new Shop(user);
+    public ShopGUI(JPanel parent) {
+        super(parent,"#ead4aa", "ShopGUI");
 
         coinCount = createText("You have " + user.getCoins() + " coins.", "#733e39", 400, 100,
                 180, 220, 30);
@@ -35,7 +32,7 @@ public class ShopGUI extends Panel {
         this.add(createText("Shop", "#733e39", 200, 100, 170, 140, 60));
         this.add(coinCount);
 
-        ActionListener backToTitle = switchPanelAction("TitleScreenGUI", parent);
+        ActionListener backToTitle = switchPanelAction("TitleScreenGUI");
 
         backToTitleButton = createButton("BACK TO TITLE", "#b86f50", 280, 60, 170, 50,
                 backToTitle, 30);
@@ -51,6 +48,13 @@ public class ShopGUI extends Panel {
         interactionPanel.add(makeSellCardPanel());
     }
 
+    public void updateShop() {
+        user = User.getInstance();
+        shop = Shop.getInstance();
+        updateSellCardScrollPanel();
+        updateBuyCardScrollPanel();
+    }
+
     private JPanel makeSelectionPanel() {
         selectionPanel = new JPanel();
         selectionPanel.setBackground(Color.decode("#e4a672"));
@@ -63,15 +67,19 @@ public class ShopGUI extends Panel {
         ActionListener sellCardAction = e -> {
             interactionLayout.show(interactionPanel, "SellCardPanel");
             backToTitleButton.setVisible(false);
-            updateSellableCards();
+            updateShop();
         };
-        ActionListener editDecksAction = switchPanelAction("EditDecksGUI", parent);
-        ActionListener battleAction = switchPanelAction("BattleScreenGUI", parent);
+        ActionListener editDecksAction = e -> {
+            EditDecksGUI editDecksGUI = (EditDecksGUI) parent.getComponent(4);
+            editDecksGUI.updateDecksScrollPane();
+            parentLayout.show(parent, "EditDecksGUI");
+        };
+//        ActionListener battleAction = switchPanelAction("BattleScreenGUI");
 
         selectionPanel.add(createButton("BUY A CARD", "#b86f50", 280, 200, 0, 0, buyCardAction, 30));
         selectionPanel.add(createButton("SELL A CARD", "#b86f50", 280, 200, 0, 0, sellCardAction, 30));
         selectionPanel.add(createButton("EDIT DECKS", "#b86f50", 280, 200, 0, 0, editDecksAction, 30));
-        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
+//        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
         interactionLayout.addLayoutComponent("SelectionPanel", selectionPanel);
         return selectionPanel;
     }
@@ -88,16 +96,32 @@ public class ShopGUI extends Panel {
 
         buyCardPanel.add(createButton("BACK", "#b86f50", 280, 200, 0, 0,
                 backToSelection, 40));
-        interactionLayout.addLayoutComponent("BuyCardPanel", buyCardPanel);
 
+        buyCardScrollPanel = new JPanel();
+        buyCardScrollPanel.setLayout(new GridLayout());
+        buyCardScrollPanel.setBackground(Color.decode("#e4a672"));
+        JScrollPane scrollPane = new JScrollPane(buyCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(1024,300));
+        scrollPane.setLocation(768, 150);
+        buyCardPanel.add(scrollPane);
+        updateBuyCardScrollPanel();
+        interactionLayout.addLayoutComponent("BuyCardPanel", buyCardPanel);
+        return buyCardPanel;
+    }
+
+    private void updateBuyCardScrollPanel() {
+        user = User.getInstance();
+        buyCardScrollPanel.removeAll();
+        int scrollPanelWidth = 0;
         for (Card card : shop.getCardsForSale()) {
             CardGUI cardGUI = new CardGUI(card);
             JButton buyButton = makeBuyButton(cardGUI);
-            cardGUI.addButton(buyButton);
-            buyCardPanel.add(cardGUI);
+            cardGUI.add(buyButton);
+            buyCardScrollPanel.add(cardGUI);
+            scrollPanelWidth += 256;
         }
-
-        return buyCardPanel;
+        buyCardScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth,300));
     }
 
     private JButton makeBuyButton(CardGUI cardGUI) {
@@ -106,16 +130,18 @@ public class ShopGUI extends Panel {
             if (user.getCoins() >= card.getCoinCost()) {
                 int index = shop.getCardsForSale().indexOf(card);
                 shop.buyCard(index);
+                Shop.setInstance(shop);
 
                 coinCount.setText("You have " + user.getCoins() + " coins.");
 
-                int guiIndex = buyCardPanel.getComponentZOrder(cardGUI);
-                buyCardPanel.remove(guiIndex);
-                buyCardPanel.add(createBlankSpot("#733e39"), guiIndex);
+                int guiIndex = buyCardScrollPanel.getComponentZOrder(cardGUI);
+                buyCardScrollPanel.remove(guiIndex);
+                buyCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
+                updateShop();
             }
         };
         JButton button = createButton("BUY: $" + card.getCoinCost(), "#feae34",200, 60,
-                28, 200, action, 20);
+                128, 220, action, 20);
         return button;
     }
 
@@ -133,6 +159,7 @@ public class ShopGUI extends Panel {
 
         sellCardScrollPanel = new JPanel();
         sellCardScrollPanel.setLayout(new GridLayout());
+        sellCardScrollPanel.setBackground(Color.decode("#733e39"));
         JScrollPane scrollPane = new JScrollPane(sellCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(1024,300));
@@ -143,7 +170,8 @@ public class ShopGUI extends Panel {
         return sellCardPanel;
     }
 
-    private void updateSellableCards() {
+    private void updateSellCardScrollPanel() {
+        user = User.getInstance();
         sellCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
         for (Card card : user.getCanSellCards()) {
@@ -160,11 +188,12 @@ public class ShopGUI extends Panel {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
             shop.sellCard(card);
+            Shop.setInstance(shop);
             coinCount.setText("You have " + user.getCoins() + " coins.");
             int guiIndex = sellCardScrollPanel.getComponentZOrder(cardGUI);
             sellCardScrollPanel.remove(guiIndex);
             sellCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
-            updateSellableCards();
+            updateSellCardScrollPanel();
         };
         JButton button = createButton("SELL: $" + card.getCoinCost(), "#feae34",200, 60,
                 128, 220, action, 20);
@@ -176,5 +205,9 @@ public class ShopGUI extends Panel {
         panel.setSize(256, 300);
         panel.setBackground(Color.decode(hexColour));
         return panel;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

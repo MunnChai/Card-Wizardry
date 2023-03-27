@@ -23,17 +23,15 @@ public class EditDecksGUI extends Panel {
     private JPanel mainPanel;
     private JPanel mainScrollPanel;
 
-    public EditDecksGUI(Component parent) {
-        super(parent, "#8b9bb4");
-
-        this.user = User.getInstance();
+    public EditDecksGUI(JPanel parent) {
+        super(parent, "#8b9bb4", "EditDecksGUI");
 
         interactionPanel = createInteractionPanel("#5a6988", "#3a4466");
         this.add(interactionPanel);
         interactionLayout = new CardLayout();
         interactionPanel.setLayout(interactionLayout);
 
-        ActionListener backToShop = switchPanelAction("ShopGUI", parent);
+        ActionListener backToShop = switchPanelAction("ShopGUI");
         backToShopButton = createButton("BACK TO SHOP", "#5a6988", 280, 60, 170, 50,
                 backToShop, 30);
         this.add(backToShopButton);
@@ -82,6 +80,20 @@ public class EditDecksGUI extends Panel {
         mainScrollPanel = new JPanel();
         mainScrollPanel.setLayout(new GridLayout());
         mainScrollPanel.setBackground(Color.decode("#5a6988"));
+
+        updateDecksScrollPane();
+
+        JScrollPane scrollPane = new JScrollPane(mainScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(1024,300));
+        scrollPane.setLocation(768, 150);
+        return scrollPane;
+    }
+
+    public void updateDecksScrollPane() {
+        user = User.getInstance();
+        mainScrollPanel.removeAll();
+
         int scrollPanelWidth = 0;
         for (Deck deck : user.getDecks()) {
             JPanel deckPanel = makeDeckPanel(deck);
@@ -90,12 +102,8 @@ public class EditDecksGUI extends Panel {
             scrollPanelWidth += 256;
         }
         mainScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth, 300));
-        JScrollPane scrollPane = new JScrollPane(mainScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(1024,300));
-        scrollPane.setLocation(768, 150);
-        return scrollPane;
     }
+
 
     private ActionListener createNewDeckAction() {
         ActionListener action = e -> {
@@ -360,5 +368,9 @@ public class EditDecksGUI extends Panel {
             deckName.setText(deck.getName());
         };
         return renameAction;
+    }
+
+    public void updateEditDecksGUI() {
+        mainScrollPanel.revalidate();
     }
 }
