@@ -23,12 +23,13 @@ public class Deck implements Writable {
     // EFFECTS: fills list of cards with random cards from the given player's cards until viable number of cards are in
     // the deck.
     public void fillRandom(User user) {
-        if (user.getOwnedCards().size() < 1) {
+        if (getCanAddCards(user).size() < 1) {
             System.out.println("You hava no cards, you fucked up frfr");
         } else {
-            while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT) {
-                int randomInt = (int)(Math.random() * getCanAddCards(user).size());
-                cardsInDeck.add(getCanAddCards(user).get(randomInt));
+            while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT && getCanAddCards(user).size() > 0) {
+                List<Card> canAddCards = getCanAddCards(user);
+                int randomInt = (int)(Math.random() * canAddCards.size());
+                cardsInDeck.add(canAddCards.get(randomInt));
             }
         }
     }

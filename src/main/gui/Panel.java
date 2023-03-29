@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import static gui.CardWizardryApp.*;
 
+// An abstract class that represents a screen of the app that you can switch on or off of
 public abstract class Panel extends JPanel {
     protected Color backgroundColor;
     protected static final int CENTER_X = WINDOW_WIDTH / 2;
@@ -21,7 +22,6 @@ public abstract class Panel extends JPanel {
     protected JButton saveButton;
 
     public Panel(JPanel parent, String backgroundHexColor, String thisPanelName) {
-        Shop.setInstance(new Shop(User.getInstance()));
         this.parent = parent;
         backgroundColor = Color.decode(backgroundHexColor);
         this.setBackground(backgroundColor);
@@ -80,14 +80,17 @@ public abstract class Panel extends JPanel {
             savePanel.resetSaveScreen();
             parentLayout.show(parent, "SavePanelGUI");
         };
-        saveButton = createButton("SAVE", "#c0cbdc", 40, 40,WINDOW_WIDTH - 60, 40, makeSavePanel, 10);
+        saveButton = new JButton(makeScaledImageIcon("./data/SaveIcon.png", 40, 40));
+        saveButton.setBackground(Color.decode("#c0cbdc"));
+        saveButton.setBounds(WINDOW_WIDTH - 80, 10, 60, 60);
+        saveButton.addActionListener(makeSavePanel);
         this.add(saveButton);
     }
 
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        g.setColor(backgroundColor);
-//        g.fillRect(0, 0, getWidth(), getHeight());
-//    }
+    public ImageIcon makeScaledImageIcon(String fileName, int width, int height) {
+        ImageIcon imageIcon = new ImageIcon(fileName);
+        ImageIcon scaledImageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(width, height,
+                Image.SCALE_DEFAULT));
+        return scaledImageIcon;
+    }
 }

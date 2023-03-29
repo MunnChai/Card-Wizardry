@@ -75,7 +75,7 @@ public class Shop implements Writable {
 
     public static Shop getInstance() {
         if (instance == null) {
-            instance = new Shop(new User("Temp User"));
+            instance = new Shop(User.getInstance());
             System.out.println("Temporary Shop Created");
         }
         return instance;

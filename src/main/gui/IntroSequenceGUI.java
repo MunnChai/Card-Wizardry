@@ -1,6 +1,5 @@
 package gui;
 
-import model.Card;
 import model.Shop;
 import model.User;
 
@@ -11,6 +10,7 @@ import java.awt.event.ActionListener;
 import static gui.CardWizardryApp.WINDOW_HEIGHT;
 import static gui.CardWizardryApp.WINDOW_WIDTH;
 
+// Represents the screen for the introduction sequence
 public class IntroSequenceGUI extends Panel {
     private JPanel interactionPanel;
 
@@ -24,6 +24,7 @@ public class IntroSequenceGUI extends Panel {
         ActionListener toShop = e -> {
             createUser();
             createShop();
+            shopGUI.makeCatSayText("Welcome to my shop.");
             parentLayout.show(parent, "ShopGUI");
         };
         this.add(createButton("CONTINUE", "#b86f50", 280, 80, WINDOW_WIDTH - 200,

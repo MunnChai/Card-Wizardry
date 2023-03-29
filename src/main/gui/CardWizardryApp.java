@@ -1,10 +1,9 @@
 package gui;
 
-import model.User;
-
 import javax.swing.*;
 import java.awt.*;
 
+// Represents the frame of the app, holds the different screens in a CardLayout
 public class CardWizardryApp {
     public static final int WINDOW_WIDTH = 1280;
     public static final int WINDOW_HEIGHT = 720;

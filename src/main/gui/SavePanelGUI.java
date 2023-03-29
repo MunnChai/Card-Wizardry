@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 
 import static gui.CardWizardryApp.WINDOW_WIDTH;
 
+// Represents the save screen of the app
 public class SavePanelGUI extends Panel {
     private JPanel interactionPanel;
     private String previousPanel;
@@ -94,6 +95,7 @@ public class SavePanelGUI extends Panel {
 
         interactionPanel.add(saveButton);
         interactionPanel.add(cancelButton);
+        questionLabel.setVisible(true);
         doneLabel.setVisible(false);
     }
 

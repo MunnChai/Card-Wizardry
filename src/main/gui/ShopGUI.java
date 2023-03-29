@@ -7,13 +7,23 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+// Represents the shop screen of the app
 public class ShopGUI extends Panel {
     private JPanel interactionPanel;
     private CardLayout interactionLayout;
 
     private JButton backToTitleButton;
     private JLabel coinCount;
+
+    private JLabel catLabel;
+    private ImageIcon catBrowRaiseIcon;
+    private ImageIcon catHappyIcon;
+    private JLabel speechBubble;
+    private JLabel speechText;
+    private Timer catTimer;
+    private Timer speechTimer;
 
     private JPanel selectionPanel;
 
@@ -38,6 +48,7 @@ public class ShopGUI extends Panel {
                 backToTitle, 30);
 
         this.add(backToTitleButton);
+        this.add(makeCatPanel());
 
         interactionPanel = createInteractionPanel("#e4a672", "#733e39");
         this.add(interactionPanel);
@@ -54,19 +65,74 @@ public class ShopGUI extends Panel {
         coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
     }
 
+    private JPanel makeCatPanel() {
+        JPanel wholePanel = new JPanel();
+        wholePanel.setBounds(350, 35, 800, 350);
+        wholePanel.setOpaque(false);
+        wholePanel.setLayout(null);
+
+        catTimer = new Timer(5000, null);
+        speechTimer = new Timer(5000, null);
+
+        catLabel = new JLabel();
+        catLabel.setBounds(0, 150,200, 200);
+        catHappyIcon = makeScaledImageIcon("./data/CatNormal.jpg", 200, 200);
+        catBrowRaiseIcon = makeScaledImageIcon("./data/CatBrowRaise2.jpg", 200, 200);
+        catLabel.setIcon(catBrowRaiseIcon);
+
+        speechBubble = new JLabel();
+        speechBubble.setBounds(200, 0, 500, 200);
+        ImageIcon speechIcon = makeScaledImageIcon("./data/SpeechBubble.png", 500, 200);
+        speechBubble.setIcon(speechIcon);
+
+        speechText = createText("Welcome to my shop!", "#000000", 480, 200, 270, 90, 30);
+
+        speechBubble.add(speechText);
+
+        wholePanel.add(speechBubble);
+        wholePanel.add(catLabel);
+        return wholePanel;
+    }
+
+    public void makeCatHappy() {
+        ActionListener setIcon = e -> {
+            catLabel.setIcon(catBrowRaiseIcon);
+        };
+        catTimer.addActionListener(setIcon);
+
+        catLabel.setIcon(catHappyIcon);
+
+        catTimer.setRepeats(false);
+        catTimer.restart();
+    }
+
+    public void makeCatSayText(String text) {
+        ActionListener hideText = e -> {
+            speechBubble.setVisible(false);
+        };
+        speechTimer.addActionListener(hideText);
+
+        speechText.setText(text);
+        speechBubble.setVisible(true);
+
+        speechTimer.setRepeats(false);
+        speechTimer.restart();
+    }
+
     private JPanel makeSelectionPanel() {
         selectionPanel = new JPanel();
         selectionPanel.setBackground(Color.decode("#e4a672"));
         selectionPanel.setLayout(new GridLayout());
 
         ActionListener buyCardAction = e -> {
-            interactionLayout.show(interactionPanel, "BuyCardPanel");
+            makeCatSayText("What would you like to buy?");
             backToTitleButton.setVisible(false);
+            interactionLayout.show(interactionPanel, "BuyCardPanel");
         };
         ActionListener sellCardAction = e -> {
-            interactionLayout.show(interactionPanel, "SellCardPanel");
+            makeCatSayText("What would you like to sell?");
             backToTitleButton.setVisible(false);
-            updateShop();
+            interactionLayout.show(interactionPanel, "SellCardPanel");
         };
         ActionListener editDecksAction = e -> {
             EditDecksGUI editDecksGUI = (EditDecksGUI) parent.getComponent(4);
@@ -111,15 +177,22 @@ public class ShopGUI extends Panel {
 
     private void updateBuyCardScrollPanel() {
         buyCardScrollPanel.removeAll();
+
         int scrollPanelWidth = 0;
-        for (Card card : Shop.getInstance().getCardsForSale()) {
-            CardGUI cardGUI = new CardGUI(card);
-            JButton buyButton = makeBuyButton(cardGUI);
-            cardGUI.add(buyButton);
-            buyCardScrollPanel.add(cardGUI);
-            scrollPanelWidth += 256;
+        List<Card> cardsForSale = Shop.getInstance().getCardsForSale();
+
+        if (cardsForSale.size() != 0) {
+            for (Card card : cardsForSale) {
+                CardGUI cardGUI = new CardGUI(card);
+                JButton buyButton = makeBuyButton(cardGUI);
+                cardGUI.add(buyButton);
+                buyCardScrollPanel.add(cardGUI);
+                scrollPanelWidth += 256;
+            }
         }
         buyCardScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth,300));
+        buyCardScrollPanel.revalidate();
+        buyCardScrollPanel.repaint();
     }
 
     private JButton makeBuyButton(CardGUI cardGUI) {
@@ -133,8 +206,11 @@ public class ShopGUI extends Panel {
 
                 int guiIndex = buyCardScrollPanel.getComponentZOrder(cardGUI);
                 buyCardScrollPanel.remove(guiIndex);
-                buyCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
+                makeCatSayText("Thank you for buying!");
+                makeCatHappy();
                 updateShop();
+            } else {
+                makeCatSayText("You're broke.");
             }
         };
         JButton button = createButton("BUY: $" + card.getCoinCost(), "#feae34",200, 60,
@@ -170,14 +246,22 @@ public class ShopGUI extends Panel {
     private void updateSellCardScrollPanel() {
         sellCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
-        for (Card card : User.getInstance().getCanSellCards()) {
-            CardGUI cardGUI = new CardGUI(card);
-            JButton sellButton = makeSellButton(cardGUI);
-            cardGUI.add(sellButton);
-            sellCardScrollPanel.add(cardGUI);
-            scrollPanelWidth += 256;
+
+        List<Card> canSellCards = User.getInstance().getCanSellCards();
+
+        if (canSellCards.size() != 0) {
+            for (Card card : canSellCards) {
+                CardGUI cardGUI = new CardGUI(card);
+                JButton sellButton = makeSellButton(cardGUI);
+                cardGUI.add(sellButton);
+                sellCardScrollPanel.add(cardGUI);
+                scrollPanelWidth += 256;
+            }
         }
+
         sellCardScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth,300));
+        sellCardScrollPanel.revalidate();
+        sellCardScrollPanel.repaint();
     }
 
     private JButton makeSellButton(CardGUI cardGUI) {
@@ -187,19 +271,13 @@ public class ShopGUI extends Panel {
             coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
             int guiIndex = sellCardScrollPanel.getComponentZOrder(cardGUI);
             sellCardScrollPanel.remove(guiIndex);
-            sellCardScrollPanel.add(createBlankSpot("#733e39"), guiIndex);
+            makeCatSayText("Thank you for your sale!");
+            makeCatHappy();
             updateSellCardScrollPanel();
         };
         JButton button = createButton("SELL: $" + card.getCoinCost(), "#feae34",200, 60,
                 128, 220, action, 20);
         return button;
-    }
-
-    public static JPanel createBlankSpot(String hexColour) {
-        JPanel panel = new JPanel();
-        panel.setSize(256, 300);
-        panel.setBackground(Color.decode(hexColour));
-        return panel;
     }
 
     public void setShop(Shop shop) {

@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static gui.CardWizardryApp.WINDOW_HEIGHT;
-import static gui.CardWizardryApp.WINDOW_WIDTH;
-
+// Represents the screen for battle sequences
 public class BattleScreenGUI extends Panel {
     private JPanel interactionPanel;
 

@@ -5,13 +5,10 @@ import model.User;
 import persistence.JsonReader;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static model.User.getInstance;
-import static model.User.setInstance;
-
+// Represents the title screen for the app
 public class TitleScreenGUI extends Panel {
     private ShopGUI shopGUI;
 
@@ -42,6 +39,7 @@ public class TitleScreenGUI extends Panel {
             loadUser();
             loadShop();
             shopGUI.updateShop();
+            shopGUI.makeCatSayText("Welcome to my shop.");
             parentLayout.show(parent, "ShopGUI");
         };
         return action;
@@ -71,6 +69,7 @@ public class TitleScreenGUI extends Panel {
             System.out.println("Unable to read from file: ./data/shop.json");
         }
         Shop.setInstance(shop);
+        Shop.getInstance().setUser(User.getInstance());
     }
 
     private ActionListener quitGameAction() {
