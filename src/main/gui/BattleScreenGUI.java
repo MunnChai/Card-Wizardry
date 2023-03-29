@@ -11,6 +11,7 @@ public class BattleScreenGUI extends Panel {
     private JPanel cardPanel;
     private CardLayout cardLayout;
 
+    // Constructor for BattleScreenGUI
     public BattleScreenGUI(JPanel parent) {
         super(parent, "#265c42", "BattleScreenGUI");
 

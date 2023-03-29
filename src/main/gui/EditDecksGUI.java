@@ -24,6 +24,8 @@ public class EditDecksGUI extends Panel {
     private JPanel mainPanel;
     private JPanel mainScrollPanel;
 
+    // Constructor for EditDecksGUI
+    // Creates an interaction panel for the user, and a back to shop button to return to the ShopGUI
     public EditDecksGUI(JPanel parent) {
         super(parent, "#8b9bb4", "EditDecksGUI");
 
@@ -47,6 +49,9 @@ public class EditDecksGUI extends Panel {
         interactionLayout.show(interactionPanel, "MainPanel");
     }
 
+    // MODIFIES: interactionPanel
+    // EFFECTS: Adds the main JPanel to the interaction panel, where users can either create a new deck or select
+    //          an existing deck
     private JPanel createMainPanel() {
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.decode("#5a6988"));
@@ -62,6 +67,8 @@ public class EditDecksGUI extends Panel {
         return mainPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the panel which shows a user the cards in a deck
     private void initializeCardPanel() {
         cardPanel = new JPanel();
         cardPanel.setLayout(new GridLayout());
@@ -81,6 +88,7 @@ public class EditDecksGUI extends Panel {
         setCardPanelVisibility(false);
     }
 
+    // EFFECTS: returns a JScrollPane that holds panels for each of the user's decks
     private JScrollPane makeDecksScrollPane() {
         mainScrollPanel = new JPanel();
         mainScrollPanel.setLayout(new GridLayout());
@@ -95,6 +103,8 @@ public class EditDecksGUI extends Panel {
         return scrollPane;
     }
 
+    // MODIFIES: mainScrollPanel
+    // EFFECTS: repaints the JScrollPane that shows the user's decks
     public void updateDecksScrollPane() {
         mainScrollPanel.removeAll();
 
@@ -112,6 +122,8 @@ public class EditDecksGUI extends Panel {
         mainScrollPanel.setPreferredSize(new Dimension(scrollPanelWidth, 300));
     }
 
+    // MODIFIES: mainScrollPanel, interactionPanel
+    // EFFECTS: returns an ActionListener that creates a new deck, updates the parts of the shop that have been affected
     private ActionListener createNewDeckAction() {
         ActionListener action = e -> {
             Deck newDeck = new Deck("New Deck");
@@ -127,6 +139,8 @@ public class EditDecksGUI extends Panel {
         return action;
     }
 
+    // EFFECTS: returns a deck panel, which is decorated with the deck's name, number of cards, and a button to edit the
+    //          deck
     private JPanel makeDeckPanel(Deck deck) {
         JPanel panel = new JPanel();
         panel.setSize(256, 300);
@@ -145,6 +159,7 @@ public class EditDecksGUI extends Panel {
         return panel;
     }
 
+    // EFFECTS: returns the button to edit a given deck
     private JButton makeEditButton(JPanel deckPanel, Deck deck) {
         ActionListener editDeckAction = e -> {
             interactionLayout.show(interactionPanel, "EditDeck" + deck.hashCode());
@@ -160,11 +175,15 @@ public class EditDecksGUI extends Panel {
         return button;
     }
 
+    // MODIFIES: cardScrollPane
+    // EFFECTS: sets the visibility of the card in the user's deck
     private void setCardPanelVisibility(Boolean visible) {
         cardScrollPane.setVisible(visible);
         deckName.setVisible(visible);
     }
 
+    // MODIFIES: cardPanel
+    // EFFECTS: updates the JPanel that holds the cards in a deck
     private void decorateCardPanel(JPanel deckPanel, Deck deck) {
         deckName.setText(deck.getName());
 
@@ -186,6 +205,7 @@ public class EditDecksGUI extends Panel {
         cardPanel.repaint();
     }
 
+    // EFFECTS: returns the ActionListener to remove a card from a deck
     private ActionListener createRemoveCardAction(JPanel deckPanel, Deck deck, Card card, CardGUI cardGUI) {
         ActionListener removeCardAction = e -> {
             deck.removeCard(card);
@@ -198,6 +218,7 @@ public class EditDecksGUI extends Panel {
         return removeCardAction;
     }
 
+    // EFFECTS: returns a button which removes a deck from a user's list of decks
     private JButton makeDeleteButton(JPanel panel, Deck deck) {
         ActionListener deleteAction = e -> {
             User.getInstance().getDecks().remove(deck);
@@ -213,7 +234,8 @@ public class EditDecksGUI extends Panel {
         return button;
     }
 
-    // REQUIRES: currently editing deck is not null
+    // EFFECTS: creates and returns a JPanel for the interactionPanel which has buttons that allow actions for a user
+    //          to edit their deck
     private JPanel makeEditDeckPanel(Deck deck, JPanel parentPanel) {
         JPanel editDeckPanel = new JPanel();
         editDeckPanel.setLayout(new GridLayout());
@@ -221,11 +243,11 @@ public class EditDecksGUI extends Panel {
 
         addRequiredPanels(parentPanel, deck);
 
-        ActionListener backButtonAction = makeBackButtonAction(deck, parentPanel);
+        ActionListener backButtonAction = makeBackButtonAction();
         ActionListener addButtonAction = makeAddButtonAction(deck, parentPanel);
         ActionListener fillRandomButtonAction = makeFillRandomAction(deck, parentPanel);
-        ActionListener removeCardsInDeckAction = makeRemoveCardsInDeckAction(deck, parentPanel);
-        ActionListener renameButtonAction = makeRenameButtonAction(deck, parentPanel);
+        ActionListener removeCardsInDeckAction = makeRemoveAllCardsInDeckAction(deck, parentPanel);
+        ActionListener renameButtonAction = makeRenameButtonAction(deck);
 
         editDeckPanel.add(createButton("BACK", "#5a6988", 0, 0, 0, 0, backButtonAction, 25));
         editDeckPanel.add(createButton("ADD CARD", "#5a6988", 0, 0, 0, 0, addButtonAction, 25));
@@ -236,7 +258,8 @@ public class EditDecksGUI extends Panel {
         return editDeckPanel;
     }
 
-    private ActionListener makeRemoveCardsInDeckAction(Deck deck, JPanel parentPanel) {
+    // EFFECTS: returns actionListener to remove all the cards from a deck
+    private ActionListener makeRemoveAllCardsInDeckAction(Deck deck, JPanel parentPanel) {
         ActionListener removeCardsInDeckAction = e -> {
             deck.getCardsInDeck().clear();
             cardPanel.removeAll();
@@ -247,6 +270,7 @@ public class EditDecksGUI extends Panel {
         return removeCardsInDeckAction;
     }
 
+    // EFFECTS: returns actionListener to show interactionPanel that allows user to add cards to a deck
     private ActionListener makeAddButtonAction(Deck deck, JPanel parentPanel) {
         ActionListener addButtonAction = e -> {
             interactionLayout.show(interactionPanel, "AddCard" + deck.hashCode());
@@ -255,7 +279,8 @@ public class EditDecksGUI extends Panel {
         return addButtonAction;
     }
 
-    private ActionListener makeBackButtonAction(Deck deck, JPanel parentPanel) {
+    // EFFECTS: returns actionListener to return to the interactionPanel which shows all the user's decks
+    private ActionListener makeBackButtonAction() {
         ActionListener backButtonAction = e -> {
             interactionLayout.show(interactionPanel, "MainPanel");
             backToShopButton.setVisible(true);
@@ -265,13 +290,15 @@ public class EditDecksGUI extends Panel {
         return backButtonAction;
     }
 
-    private ActionListener makeRenameButtonAction(Deck deck, JPanel parentPanel) {
+    // EFFECTS: returns actionListener to show the interactionPanel where a user can rename their deck
+    private ActionListener makeRenameButtonAction(Deck deck) {
         ActionListener renameButtonAction = e -> {
             interactionLayout.show(interactionPanel, "RenameDeck" + deck.hashCode());
         };
         return renameButtonAction;
     }
 
+    // EFFECTS: creates and adds the interactionPanel where a user can rename their deck
     private void addRequiredPanels(JPanel parentPanel, Deck deck) {
         JPanel addCardPanel = makeAddCardPanel(deck, parentPanel);
         interactionPanel.add(addCardPanel);
@@ -281,6 +308,7 @@ public class EditDecksGUI extends Panel {
         interactionLayout.addLayoutComponent("RenameDeck" + deck.hashCode(), renamePanel);
     }
 
+    // EFFECTS: returns the actionListener to randomly fill a user's deck
     private ActionListener makeFillRandomAction(Deck deck, JPanel parentPanel) {
         ActionListener fillRandomAction = e -> {
             deck.fillRandom(User.getInstance());
@@ -292,6 +320,7 @@ public class EditDecksGUI extends Panel {
         return fillRandomAction;
     }
 
+    // EFFECTS: returns an interactionPanel for user's to add a card from their owned cards to their deck
     private JPanel makeAddCardPanel(Deck deck, JPanel grandparentPanel) {
         JPanel addCardPanel = new JPanel();
         addCardPanel.setLayout(new GridLayout());
@@ -313,6 +342,8 @@ public class EditDecksGUI extends Panel {
         return addCardPanel;
     }
 
+    // MODIFIES: addableCardPanel
+    // EFFECTS: updates a user's owned cards
     private void decorateAddCardPanel(JPanel deckPanel, Deck deck) {
         addableCardPanel.removeAll();
 
@@ -332,6 +363,7 @@ public class EditDecksGUI extends Panel {
         addableCardPanel.repaint();
     }
 
+    // EFFECTS: returns actionListener for adding a card to a deck
     private ActionListener makeAddCardAction(JPanel addCardPanel, JPanel deckPanel, Deck deck, Card card,
                                              CardGUI cardGUI) {
         ActionListener addCardAction = e -> {
@@ -340,13 +372,14 @@ public class EditDecksGUI extends Panel {
             decorateAddCardPanel(deckPanel, deck);
             cardGUI.remove(cardGUI.getComponentCount() - 1);
             cardPanel.add(cardGUI);
-            decorateCardPanel(deckPanel, deck);
             JLabel cardCount = (JLabel)deckPanel.getComponent(1);
             cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
+            decorateCardPanel(deckPanel, deck);
         };
         return addCardAction;
     }
 
+    // EFFECTS: returns an interactionPanel where a user can rename their deck
     private JPanel makeRenamePanel(Deck deck, JPanel grandparentPanel) {
         JPanel renamePanel = new JPanel();
         renamePanel.setLayout(new GridLayout());
@@ -379,6 +412,7 @@ public class EditDecksGUI extends Panel {
         return renamePanel;
     }
 
+    // EFFECTS: returns an actionListener for a user to rename their deck
     private ActionListener makeRenameAction(JTextField textField, Deck deck, JPanel grandparentPanel,
                                             JPanel parentPanel) {
         ActionListener renameAction = e -> {

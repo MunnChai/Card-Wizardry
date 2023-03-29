@@ -14,6 +14,9 @@ public class CardWizardryApp {
 
     private ShopGUI shopGUI;
 
+    // Constructor for CardWizardryApp
+    // Creates a JFrame that holds a JPanel. This JPanel has the CardLayout which can be used to switch between
+    // different screens
     public CardWizardryApp() {
         frame = new JFrame();
 
@@ -38,6 +41,8 @@ public class CardWizardryApp {
         frame.setVisible(true);
     }
 
+    // MODIFIES: cardPanel
+    // EFFECTS: Add a Panel to the CardPanel and CardLayout, which can be set as the visible screen using show()
     public void addGuiPanel(Panel panel, String layoutComponentName) {
         cardPanel.add(panel, BorderLayout.CENTER);
         layout.addLayoutComponent(layoutComponentName, panel);

@@ -16,8 +16,9 @@ public class CardGUI extends JPanel {
     private static String BLUE = "#0099db";
 
     private Card card;
-    private String action;
 
+    // Constructor for card GUI
+    // Sets card size and decorates card
     public CardGUI(Card card) {
         this.card = card;
         this.setSize(256, 300);
@@ -27,6 +28,8 @@ public class CardGUI extends JPanel {
         addIcon(card.getType());
     }
 
+    // MODIFIES: this
+    // EFFECTS: decorates card with text and colours the card depending on its card type
     private void decorateCard() {
         setColour();
         this.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -44,6 +47,8 @@ public class CardGUI extends JPanel {
                 this.getWidth() - 40, 60, 20));
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background colour depending on the card type
     private void setColour() {
         Card.CardType cardType = card.getType();
         if (cardType == ATTACK) {
@@ -55,6 +60,8 @@ public class CardGUI extends JPanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: decorates card with an icon, depending on the card type
     private void addIcon(Card.CardType cardType) {
         String fileName;
         if (cardType == ATTACK) {
@@ -75,6 +82,7 @@ public class CardGUI extends JPanel {
         this.add(iconLabel);
     }
 
+    // EFFECTS: returns the given file as an ImageIcon that has given width and height
     private ImageIcon makeScaledImageIcon(String fileName, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(fileName);
         ImageIcon scaledImageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(width, height,
@@ -82,6 +90,7 @@ public class CardGUI extends JPanel {
         return scaledImageIcon;
     }
 
+    // EFFECTS: returns a JPanel with a JLabel that has given text, colour, width, height, coordinates, and text size
     private JPanel createText(String text, String colorHex, int width, int height, int x, int y, int textSize) {
         JPanel panel = new JPanel();
         panel.setSize(width, height);
@@ -96,6 +105,7 @@ public class CardGUI extends JPanel {
         return panel;
     }
 
+    // Getters
     public Card getCard() {
         return card;
     }

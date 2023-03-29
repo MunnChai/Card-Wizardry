@@ -1,30 +1,7 @@
-{"cardsForSale": [
-    {
-        "name": "BRACING Spell Of INVULNERABILITY",
-        "type": "SHIELD",
-        "value": 6,
-        "coinCost": 2,
-        "energyCost": 3
-    },
-    {
-        "name": "STRENGTHENING Spell Of HEALTHINESS",
-        "type": "SHIELD",
-        "value": 10,
-        "coinCost": 2,
-        "energyCost": 6
-    },
-    {
-        "name": "DEADLY Spell Of DOOM",
-        "type": "ATTACK",
-        "value": 4,
-        "coinCost": 2,
-        "energyCost": 2
-    },
-    {
-        "name": "MONSTROUS Spell Of CATACLYSM",
-        "type": "ATTACK",
-        "value": 4,
-        "coinCost": 2,
-        "energyCost": 2
-    }
-]}
+{"cardsForSale": [{
+    "name": "VILLAINOUS Spell Of CATACLYSM",
+    "type": "ATTACK",
+    "value": 4,
+    "coinCost": 2,
+    "energyCost": 2
+}]}
