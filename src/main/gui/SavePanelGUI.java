@@ -19,6 +19,9 @@ public class SavePanelGUI extends Panel {
     private JLabel questionLabel;
     private JLabel doneLabel;
 
+    // Constructor for SavePanelGUI
+    // Creates an interactionPanel that has buttons for the user to interact with, and text to display a question or
+    // statement
     public SavePanelGUI(JPanel parent) {
         super(parent, "#5a6988", "SavePanelGUI");
         this.setLayout(null);
@@ -42,34 +45,8 @@ public class SavePanelGUI extends Panel {
         resetSaveScreen();
     }
 
-    public JButton createButton(String text, String colorHex, int width, int height, int x, int y,
-                                ActionListener action, int textSize) {
-        JButton button = new JButton(text);
-        button.setSize(width, height);
-
-        button.setLocation(x - width / 2, y - height / 2);
-        button.setFont(new Font(FONT, Font.BOLD, textSize));
-        button.setForeground(Color.white);
-        button.setBackground(Color.decode(colorHex));
-        button.addActionListener(action);
-        return button;
-    }
-
-    public JLabel createText(String text, String colorHex, int width, int height, int x, int y, int textSize) {
-        JLabel label = new JLabel(text, SwingConstants.CENTER);
-        label.setSize(width, height);
-        label.setLocation(x - label.getWidth() / 2, y - label.getHeight() / 2);
-
-
-        label.setFont(new Font(FONT, Font.BOLD, textSize));
-        label.setForeground(Color.decode(colorHex));
-        return label;
-    }
-
-    public void setPreviousPanel(String previousPanel) {
-        this.previousPanel = previousPanel;
-    }
-
+    // MODIFIES: this
+    // EFFECTS: resets this screen to its default state
     public void resetSaveScreen() {
         interactionPanel.removeAll();
 
@@ -99,6 +76,7 @@ public class SavePanelGUI extends Panel {
         doneLabel.setVisible(false);
     }
 
+    // EFFECTS: saves a JSON representation of the current Shop
     private void saveShop() {
         JsonWriter shopWriter = new JsonWriter("./data/shop.json");
         try {
@@ -111,6 +89,7 @@ public class SavePanelGUI extends Panel {
         }
     }
 
+    // EFFECTS: saves a JSON representation of the current User
     private void saveUser() {
         JsonWriter userWriter = new JsonWriter("./data/user.json");
         try {
@@ -121,5 +100,10 @@ public class SavePanelGUI extends Panel {
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File not found. Could not save to file.");
         }
+    }
+
+    // Setters
+    public void setPreviousPanel(String previousPanel) {
+        this.previousPanel = previousPanel;
     }
 }

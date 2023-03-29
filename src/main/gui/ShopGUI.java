@@ -33,6 +33,8 @@ public class ShopGUI extends Panel {
     private JPanel sellCardPanel;
     private JPanel sellCardScrollPanel;
 
+    // Constructor for ShopGUI
+    // Creates an interactionPanel, back button, text for the user's coin count
     public ShopGUI(JPanel parent) {
         super(parent,"#ead4aa", "ShopGUI");
 
@@ -59,12 +61,15 @@ public class ShopGUI extends Panel {
         interactionPanel.add(makeSellCardPanel());
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates the changing parts of the shop
     public void updateShop() {
         updateSellCardScrollPanel();
         updateBuyCardScrollPanel();
         coinCount.setText("You have " + User.getInstance().getCoins() + " coins.");
     }
 
+    // EFFECTS: returns the "shop owner" as a visible JPanel
     private JPanel makeCatPanel() {
         JPanel wholePanel = new JPanel();
         wholePanel.setBounds(350, 35, 800, 350);
@@ -94,6 +99,8 @@ public class ShopGUI extends Panel {
         return wholePanel;
     }
 
+    // MODIFIES: catPanel
+    // EFFECTS: changes cat icon to smiling cat for 5 seconds, then change back to brow raise cat
     public void makeCatHappy() {
         ActionListener setIcon = e -> {
             catLabel.setIcon(catBrowRaiseIcon);
@@ -106,6 +113,8 @@ public class ShopGUI extends Panel {
         catTimer.restart();
     }
 
+    // MODIFIES: catPanel
+    // EFFECTS: makes cat "say" given text for 5 seconds
     public void makeCatSayText(String text) {
         ActionListener hideText = e -> {
             speechBubble.setVisible(false);
@@ -119,6 +128,7 @@ public class ShopGUI extends Panel {
         speechTimer.restart();
     }
 
+    // EFFECTS: returns the main interactionPanel where the user can select to buy or sell a card, or edit their decks
     private JPanel makeSelectionPanel() {
         selectionPanel = new JPanel();
         selectionPanel.setBackground(Color.decode("#e4a672"));
@@ -149,6 +159,7 @@ public class ShopGUI extends Panel {
         return selectionPanel;
     }
 
+    // EFFECTS: returns the interactionPanel where the user can buy a card
     private JPanel makeBuyCardPanel() {
         buyCardPanel = new JPanel();
         buyCardPanel.setBackground(Color.decode("#e4a672"));
@@ -175,6 +186,8 @@ public class ShopGUI extends Panel {
         return buyCardPanel;
     }
 
+    // MODIFIES: buyCardScrollPanel
+    // EFFECTS: updates the cards for sale in the shop
     private void updateBuyCardScrollPanel() {
         buyCardScrollPanel.removeAll();
 
@@ -195,6 +208,7 @@ public class ShopGUI extends Panel {
         buyCardScrollPanel.repaint();
     }
 
+    // EFFECTS: returns a button that allows a user to buy a card
     private JButton makeBuyButton(CardGUI cardGUI) {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
@@ -218,6 +232,7 @@ public class ShopGUI extends Panel {
         return button;
     }
 
+    // EFFECTS: returns the interactionPanel where the user can sell a card
     private JPanel makeSellCardPanel() {
         sellCardPanel = new JPanel();
         sellCardPanel.setBackground(Color.decode("#e4a672"));
@@ -243,6 +258,8 @@ public class ShopGUI extends Panel {
         return sellCardPanel;
     }
 
+    // MODIFIES: sellCardScrollPanel
+    // EFFECTS: updates the sellable cards in the shop
     private void updateSellCardScrollPanel() {
         sellCardScrollPanel.removeAll();
         int scrollPanelWidth = 0;
@@ -264,6 +281,7 @@ public class ShopGUI extends Panel {
         sellCardScrollPanel.repaint();
     }
 
+    // EFFECTS: returns a button that sells a card
     private JButton makeSellButton(CardGUI cardGUI) {
         Card card = cardGUI.getCard();
         ActionListener action = e -> {
@@ -280,6 +298,7 @@ public class ShopGUI extends Panel {
         return button;
     }
 
+    // Setters
     public void setShop(Shop shop) {
         Shop.setInstance(shop);
     }

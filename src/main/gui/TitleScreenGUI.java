@@ -12,6 +12,11 @@ import java.io.IOException;
 public class TitleScreenGUI extends Panel {
     private ShopGUI shopGUI;
 
+    // Constructor for TitleScreenGUI
+    // Creates the title text, and 3 buttons to:
+    // - start a new game
+    // - load a save file
+    // - quit game
     public TitleScreenGUI(JPanel parent, ShopGUI shopGUI) {
         super(parent,"#2ce8f5", "TitleScreenGUI");
 
@@ -34,6 +39,7 @@ public class TitleScreenGUI extends Panel {
         saveButton.setVisible(false);
     }
 
+    // EFFECTS: returns action to load a game from a save file
     private ActionListener loadGameAction() {
         ActionListener action = f -> {
             loadUser();
@@ -45,6 +51,8 @@ public class TitleScreenGUI extends Panel {
         return action;
     }
 
+    // MODIFIES: User
+    // EFFECTS: reads User from the JSON save data, and sets current instance to that user
     private void loadUser() {
         JsonReader jsonReader = new JsonReader("./data/user.json");
         User user;
@@ -58,6 +66,8 @@ public class TitleScreenGUI extends Panel {
         User.setInstance(user);
     }
 
+    // MODIFIES: Shop
+    // EFFECTS: reads Shop from the JSON save data, and sets current instance to that shop
     private void loadShop() {
         JsonReader shopReader = new JsonReader("./data/shop.json");
         Shop shop;
@@ -72,6 +82,7 @@ public class TitleScreenGUI extends Panel {
         Shop.getInstance().setUser(User.getInstance());
     }
 
+    // EFFECTS: returns an ActionListener to close the program
     private ActionListener quitGameAction() {
         ActionListener action = e -> System.exit(0);
         return action;

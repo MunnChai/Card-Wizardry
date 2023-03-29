@@ -21,6 +21,8 @@ public abstract class Panel extends JPanel {
 
     protected JButton saveButton;
 
+    // Constructor for a Panel
+    // Sets the colour, size, layout, and a save button on the Panel
     public Panel(JPanel parent, String backgroundHexColor, String thisPanelName) {
         this.parent = parent;
         backgroundColor = Color.decode(backgroundHexColor);
@@ -33,6 +35,7 @@ public abstract class Panel extends JPanel {
         addSaveButton(thisPanelName);
     }
 
+    // EFFECTS: returns a button with the given text, colour, size, location, action, and text size
     public JButton createButton(String text, String colorHex, int width, int height, int x, int y,
                                 ActionListener action, int textSize) {
         JButton button = new JButton(text);
@@ -46,6 +49,7 @@ public abstract class Panel extends JPanel {
         return button;
     }
 
+    // EFFECTS: returns a JPanel that has a JLabel with given text, colour, size, location, and text size
     public JLabel createText(String text, String colorHex, int width, int height, int x, int y, int textSize) {
         JLabel label = new JLabel(text, SwingConstants.CENTER);
         label.setSize(width, height);
@@ -57,6 +61,7 @@ public abstract class Panel extends JPanel {
         return label;
     }
 
+    // EFFECTS: returns an ActionListener which switches to the panel with the given name
     public ActionListener switchPanelAction(String panelLayoutName) {
         ActionListener action = e -> {
             parentLayout.show(parent, panelLayoutName);
@@ -64,6 +69,7 @@ public abstract class Panel extends JPanel {
         return action;
     }
 
+    // EFFECTS: creates an interactionPanel with the given colours
     public JPanel createInteractionPanel(String hexColour, String borderHexColour) {
         JPanel panel = new JPanel();
         panel.setSize(WINDOW_WIDTH, 300);
@@ -73,6 +79,7 @@ public abstract class Panel extends JPanel {
         return panel;
     }
 
+    // EFFECTS: creates and adds a save button which allows a user to save their data
     public void addSaveButton(String previousPanelName) {
         ActionListener makeSavePanel = e -> {
             SavePanelGUI savePanel = (SavePanelGUI)parent.getComponent(5);
@@ -87,6 +94,7 @@ public abstract class Panel extends JPanel {
         this.add(saveButton);
     }
 
+    // EFFECTS: returns an ImageIcon with given width and height
     public ImageIcon makeScaledImageIcon(String fileName, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(fileName);
         ImageIcon scaledImageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(width, height,

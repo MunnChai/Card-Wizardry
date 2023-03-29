@@ -369,11 +369,11 @@ public class EditDecksGUI extends Panel {
         ActionListener addCardAction = e -> {
             deck.addCard(card);
             addCardPanel.remove(cardGUI);
-            decorateAddCardPanel(deckPanel, deck);
             cardGUI.remove(cardGUI.getComponentCount() - 1);
             cardPanel.add(cardGUI);
             JLabel cardCount = (JLabel)deckPanel.getComponent(1);
             cardCount.setText(deck.getCardsInDeck().size() + "/20 Cards");
+            decorateAddCardPanel(deckPanel, deck);
             decorateCardPanel(deckPanel, deck);
         };
         return addCardAction;

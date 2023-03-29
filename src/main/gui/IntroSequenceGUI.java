@@ -16,6 +16,8 @@ public class IntroSequenceGUI extends Panel {
 
     private ShopGUI shopGUI;
 
+    // Constructor for IntroSequenceGUI
+    // Creates a back to shop button, and a continue button
     public IntroSequenceGUI(JPanel parent, ShopGUI shopGUI) {
         super(parent, "#63c74d", "IntroSequenceGUI");
 
@@ -39,11 +41,13 @@ public class IntroSequenceGUI extends Panel {
         saveButton.setVisible(false);
     }
 
+    // EFFECTS: sets Shop instance to a new Shop
     public void createShop() {
         Shop.setInstance(new Shop(User.getInstance()));
         shopGUI.updateShop();
     }
 
+    // EFFECTS: sets User instance to a new User
     public void createUser() {
         User.setInstance(new User("New User"));
     }
