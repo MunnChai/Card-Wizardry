@@ -130,4 +130,13 @@ public class UserTest {
 
         assertEquals("Bob", getInstance().getName());
     }
+
+    @Test
+    public void testSetName() {
+        User user = new User("Bob");
+
+        user.setName("Joe");
+
+        assertEquals("Joe", user.getName());
+    }
 }

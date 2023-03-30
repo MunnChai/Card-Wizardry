@@ -47,3 +47,17 @@ this project is a good foundation for me to create more in depth and complex gam
 - As a user, I want to be able to draw a card from my deck, and add it to my hand. 
 - As a user, I want to be able to play a card, removing it from my hand and having an effect occur
 in the battle.
+
+
+## Instructions for Grader
+
+- To generate the action related to adding a card to a deck:
+  - Run the main method in the CardWizardryApp class.
+  - Click the button that says "NEW GAME"
+  - Click the button that says "CONTINUE"
+  - Click the button that says "EDIT DECKS"
+  - Click the button that says "CREATE NEW DECK"
+  - You will see a new panel that has the name "New Deck", click the button that says "EDIT"
+  - Click the button that says "ADD CARD"
+  - Press any button that says "ADD"
+  - You will see that the card has been added to your deck, which you can see at the top
