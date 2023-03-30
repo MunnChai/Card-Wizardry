@@ -266,6 +266,39 @@ class CardTest {
     }
 
     @Test
+    public void testDifferentValue() {
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 3, 1, 1, 0);
+
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        assertNotEquals(card1, card2);
+    }
+
+    @Test
+    public void testDifferentEnergyCost() {
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 2, 2, 1, 0);
+
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        assertNotEquals(card1, card2);
+    }
+
+    @Test
+    public void testDifferentCoinCost() {
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 2, 1, 2, 0);
+
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        assertNotEquals(card1, card2);
+    }
+
+    @Test
     public void testEqualsDifferentId() {
         Card card1 = new Card(ATTACK, 2, 1, 1, 0);
         Card card2 = new Card(ATTACK, 2, 1, 1, 3);
@@ -285,6 +318,19 @@ class CardTest {
         card2.setName("Bob");
 
         assertNotEquals(card1, card2);
+    }
+
+    @Test
+    public void testSetId() {
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 2, 1, 1, 2);
+
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        card2.setId(0);
+
+        assertEquals(card1, card2);
     }
 
     @Test
