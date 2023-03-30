@@ -1,34 +1,34 @@
 {"cardsForSale": [
     {
-        "name": "STRENGTHENING Spell Of SAFETY",
+        "name": "STRENGTHENING Spell Of IMMUNITY",
         "id": 1,
         "type": "SHIELD",
-        "value": 1,
+        "value": 6,
         "coinCost": 2,
-        "energyCost": 1
+        "energyCost": 3
     },
     {
-        "name": "LETHAL Spell Of DISTRESS",
-        "id": 4,
+        "name": "EVIL Spell Of SABOTAGE",
+        "id": 5,
         "type": "ATTACK",
         "value": 12,
         "coinCost": 4,
         "energyCost": 6
     },
     {
-        "name": "SHIELDING Spell Of SAFEGUARDING",
-        "id": 0,
-        "type": "SHIELD",
-        "value": 3,
-        "coinCost": 2,
-        "energyCost": 2
+        "name": "MALICIOUS Spell Of DEATH",
+        "id": 3,
+        "type": "ATTACK",
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
     },
     {
-        "name": "LETHAL Spell Of MISHAP",
-        "id": 7,
+        "name": "LETHAL Spell Of JUDGEMENT",
+        "id": 2,
         "type": "ATTACK",
-        "value": 8,
-        "coinCost": 3,
-        "energyCost": 4
+        "value": 4,
+        "coinCost": 2,
+        "energyCost": 2
     }
 ]}

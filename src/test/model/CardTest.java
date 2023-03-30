@@ -267,11 +267,13 @@ class CardTest {
 
     @Test
     public void testEqualsDifferentId() {
-        Card attackCard1V2 = new Card(ATTACK, 2, 1, 1, 1);
-        attackCard1V2.setName(attackCard1.getName());
-        attackCard1V2.setId(1000);
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 2, 1, 1, 3);
 
-        assertNotEquals(attackCard1, attackCard1V2);
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        assertNotEquals(card1, card2);
     }
 
     @Test

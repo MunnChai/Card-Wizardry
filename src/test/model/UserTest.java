@@ -125,7 +125,7 @@ public class UserTest {
     }
 
     @Test
-    public static void testInstances() {
+    public void testInstances() {
         setInstance(new User("Bob"));
 
         assertEquals("Bob", getInstance().getName());
