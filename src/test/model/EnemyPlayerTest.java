@@ -137,7 +137,7 @@ public class EnemyPlayerTest {
     @Test
     public void testEnemyDecisionMakingNonEmptyHand() {
         List<Card> notEmptyHand = new ArrayList<>();
-        Card testCard = new Card(ATTACK, 1, 1, 1);
+        Card testCard = new Card(ATTACK, 1, 1, 1, 0);
         notEmptyHand.add(testCard);
         notEmptyHand.add(testCard);
         notEmptyHand.add(testCard);
@@ -152,7 +152,7 @@ public class EnemyPlayerTest {
     @Test
     public void testPlayRandomCardHasEnergyAttackCard() {
         List<Card> attackCards = new ArrayList<>();
-        Card attackCard = new Card(ATTACK, 1, 1, 1);
+        Card attackCard = new Card(ATTACK, 1, 1, 1, 1);
         attackCards.add(attackCard);
         attackCards.add(attackCard);
         attackCards.add(attackCard);
@@ -166,7 +166,7 @@ public class EnemyPlayerTest {
     @Test
     public void testPlayRandomCardHasEnergyHealCard() {
         List<Card> healCards = new ArrayList<>();
-        Card healCard = new Card(HEAL, 1, 1, 1);
+        Card healCard = new Card(HEAL, 1, 1, 1, 2);
         healCards.add(healCard);
         healCards.add(healCard);
         healCards.add(healCard);

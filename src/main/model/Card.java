@@ -68,14 +68,16 @@ public class Card implements Writable {
     private int value;
     private int energyCost;
     private int coinCost;
+    private int id;
 
     // EFFECTS: Constructs a card, with given name, type, value, and cost
-    public Card(CardType type, int value, int energyCost, int coinCost) {
+    public Card(CardType type, int value, int energyCost, int coinCost, int id) {
         this.type = type;
         this.name = pickRandomAdj(type) + " Spell Of " + pickRandomNoun(type);
         this.value = value;
         this.energyCost = energyCost;
         this.coinCost = coinCost;
+        this.id = id;
     }
 
     // EFFECTS: Returns random adjective, depending on which type is given
@@ -138,6 +140,7 @@ public class Card implements Writable {
         jsonObject.put("value", this.getValue());
         jsonObject.put("energyCost", this.getEnergyCost());
         jsonObject.put("coinCost", this.getCoinCost());
+        jsonObject.put("id", this.getId());
         return jsonObject;
     }
 
@@ -151,12 +154,12 @@ public class Card implements Writable {
         }
         Card card = (Card) o;
         return value == card.value && energyCost == card.energyCost && coinCost == card.coinCost
-                && Objects.equals(name, card.name) && type == card.type;
+                && Objects.equals(name, card.name) && type == card.type && id == card.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, type, value, energyCost, coinCost);
+        return Objects.hash(name, type, value, energyCost, coinCost, id);
     }
 
     // Setters
@@ -164,13 +167,17 @@ public class Card implements Writable {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Getters
     public CardType getType() {
         return type;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getValue() {
@@ -183,5 +190,9 @@ public class Card implements Writable {
 
     public int getCoinCost() {
         return coinCost;
+    }
+
+    public int getId() {
+        return id;
     }
 }

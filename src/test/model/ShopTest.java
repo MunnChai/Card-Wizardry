@@ -27,9 +27,9 @@ public class ShopTest {
         shop1 = new Shop(user);
         shop2 = new Shop(user);
 
-        sampleCard1 = new Card(ATTACK, 3, 2, 1);
-        sampleCard2 = new Card(HEAL, 1, 1, 1);
-        sampleCard3 = new Card(SHIELD, 6, 4, 3);
+        sampleCard1 = new Card(ATTACK, 3, 2, 1, 0);
+        sampleCard2 = new Card(HEAL, 1, 1, 1, 1);
+        sampleCard3 = new Card(SHIELD, 6, 4, 3, 2);
     }
 
     @Test

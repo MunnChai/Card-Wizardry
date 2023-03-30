@@ -87,7 +87,7 @@ public class UserTest {
         assertEquals(1, user1.getDecks().size());
         assertTrue(starterDeck.checkViable());
         assertEquals(20, starterDeck.getCardsInDeck().size());
-
+        assertEquals(30, user1.getOwnedCards().size());
         assertEquals(10, user1.getCanSellCards().size());
     }
 

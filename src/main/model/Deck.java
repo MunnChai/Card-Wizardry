@@ -26,10 +26,11 @@ public class Deck implements Writable {
         if (getCanAddCards(user).size() < 1) {
             System.out.println("You hava no cards, you fucked up frfr");
         } else {
-            while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT && getCanAddCards(user).size() > 0) {
-                List<Card> canAddCards = getCanAddCards(user);
+            List<Card> canAddCards = getCanAddCards(user);
+            while (cardsInDeck.size() < VIABLE_DECK_CARD_COUNT && canAddCards.size() > 0) {
                 int randomInt = (int)(Math.random() * canAddCards.size());
                 cardsInDeck.add(canAddCards.get(randomInt));
+                canAddCards.remove(randomInt);
             }
         }
     }

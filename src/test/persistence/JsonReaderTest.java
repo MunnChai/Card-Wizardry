@@ -2,10 +2,8 @@ package persistence;
 
 import model.Deck;
 import model.User;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,14 +47,12 @@ public class JsonReaderTest {
             User user = reader.read();
 
             assertEquals("General User", user.getName());
-            assertEquals(3, user.getDecks().size());
-            assertEquals("First Deck", user.getDecks().get(1).getName());
+            assertEquals(2, user.getDecks().size());
+            assertEquals("Second Deck", user.getDecks().get(1).getName());
             assertEquals(0, user.getDecks().get(1).getCardsInDeck().size());
-            assertEquals("Second Deck", user.getDecks().get(2).getName());
-            assertEquals(0, user.getDecks().get(2).getCardsInDeck().size());
             assertEquals(30, user.getOwnedCards().size());
             assertEquals(30, user.getNotOwnedCards().size());
-            assertEquals(10, user.getCoins());
+            assertEquals(15, user.getCoins());
         } catch (IOException e) {
             fail("Unexpected Exception caught");
         }

@@ -107,8 +107,10 @@ public class User implements Writable {
     // EFFECTS: return list of n cards with given type, value, energy cost, and coin cost
     public List<Card> makeCards(int amount, Card.CardType type, int value, int energyCost, int coinCost) {
         List<Card> cards = new ArrayList<>();
+        int id = 0;
         for (int i = 0; i < amount; i++) {
-            cards.add(new Card(type, value, energyCost, coinCost));
+            cards.add(new Card(type, value, energyCost, coinCost, id));
+            id++;
         }
         return cards;
     }

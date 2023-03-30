@@ -29,9 +29,9 @@ class DeckTest {
         deck1 = new Deck("Deck 1");
         deck2 = new Deck("Deck 2");
         deck3 = new Deck("Deck 3");
-        sampleCard1 = new Card(ATTACK, 3, 2, 1);
-        sampleCard2 = new Card(HEAL, 1, 1, 1);
-        sampleCard3 = new Card(SHIELD, 6, 4, 3);
+        sampleCard1 = new Card(ATTACK, 3, 2, 1, 0);
+        sampleCard2 = new Card(HEAL, 1, 1, 1, 1);
+        sampleCard3 = new Card(SHIELD, 6, 4, 3, 2);
     }
 
     @Test
@@ -189,9 +189,13 @@ class DeckTest {
         deck1.addCard(sampleCard2);
         JSONObject jsonObject = deck1.toJson();
 
+        List<Card> expectedCards = new ArrayList<>();
+        expectedCards.add(sampleCard2);
+        expectedCards.add(sampleCard1);
+
         assertEquals("Deck 1", jsonObject.get("name"));
-        assertEquals("[{\"name\":\"Card 2\",\"type\":\"HEAL\",\"value\":1,\"coinCost\":1,\"energyCost\":1},"
-                + "{\"name\":\"Card 1\",\"type\":\"ATTACK\",\"value\":3,\"coinCost\":1,\"energyCost\":2}]",
+        assertEquals("[{\"name\":\"Card 2\",\"id\":1,\"type\":\"HEAL\",\"value\":1,\"coinCost\":1,"
+                + "\"energyCost\":1},{\"name\":\"Card 1\",\"id\":0,\"type\":\"ATTACK\",\"value\":3,\"coinCost\":1,\"energyCost\":2}]",
                 jsonObject.get("cardsInDeck").toString());
     }
 }

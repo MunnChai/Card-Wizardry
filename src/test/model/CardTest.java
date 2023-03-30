@@ -28,13 +28,13 @@ class CardTest {
 
     @BeforeEach
     public void setup() {
-        attackCard1 = new Card(ATTACK, 2, 1, 1);
-        healCard1 = new Card(HEAL, 1, 1, 1);
-        shieldCard1 = new Card(SHIELD, 3, 1, 1);
+        attackCard1 = new Card(ATTACK, 2, 1, 1, 0);
+        healCard1 = new Card(HEAL, 1, 1, 1, 1);
+        shieldCard1 = new Card(SHIELD, 3, 1, 1, 2);
 
-        attackCard2 = new Card(ATTACK, 6, 1, 1);
-        healCard2 = new Card(HEAL, 2, 1, 1);
-        shieldCard2 = new Card(SHIELD, 3, 1, 1);
+        attackCard2 = new Card(ATTACK, 6, 1, 1, 3);
+        healCard2 = new Card(HEAL, 2, 1, 1, 4);
+        shieldCard2 = new Card(SHIELD, 3, 1, 1, 5);
 
         user = new User("Name");
         userPlayer = new UserPlayer(user.getSelectedDeck());
@@ -47,16 +47,19 @@ class CardTest {
         assertEquals(2, attackCard1.getValue());
         assertEquals(1, attackCard1.getEnergyCost());
         assertEquals(1, attackCard1.getCoinCost());
+        assertEquals(0, attackCard1.getId());
 
         assertEquals(HEAL, healCard1.getType());
         assertEquals(1, healCard1.getValue());
         assertEquals(1, healCard1.getEnergyCost());
         assertEquals(1, healCard1.getCoinCost());
+        assertEquals(1, healCard1.getId());
 
         assertEquals(SHIELD, shieldCard1.getType());
         assertEquals(3, shieldCard1.getValue());
         assertEquals(1, shieldCard1.getEnergyCost());
         assertEquals(1, shieldCard1.getCoinCost());
+        assertEquals(2, shieldCard1.getId());
     }
 
     @Test
@@ -238,7 +241,7 @@ class CardTest {
 
     @Test
     public void testSetName() {
-        Card card = new Card(ATTACK, 1, 1, 1);
+        Card card = new Card(ATTACK, 1, 1, 1, 6);
         String initialName = card.getName();
         card.setName("New name");
         assertEquals("New name", card.getName());

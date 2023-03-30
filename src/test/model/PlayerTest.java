@@ -29,8 +29,8 @@ public class PlayerTest {
         user1 = new UserPlayer(user.getSelectedDeck());
         enemy1 = new EnemyPlayer();
 
-        sampleCard1 = new Card(ATTACK, 4, 3, 1);
-        sampleCard2 = new Card(HEAL, 2, 5, 1);
+        sampleCard1 = new Card(ATTACK, 4, 3, 1, 0);
+        sampleCard2 = new Card(HEAL, 2, 5, 1, 1);
     }
 
     @Test

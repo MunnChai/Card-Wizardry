@@ -99,7 +99,8 @@ public class JsonReader {
         int cardValue = card.getInt("value");
         int cardCoinCost = card.getInt("coinCost");
         int cardEnergyCost = card.getInt("energyCost");
-        Card c = new Card(cardType, cardValue, cardEnergyCost, cardCoinCost);
+        int cardId = card.getInt("id");
+        Card c = new Card(cardType, cardValue, cardEnergyCost, cardCoinCost, cardId);
         c.setName(cardName);
         return c;
     }
