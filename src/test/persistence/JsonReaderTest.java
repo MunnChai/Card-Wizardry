@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Deck;
+import model.Shop;
 import model.User;
 import org.junit.jupiter.api.Test;
 
@@ -53,6 +54,32 @@ public class JsonReaderTest {
             assertEquals(30, user.getOwnedCards().size());
             assertEquals(30, user.getNotOwnedCards().size());
             assertEquals(15, user.getCoins());
+        } catch (IOException e) {
+            fail("Unexpected Exception caught");
+        }
+    }
+
+    @Test
+    public void testReadDefaultShop() {
+        JsonReader reader = new JsonReader("./data/testJsonReaderDefaultShop");
+
+        try {
+            Shop shop = reader.readShop();
+
+            assertEquals(4, shop.getCardsForSale().size());
+        } catch (IOException e) {
+            fail("Unexpected Exception caught");
+        }
+    }
+
+    @Test
+    public void testReadGeneralShop() {
+        JsonReader reader = new JsonReader("./data/testJsonReaderGeneralShop");
+
+        try {
+            Shop shop = reader.readShop();
+
+            assertEquals(2, shop.getCardsForSale().size());
         } catch (IOException e) {
             fail("Unexpected Exception caught");
         }

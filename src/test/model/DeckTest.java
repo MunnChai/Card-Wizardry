@@ -62,6 +62,14 @@ class DeckTest {
     }
 
     @Test
+    public void testFillRandomNotEnough() {
+        user1.setOwnedCards(new ArrayList<>());
+        deck1.fillRandom(user1);
+        assertEquals(0, deck1.getCardsInDeck().size());
+        assertEquals(0, user1.getOwnedCards().size());
+    }
+
+    @Test
     public void testGetAvailableCards() {
         List<Card> ownedCards = new ArrayList<>();
         ownedCards.add(sampleCard1);

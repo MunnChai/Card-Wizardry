@@ -259,4 +259,28 @@ class CardTest {
         assertEquals(1, jsonObject.get("coinCost"));
         assertEquals(1, jsonObject.get("energyCost"));
     }
+
+    @Test
+    public void testEqualsDifferentClass() {
+        assertFalse(attackCard1.equals(new Deck("New deck")));
+    }
+
+    @Test
+    public void testEqualsDifferentId() {
+        Card attackCard1V2 = new Card(ATTACK, 2, 1, 1, 1);
+        attackCard1V2.setName(attackCard1.getName());
+        attackCard1V2.setId(1000);
+
+        assertNotEquals(attackCard1, attackCard1V2);
+    }
+
+    @Test
+    public void testDifferentCardType() {
+        assertNotEquals(attackCard1, shieldCard1);
+    }
+
+    @Test
+    public void testHashCode() {
+        assertNotEquals(attackCard1.hashCode(), attackCard2.hashCode());
+    }
 }

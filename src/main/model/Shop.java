@@ -81,6 +81,10 @@ public class Shop implements Writable {
         return instance;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     // Setters
     public void setCardsForSale(List<Card> cardsForSale) {
         this.cardsForSale = cardsForSale;

@@ -1,0 +1,34 @@
+{"cardsForSale": [
+    {
+        "name": "WICKED Spell Of SABOTAGE",
+        "id": 3,
+        "type": "ATTACK",
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
+    },
+    {
+        "name": "DEADLY Spell Of DOOM",
+        "id": 7,
+        "type": "ATTACK",
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
+    },
+    {
+        "name": "WICKED Spell Of CATACLYSM",
+        "id": 6,
+        "type": "ATTACK",
+        "value": 4,
+        "coinCost": 2,
+        "energyCost": 2
+    },
+    {
+        "name": "MONSTROUS Spell Of MISHAP",
+        "id": 3,
+        "type": "ATTACK",
+        "value": 4,
+        "coinCost": 2,
+        "energyCost": 2
+    }
+]}

@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Deck;
+import model.Shop;
 import model.User;
 import org.junit.jupiter.api.Test;
 
@@ -65,6 +66,44 @@ public class JsonWriterTest {
             assertEquals(30, loadedUser.getOwnedCards().size());
             assertEquals(30, loadedUser.getNotOwnedCards().size());
             assertEquals(15, loadedUser.getCoins());
+        } catch (IOException e) {
+            fail("Unexpected exception thrown");
+        }
+    }
+
+    @Test
+    public void testWriteDefaultShop() {
+        try {
+            User user = new User("Default User");
+            Shop shop = new Shop(user);
+            JsonWriter writer = new JsonWriter("./data/testJsonWriterDefaultShop");
+            writer.open();
+            writer.write(shop);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testJsonWriterDefaultShop");
+            Shop loadedShop = reader.readShop();
+            assertEquals(4, loadedShop.getCardsForSale().size());
+        } catch (IOException e) {
+            fail("Unexpected exception thrown");
+        }
+    }
+
+    @Test
+    public void testWriteGeneralShop() {
+        try {
+            User user = new User("General User");
+            Shop shop = new Shop(user);
+            shop.buyCard(0);
+            shop.buyCard(2);
+            JsonWriter writer = new JsonWriter("./data/testJsonWriterGeneralShop");
+            writer.open();
+            writer.write(shop);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testJsonWriterGeneralShop");
+            Shop loadedShop = reader.readShop();
+            assertEquals(2, loadedShop.getCardsForSale().size());
         } catch (IOException e) {
             fail("Unexpected exception thrown");
         }

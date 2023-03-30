@@ -123,4 +123,11 @@ public class UserTest {
         assertEquals("Name", jsonObject.get("name"));
         assertEquals(0, jsonObject.get("coins"));
     }
+
+    @Test
+    public static void testInstances() {
+        setInstance(new User("Bob"));
+
+        assertEquals("Bob", getInstance().getName());
+    }
 }

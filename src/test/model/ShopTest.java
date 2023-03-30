@@ -8,6 +8,7 @@ import java.util.List;
 
 import static model.Card.CardType.*;
 import static model.Shop.SHOP_CARD_STOCK;
+import static model.Shop.getInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ShopTest {
@@ -79,5 +80,19 @@ public class ShopTest {
 
         int cost = sampleCard1.getCoinCost();
         assertEquals(10 + cost, user.getCoins());
+    }
+
+    @Test
+    public void testSetUser() {
+        shop1.setUser(user);
+
+        assertEquals(user, shop1.getUser());
+    }
+
+    @Test
+    public static void testSetInstance() {
+        Shop shop = getInstance();
+
+        assertEquals(shop, getInstance());
     }
 }
