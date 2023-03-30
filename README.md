@@ -52,12 +52,33 @@ in the battle.
 ## Instructions for Grader
 
 - To generate the action related to adding a card to a deck:
-  - Run the main method in the CardWizardryApp class.
-  - Click the button that says "NEW GAME"
-  - Click the button that says "CONTINUE"
-  - Click the button that says "EDIT DECKS"
-  - Click the button that says "CREATE NEW DECK"
-  - You will see a new panel that has the name "New Deck", click the button that says "EDIT"
-  - Click the button that says "ADD CARD"
-  - Press any button that says "ADD"
-  - You will see that the card has been added to your deck, which you can see at the top
+  1. Run the main method in the CardWizardryApp class.
+  2. Click the button that says "NEW GAME"
+  3. Click the button that says "CONTINUE"
+  4. Click the button that says "EDIT DECKS"
+  5. Click the button that says "CREATE NEW DECK"
+  6. You will see a new panel that has the name "New Deck", click the button that says "EDIT"
+  7. Click the button that says "ADD CARD"
+  8. Press any button that says "ADD"
+  9. You will see that the card has been added to your deck, which you can see in the upper half of the screen
+- To generate the action related to removing a card from your deck:
+  1. Follow steps 1-4 from above. 
+  2. You will see a panel which is named "Starter Deck". Click the button on this panel that says "EDIT"
+  3. In the upper half of the screen, you will see many panels which have visual representations of cards on them. 
+  4. On any one of these panels, press the button that says "REMOVE" to remove that card from your deck
+  5. There are other actions you can do from the deck editing screen, such as filling it randomly with cards, or removing all the cards from the deck.
+- To find the visual component:
+  1. Run the main method in the CardWizardryApp class
+  2. Click the button that says "NEW GAME"
+  3. Click the button that says "CONTINUE"
+  4. You will see an image of a cat in the centre of the screen, who will say certain phrases depending on what you do.
+  5. For example, if you click "BUY CARD" or "SELL CARD", you will see the cat say something different.
+  6. If you buy or sell a card, the cat will smile slightly.
+  7. There are also ImageIcons rendered on each card's panel
+- To save the state of the application, there is a small button in the top right of most screens:
+  1. Click this button, then click the button that says "SAVE"
+  2. Click the button that says "CONTINUE"
+  3. Your game state has now been saved.
+- You can load a save file from the title screen of the application.
+  1. To load the save file, press the button that says "LOAD FILE"
+  2. Your file has now been loaded, and you can play the game.

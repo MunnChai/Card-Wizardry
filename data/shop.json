@@ -1,34 +1,26 @@
 {"cardsForSale": [
     {
-        "name": "WATCHFUL Spell Of HEALTHINESS",
-        "id": 0,
-        "type": "SHIELD",
-        "value": 3,
-        "coinCost": 2,
-        "energyCost": 2
-    },
-    {
-        "name": "DEADLY Spell Of SABOTAGE",
-        "id": 7,
+        "name": "MALICIOUS Spell Of DEATH",
+        "id": 5,
         "type": "ATTACK",
         "value": 12,
         "coinCost": 4,
         "energyCost": 6
     },
     {
-        "name": "MONSTROUS Spell Of DEATH",
-        "id": 6,
+        "name": "MONSTROUS Spell Of DISASTER",
+        "id": 7,
         "type": "ATTACK",
-        "value": 8,
-        "coinCost": 3,
-        "energyCost": 4
+        "value": 4,
+        "coinCost": 2,
+        "energyCost": 2
     },
     {
-        "name": "VILLAINOUS Spell Of DISASTER",
+        "name": "SHELTERING Spell Of ASSURANCE",
         "id": 1,
-        "type": "ATTACK",
-        "value": 6,
+        "type": "SHIELD",
+        "value": 3,
         "coinCost": 2,
-        "energyCost": 3
+        "energyCost": 2
     }
 ]}
