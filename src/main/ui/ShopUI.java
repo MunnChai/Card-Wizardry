@@ -18,9 +18,12 @@ public class ShopUI extends UIMethods {
     protected Shop shop;
 
     // EFFECTS: Constructs shop UI.
-    public ShopUI(User givenUser) {
-        user = givenUser;
-        shop = new Shop(user);
+    public ShopUI() {
+        user = User.getInstance();
+        User.setInstance(user);
+        shop = Shop.getInstance();
+        shop.setUser(user);
+        Shop.setInstance(shop);
 
         initUI();
     }

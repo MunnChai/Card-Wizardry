@@ -107,7 +107,7 @@ public class BattleUI extends UIMethods {
             victorySequence();
         }
         pause();
-        new ShopUI(user);
+        new ShopUI();
     }
 
     // MODIFIES: userPlayer, enemyPlayer, this

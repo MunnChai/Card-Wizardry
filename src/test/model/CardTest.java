@@ -276,7 +276,24 @@ class CardTest {
 
     @Test
     public void testDifferentCardType() {
-        assertNotEquals(attackCard1, shieldCard1);
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(SHIELD, 2, 1, 1, 0);
+
+        card1.setName("Bob");
+        card2.setName("Bob");
+
+        assertNotEquals(card1, card2);
+    }
+
+    @Test
+    public void testDifferentCardName() {
+        Card card1 = new Card(ATTACK, 2, 1, 1, 0);
+        Card card2 = new Card(ATTACK, 2, 1, 1, 0);
+
+        card1.setName("Bob");
+        card2.setName("Joe");
+
+        assertNotEquals(card1, card2);
     }
 
     @Test

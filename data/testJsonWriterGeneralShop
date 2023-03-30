@@ -1,18 +1,18 @@
 {"cardsForSale": [
     {
-        "name": "WICKED Spell Of CATACLYSM",
-        "id": 3,
+        "name": "WICKED Spell Of DOOM",
+        "id": 1,
         "type": "ATTACK",
         "value": 6,
         "coinCost": 2,
         "energyCost": 3
     },
     {
-        "name": "REINFORCING Spell Of PRESERVATION",
+        "name": "STRENGTHENING Spell Of PRESERVATION",
         "id": 0,
         "type": "SHIELD",
-        "value": 8,
+        "value": 1,
         "coinCost": 2,
-        "energyCost": 4
+        "energyCost": 1
     }
 ]}

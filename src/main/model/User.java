@@ -204,6 +204,10 @@ public class User implements Writable {
         this.decks = decks;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // Getters
     public String getName() {
         return name;

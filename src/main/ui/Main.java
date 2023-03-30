@@ -14,7 +14,8 @@ public class Main {
         String name = scanner.nextLine();
         System.out.println("Your journey begins in a dark forest, where you've been wandering for days on end,"
                 + " lost beyond lost.");
-        User user = new User(name);
-        ShopUI shopUI = new ShopUI(user);
+        User user = User.getInstance();
+        user.setName(name);
+        ShopUI shopUI = new ShopUI();
     }
 }
