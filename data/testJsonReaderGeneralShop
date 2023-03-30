@@ -1,0 +1,18 @@
+{"cardsForSale": [
+    {
+        "name": "MONSTROUS Spell Of DOOM",
+        "id": 5,
+        "type": "ATTACK",
+        "value": 4,
+        "coinCost": 2,
+        "energyCost": 2
+    },
+    {
+        "name": "WATCHFUL Spell Of INVULNERABILITY",
+        "id": 1,
+        "type": "SHIELD",
+        "value": 10,
+        "coinCost": 2,
+        "energyCost": 6
+    }
+]}
