@@ -160,7 +160,7 @@ public class EditDeckUI extends UIMethods {
             if (user.getDecks().size() == 1) {
                 System.out.println("You cannot delete your final deck.");
             } else {
-                user.getDecks().remove(deck);
+                user.removeDeck(deck);
                 System.out.println("Deleted " + deck.getName());
             }
         }

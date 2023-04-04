@@ -29,6 +29,14 @@ public class Deck implements Writable {
             cardsInDeck.add(canAddCards.get(randomInt));
             canAddCards.remove(randomInt);
         }
+        EventLog.getInstance().logEvent(new Event("Filled " + this.getName() + " randomly with cards."));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: empties list of cards in deck
+    public void clearDeck() {
+        this.cardsInDeck = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("Removed all cards from " + this.getName() + "."));
     }
 
     // EFFECTS: Produce all cards that are in user's owned cards, but not in the deck's cards
@@ -46,12 +54,16 @@ public class Deck implements Writable {
     // EFFECTS: Add given card to deck at index 0
     public void addCard(Card card) {
         cardsInDeck.add(0, card);
+        EventLog.getInstance().logEvent(new Event("Added " + card.getName() + " to " + this.getName() + "."));
     }
+
 
     // MODIFIES: this
     // EFFECTS: Remove given card from deck
     public void removeCard(Card card) {
         cardsInDeck.remove(card);
+        EventLog.getInstance().logEvent(new Event("Removed " + card.getName() + " from "
+                + this.getName() + "."));
     }
 
     // EFFECTS: Produce true if deck has viable amount of cards
@@ -73,7 +85,9 @@ public class Deck implements Writable {
     }
 
     public void setName(String name) {
+        String oldName = this.getName();
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Renamed " + oldName + " to " + name));
     }
 
     // Getters

@@ -2,6 +2,8 @@ package gui;
 
 import model.Shop;
 import model.User;
+import model.Event;
+import model.EventLog;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -16,8 +18,8 @@ public class SavePanelGUI extends Panel {
     private JPanel interactionPanel;
     private String previousPanel;
 
-    private JLabel questionLabel;
-    private JLabel doneLabel;
+    private JLabel textLabel;
+    private JTextArea eventLog;
 
     // Constructor for SavePanelGUI
     // Creates an interactionPanel that has buttons for the user to interact with, and text to display a question or
@@ -26,21 +28,18 @@ public class SavePanelGUI extends Panel {
         super(parent, "#5a6988", "SavePanelGUI");
         this.setLayout(null);
 
-        questionLabel = createText("Would you like to save your game?", "#ffffff", 1000, 1000,
-                WINDOW_WIDTH / 2, 200, 40);
-        questionLabel.setHorizontalAlignment(JLabel.CENTER);
-        questionLabel.setVerticalAlignment(JLabel.CENTER);
-
-        doneLabel = createText("Your game has been saved!", "#ffffff", 1000, 1000,
-                WINDOW_WIDTH / 2, 200, 40);
+        textLabel = createText("Would you like to save your game?", "#ffffff", 1000, 1000,
+                450, 200, 40);
+        textLabel.setHorizontalAlignment(JLabel.CENTER);
+        textLabel.setVerticalAlignment(JLabel.CENTER);
 
         interactionPanel = createInteractionPanel("#3a4466", "#262b44");
         interactionPanel.setLayout(new GridLayout());
 
         saveButton.setVisible(false);
 
-        this.add(questionLabel);
-        this.add(doneLabel);
+        this.add(textLabel);
+        addEventLog();
         this.add(interactionPanel);
         resetSaveScreen();
     }
@@ -61,8 +60,7 @@ public class SavePanelGUI extends Panel {
             interactionPanel.revalidate();
             saveUser();
             saveShop();
-            questionLabel.setVisible(false);
-            doneLabel.setVisible(true);
+            textLabel.setText("Your game has been saved!");
         };
 
         JButton saveButton = createButton("SAVE", "#3e8948", 0, 0,
@@ -72,8 +70,8 @@ public class SavePanelGUI extends Panel {
 
         interactionPanel.add(saveButton);
         interactionPanel.add(cancelButton);
-        questionLabel.setVisible(true);
-        doneLabel.setVisible(false);
+        textLabel.setText("Would you like to save your game?");
+        updateEventLog();
     }
 
     // EFFECTS: saves a JSON representation of the current Shop
@@ -100,6 +98,35 @@ public class SavePanelGUI extends Panel {
         } catch (FileNotFoundException e) {
             System.out.println("ERROR: File not found. Could not save to file.");
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds the event to the interaction panel with all the events so far
+    private void addEventLog() {
+        eventLog = new JTextArea();
+        eventLog.setEditable(false);
+        eventLog.setBackground(Color.decode("#8b9bb4"));
+        eventLog.setText("\n");
+        JScrollPane scrollPane = new JScrollPane(eventLog, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(WINDOW_WIDTH - 395, 0, 380, 385);
+        this.add(scrollPane);
+        updateEventLog();
+    }
+
+    // MODIFIES: eventLog
+    // EFFECTS: updates text with all the events that have been added so far
+    public void updateEventLog() {
+        eventLog.removeAll();
+        eventLog.setText("\n");
+
+        JLabel eventLogLabel = createText("Event Log", "#262b44", 200, 100, 80, 25, 30);
+        eventLog.add(eventLogLabel);
+
+        for (Event event : EventLog.getInstance()) {
+            eventLog.setText(eventLog.getText() + "\n\n" + event.toString());
+        }
+        eventLog.repaint();
     }
 
     // Setters

@@ -1,8 +1,10 @@
 package gui;
 
 import model.Card;
+import model.EventLog;
 import model.Shop;
 import model.User;
+import model.Event;
 
 import javax.swing.*;
 import java.awt.*;
@@ -177,7 +179,7 @@ public class ShopGUI extends Panel {
         buyCardScrollPanel.setLayout(new GridLayout());
         buyCardScrollPanel.setBackground(Color.decode("#e4a672"));
         JScrollPane scrollPane = new JScrollPane(buyCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(1024,300));
         scrollPane.setLocation(768, 150);
         buyCardPanel.add(scrollPane);
@@ -249,7 +251,7 @@ public class ShopGUI extends Panel {
         sellCardScrollPanel.setLayout(new GridLayout());
         sellCardScrollPanel.setBackground(Color.decode("#733e39"));
         JScrollPane scrollPane = new JScrollPane(sellCardScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(1024,300));
         scrollPane.setLocation(768, 150);
         sellCardPanel.add(scrollPane);

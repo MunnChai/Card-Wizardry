@@ -1,18 +1,18 @@
 {"cardsForSale": [
     {
-        "name": "FORTIFYING Spell Of PRESERVATION",
-        "id": 0,
-        "type": "SHIELD",
-        "value": 8,
-        "coinCost": 2,
-        "energyCost": 4
-    },
-    {
-        "name": "REINFORCING Spell Of IMMUNITY",
+        "name": "BRACING Spell Of SAFEGUARDING",
         "id": 1,
         "type": "SHIELD",
-        "value": 3,
+        "value": 6,
         "coinCost": 2,
-        "energyCost": 2
+        "energyCost": 3
+    },
+    {
+        "name": "SHIELDING Spell Of HEALTHINESS",
+        "id": 1,
+        "type": "SHIELD",
+        "value": 10,
+        "coinCost": 2,
+        "energyCost": 6
     }
 ]}

@@ -2,7 +2,9 @@ package gui;
 
 import model.Card;
 import model.Deck;
+import model.EventLog;
 import model.User;
+import model.Event;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,7 +77,7 @@ public class EditDecksGUI extends Panel {
         cardPanel.setBackground(Color.decode("#5a6988"));
         cardPanel.setLocation(70, 70);
         cardScrollPane = new JScrollPane(cardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         cardScrollPane.setSize(1140,300);
         cardScrollPane.setLocation(70, 70);
         this.add(cardScrollPane);
@@ -97,7 +99,7 @@ public class EditDecksGUI extends Panel {
         updateDecksScrollPane();
 
         JScrollPane scrollPane = new JScrollPane(mainScrollPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(1024,300));
         scrollPane.setLocation(768, 150);
         return scrollPane;
@@ -164,7 +166,6 @@ public class EditDecksGUI extends Panel {
         ActionListener editDeckAction = e -> {
             interactionLayout.show(interactionPanel, "EditDeck" + deck.hashCode());
             backToShopButton.setVisible(false);
-            System.out.println("Currently Editing Deck " + deck.hashCode());
             decorateCardPanel(deckPanel, deck);
             decorateAddCardPanel(deckPanel, deck);
             setCardPanelVisibility(true);
@@ -221,7 +222,7 @@ public class EditDecksGUI extends Panel {
     // EFFECTS: returns a button which removes a deck from a user's list of decks
     private JButton makeDeleteButton(JPanel panel, Deck deck) {
         ActionListener deleteAction = e -> {
-            User.getInstance().getDecks().remove(deck);
+            User.getInstance().removeDeck(deck);
             mainScrollPanel.remove(panel);
             mainScrollPanel.setPreferredSize(new Dimension(mainScrollPanel.getComponentCount() * 256, 300));
             mainScrollPanel.revalidate();
@@ -261,7 +262,7 @@ public class EditDecksGUI extends Panel {
     // EFFECTS: returns actionListener to remove all the cards from a deck
     private ActionListener makeRemoveAllCardsInDeckAction(Deck deck, JPanel parentPanel) {
         ActionListener removeCardsInDeckAction = e -> {
-            deck.getCardsInDeck().clear();
+            deck.clearDeck();
             cardPanel.removeAll();
             decorateCardPanel(parentPanel, deck);
             JLabel cardCount = (JLabel) parentPanel.getComponent(1);
@@ -336,7 +337,7 @@ public class EditDecksGUI extends Panel {
         addableCardPanel.setLayout(new GridLayout());
         addableCardPanel.setBackground(Color.decode("#5a6988"));
         JScrollPane addableCardScrollPane = new JScrollPane(addableCardPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         decorateAddCardPanel(grandparentPanel, deck);
         addCardPanel.add(addableCardScrollPane);
         return addCardPanel;
@@ -416,10 +417,8 @@ public class EditDecksGUI extends Panel {
     private ActionListener makeRenameAction(JTextField textField, Deck deck, JPanel grandparentPanel,
                                             JPanel parentPanel) {
         ActionListener renameAction = e -> {
-            System.out.println(deck.getName());
-            System.out.println(textField.getText());
+            String oldName = deck.getName();
             deck.setName(textField.getText());
-            System.out.println("Deck Renamed to " + deck.getName());
             interactionLayout.show(interactionPanel, "EditDeck" + deck.hashCode());
             JLabel deckPanelLabel = (JLabel) grandparentPanel.getComponent(0);
             deckPanelLabel.setText(deck.getName());

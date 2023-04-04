@@ -119,6 +119,14 @@ public class User implements Writable {
     // EFFECTS: Add given deck to list of decks
     public void addDeck(Deck deck) {
         decks.add(deck);
+        EventLog.getInstance().logEvent(new Event("Added " + deck.getName() + " to user's decks."));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes deck from user's decks
+    public void removeDeck(Deck deck) {
+        decks.remove(deck);
+        EventLog.getInstance().logEvent(new Event("Deleted " + deck.getName() + "."));
     }
 
     // REQUIRES: User must have at least 1 deck

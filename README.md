@@ -82,3 +82,20 @@ in the battle.
 - You can load a save file from the title screen of the application.
   1. To load the save file, press the button that says "LOAD FILE"
   2. Your file has now been loaded, and you can play the game.
+
+## Phase 4: Task 2
+
+Mon Apr 03 16:37:38 PDT 2023 <br />
+Filled Starter Deck randomly with cards. <br />
+Mon Apr 03 16:37:41 PDT 2023 <br />
+Filled Starter Deck randomly with cards. <br />
+Mon Apr 03 16:37:46 PDT 2023 <br />
+Added New Deck to user's decks. <br /> 
+Mon Apr 03 16:37:53 PDT 2023 <br />
+Renamed New Deck to My Best Deck <br />
+Mon Apr 03 16:37:54 PDT 2023 <br />
+Filled My Best Deck randomly with cards. <br />
+Mon Apr 03 16:37:55 PDT 2023 <br />
+Removed SACRED Spell Of FORTUNE from My Best Deck. <br />
+Mon Apr 03 16:37:57 PDT 2023 <br />
+Added WICKED Spell Of MISHAP to My Best Deck.

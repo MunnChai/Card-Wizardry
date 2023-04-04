@@ -40,6 +40,8 @@ public class Shop implements Writable {
         user.getOwnedCards().add(purchasedCard);
         user.getNotOwnedCards().remove(purchasedCard);
         user.setCoins(user.getCoins() - purchasedCard.getCoinCost());
+        EventLog.getInstance().logEvent(new Event("Purchased " + purchasedCard.getName() + " for "
+                + purchasedCard.getCoinCost() + " coins."));
     }
 
     // MODIFIES: Player
@@ -48,6 +50,8 @@ public class Shop implements Writable {
         user.getOwnedCards().remove(card);
         user.getNotOwnedCards().add(card);
         user.setCoins(user.getCoins() + card.getCoinCost());
+        EventLog.getInstance().logEvent(new Event("Sold " + card.getName() + " for "
+                + card.getCoinCost() + " coins."));
     }
 
     // EFFECTS: returns shop as a JSONObject
@@ -76,7 +80,6 @@ public class Shop implements Writable {
     public static Shop getInstance() {
         if (instance == null) {
             instance = new Shop(User.getInstance());
-            System.out.println("Temporary Shop Created");
         }
         return instance;
     }

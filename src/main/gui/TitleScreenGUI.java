@@ -1,5 +1,7 @@
 package gui;
 
+import model.Event;
+import model.EventLog;
 import model.Shop;
 import model.User;
 import persistence.JsonReader;
@@ -84,7 +86,12 @@ public class TitleScreenGUI extends Panel {
 
     // EFFECTS: returns an ActionListener to close the program
     private ActionListener quitGameAction() {
-        ActionListener action = e -> System.exit(0);
+        ActionListener action = e -> {
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.toString());
+            }
+            System.exit(0);
+        };
         return action;
     }
 }
