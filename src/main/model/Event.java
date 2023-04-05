@@ -3,6 +3,11 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Represents any card or deck related event
+ *
+ * Referenced from: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+ */
 public class Event {
     private static final int HASH_CONSTANT = 13;
     private Date dateLogged;

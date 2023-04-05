@@ -1,30 +1,30 @@
 {"cardsForSale": [
     {
-        "name": "WATCHFUL Spell Of INVULNERABILITY",
-        "id": 0,
-        "type": "SHIELD",
-        "value": 3,
+        "name": "VILLAINOUS Spell Of JUDGEMENT",
+        "id": 2,
+        "type": "ATTACK",
+        "value": 6,
+        "coinCost": 2,
+        "energyCost": 3
+    },
+    {
+        "name": "DEADLY Spell Of CATACLYSM",
+        "id": 7,
+        "type": "ATTACK",
+        "value": 8,
+        "coinCost": 3,
+        "energyCost": 4
+    },
+    {
+        "name": "MONSTROUS Spell Of DISTRESS",
+        "id": 6,
+        "type": "ATTACK",
+        "value": 4,
         "coinCost": 2,
         "energyCost": 2
     },
     {
-        "name": "VIGILANT Spell Of SAFETY",
-        "id": 1,
-        "type": "SHIELD",
-        "value": 1,
-        "coinCost": 2,
-        "energyCost": 1
-    },
-    {
-        "name": "LETHAL Spell Of DISTRESS",
-        "id": 7,
-        "type": "ATTACK",
-        "value": 12,
-        "coinCost": 4,
-        "energyCost": 6
-    },
-    {
-        "name": "MALICIOUS Spell Of JUDGEMENT",
+        "name": "WICKED Spell Of DISASTER",
         "id": 2,
         "type": "ATTACK",
         "value": 4,
