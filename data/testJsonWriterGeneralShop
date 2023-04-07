@@ -1,15 +1,15 @@
 {"cardsForSale": [
     {
-        "name": "VIGILANT Spell Of IMMUNITY",
-        "id": 1,
-        "type": "SHIELD",
-        "value": 1,
-        "coinCost": 2,
-        "energyCost": 1
+        "name": "LETHAL Spell Of SABOTAGE",
+        "id": 2,
+        "type": "ATTACK",
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
     },
     {
-        "name": "FORTIFYING Spell Of SAFEGUARDING",
-        "id": 0,
+        "name": "VIGILANT Spell Of SAFEGUARDING",
+        "id": 1,
         "type": "SHIELD",
         "value": 3,
         "coinCost": 2,

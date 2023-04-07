@@ -15,7 +15,7 @@ public class BattleUI extends UIMethods {
     private EnemyPlayer enemyPlayer;
     private int turnEnergy;
 
-    public static final int VICTORY_COIN_AMOUNT = 4;
+    public static final int VICTORY_COIN_AMOUNT = 6;
 
     // EFFECTS: Constructs battle UI.
     public BattleUI(User givenUser) {

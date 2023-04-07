@@ -1,14 +1,6 @@
 {"cardsForSale": [
     {
-        "name": "VILLAINOUS Spell Of JUDGEMENT",
-        "id": 2,
-        "type": "ATTACK",
-        "value": 6,
-        "coinCost": 2,
-        "energyCost": 3
-    },
-    {
-        "name": "DEADLY Spell Of CATACLYSM",
+        "name": "DEADLY Spell Of SABOTAGE",
         "id": 7,
         "type": "ATTACK",
         "value": 8,
@@ -16,19 +8,27 @@
         "energyCost": 4
     },
     {
-        "name": "MONSTROUS Spell Of DISTRESS",
-        "id": 6,
-        "type": "ATTACK",
-        "value": 4,
+        "name": "REINFORCING Spell Of HEALTHINESS",
+        "id": 0,
+        "type": "SHIELD",
+        "value": 10,
         "coinCost": 2,
-        "energyCost": 2
+        "energyCost": 6
     },
     {
-        "name": "WICKED Spell Of DISASTER",
-        "id": 2,
+        "name": "EVIL Spell Of DEATH",
+        "id": 3,
         "type": "ATTACK",
-        "value": 4,
-        "coinCost": 2,
-        "energyCost": 2
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
+    },
+    {
+        "name": "LETHAL Spell Of SABOTAGE",
+        "id": 6,
+        "type": "ATTACK",
+        "value": 12,
+        "coinCost": 4,
+        "energyCost": 6
     }
 ]}

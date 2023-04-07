@@ -55,7 +55,6 @@ public abstract class Panel extends JPanel {
         label.setSize(width, height);
         label.setLocation(x - label.getWidth() / 2, y - label.getHeight() / 2);
 
-
         label.setFont(new Font(FONT, Font.BOLD, textSize));
         label.setForeground(Color.decode(colorHex));
         return label;

@@ -151,12 +151,12 @@ public class ShopGUI extends Panel {
             editDecksGUI.updateDecksScrollPane();
             parentLayout.show(parent, "EditDecksGUI");
         };
-//        ActionListener battleAction = switchPanelAction("BattleScreenGUI");
+        ActionListener battleAction = switchPanelAction("BattleScreenGUI");
 
         selectionPanel.add(createButton("BUY A CARD", "#b86f50", 280, 200, 0, 0, buyCardAction, 30));
         selectionPanel.add(createButton("SELL A CARD", "#b86f50", 280, 200, 0, 0, sellCardAction, 30));
         selectionPanel.add(createButton("EDIT DECKS", "#b86f50", 280, 200, 0, 0, editDecksAction, 30));
-//        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
+        selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
         interactionLayout.addLayoutComponent("SelectionPanel", selectionPanel);
         return selectionPanel;
     }
