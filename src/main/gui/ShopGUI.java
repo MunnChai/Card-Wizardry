@@ -136,22 +136,18 @@ public class ShopGUI extends Panel {
         selectionPanel.setBackground(Color.decode("#e4a672"));
         selectionPanel.setLayout(new GridLayout());
 
-        ActionListener buyCardAction = e -> {
-            makeCatSayText("What would you like to buy?");
-            backToTitleButton.setVisible(false);
-            interactionLayout.show(interactionPanel, "BuyCardPanel");
-        };
-        ActionListener sellCardAction = e -> {
-            makeCatSayText("What would you like to sell?");
-            backToTitleButton.setVisible(false);
-            interactionLayout.show(interactionPanel, "SellCardPanel");
-        };
+        ActionListener buyCardAction = makeBuyCardAction();
+        ActionListener sellCardAction = makeSellCardAction();
         ActionListener editDecksAction = e -> {
             EditDecksGUI editDecksGUI = (EditDecksGUI) parent.getComponent(4);
             editDecksGUI.updateDecksScrollPane();
             parentLayout.show(parent, "EditDecksGUI");
         };
-        ActionListener battleAction = switchPanelAction("BattleScreenGUI");
+        ActionListener battleAction = e -> {
+            BattleScreenGUI battleScreenGUI = (BattleScreenGUI) parent.getComponent(3);
+            battleScreenGUI.newBattle();
+            parentLayout.show(parent, "BattleScreenGUI");
+        };
 
         selectionPanel.add(createButton("BUY A CARD", "#b86f50", 280, 200, 0, 0, buyCardAction, 30));
         selectionPanel.add(createButton("SELL A CARD", "#b86f50", 280, 200, 0, 0, sellCardAction, 30));
@@ -159,6 +155,24 @@ public class ShopGUI extends Panel {
         selectionPanel.add(createButton("OFF TO BATTLE!", "#b86f50", 280, 200, 0, 0, battleAction, 30));
         interactionLayout.addLayoutComponent("SelectionPanel", selectionPanel);
         return selectionPanel;
+    }
+
+    // EFFECTS: returns ActionListener to show buy card panel
+    private ActionListener makeBuyCardAction() {
+        return e -> {
+            makeCatSayText("What would you like to buy?");
+            backToTitleButton.setVisible(false);
+            interactionLayout.show(interactionPanel, "BuyCardPanel");
+        };
+    }
+
+    // EFFECTS: returns ActionListener to show sell card panel
+    private ActionListener makeSellCardAction() {
+        return e -> {
+            makeCatSayText("What would you like to sell?");
+            backToTitleButton.setVisible(false);
+            interactionLayout.show(interactionPanel, "SellCardPanel");
+        };
     }
 
     // EFFECTS: returns the interactionPanel where the user can buy a card

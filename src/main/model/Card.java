@@ -17,7 +17,7 @@ public class Card implements Writable {
     }
 
     // Different adjectives used to generate card names. Sorted by adjective types that correspond with card types.
-    enum Adjectives {
+    enum CardAdjectives {
 
         DEADLY(AdjType.ATTACK), EVIL(AdjType.ATTACK), MONSTROUS(AdjType.ATTACK), LETHAL(AdjType.ATTACK),
         MALICIOUS(AdjType.ATTACK), VICIOUS(AdjType.ATTACK), WICKED(AdjType.ATTACK), VILLAINOUS(AdjType.ATTACK),
@@ -30,7 +30,7 @@ public class Card implements Writable {
 
         private final AdjType adjType;
 
-        Adjectives(AdjType adjType) {
+        CardAdjectives(AdjType adjType) {
             this.adjType = adjType;
         }
 
@@ -40,7 +40,7 @@ public class Card implements Writable {
     }
 
     // Different nouns used to generate card names. Sorted by noun types that correspond with card types.
-    enum Nouns {
+    enum CardNouns {
 
         DOOM(NounType.ATTACK), CATACLYSM(NounType.ATTACK), DISASTER(NounType.ATTACK), MISHAP(NounType.ATTACK),
         DISTRESS(NounType.ATTACK), JUDGEMENT(NounType.ATTACK), DEATH(NounType.ATTACK), SABOTAGE(NounType.ATTACK),
@@ -54,7 +54,7 @@ public class Card implements Writable {
 
         private final NounType nounType;
 
-        Nouns(NounType nounType) {
+        CardNouns(NounType nounType) {
             this.nounType = nounType;
         }
 
@@ -95,7 +95,7 @@ public class Card implements Writable {
             default:
                 randomInt = (int)(Math.random() * 8) + 16;
         }
-        return Adjectives.values()[randomInt].name();
+        return CardAdjectives.values()[randomInt].name();
     }
 
     // EFFECTS: Returns random noun, depending on which type is given
@@ -113,7 +113,7 @@ public class Card implements Writable {
             default:
                 randomInt = (int)(Math.random() * 8) + 16;
         }
-        return Nouns.values()[randomInt].name();
+        return CardNouns.values()[randomInt].name();
     }
 
     // MODIFIES: player

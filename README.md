@@ -84,18 +84,42 @@ in the battle.
   2. Your file has now been loaded, and you can play the game.
 
 ## Phase 4: Task 2
+*A sample of events that may occur when you run the game.*
 
 Mon Apr 03 16:37:38 PDT 2023 <br />
-Filled Starter Deck randomly with cards. <br />
+Filled Starter Deck randomly with cards. <br /><br />
 Mon Apr 03 16:37:41 PDT 2023 <br />
-Filled Starter Deck randomly with cards. <br />
+Filled Starter Deck randomly with cards. <br /><br />
 Mon Apr 03 16:37:46 PDT 2023 <br />
-Added New Deck to user's decks. <br /> 
+Added New Deck to user's decks. <br /> <br />
 Mon Apr 03 16:37:53 PDT 2023 <br />
-Renamed New Deck to My Best Deck <br />
+Renamed New Deck to My Best Deck <br /><br />
 Mon Apr 03 16:37:54 PDT 2023 <br />
-Filled My Best Deck randomly with cards. <br />
+Filled My Best Deck randomly with cards. <br /><br />
 Mon Apr 03 16:37:55 PDT 2023 <br />
-Removed SACRED Spell Of FORTUNE from My Best Deck. <br />
+Removed SACRED Spell Of FORTUNE from My Best Deck. <br /><br />
 Mon Apr 03 16:37:57 PDT 2023 <br />
 Added WICKED Spell Of MISHAP to My Best Deck.
+
+## Phase 4: Task 3
+
+While completing my project, I noticed many design choices that past me had made, and present me regretted.
+One change that I managed to implement in time was making my User class a Singleton Pattern. I remember absolutely suffering 
+during the console UI phase, passing a User through every single class, wishing there was an easier way
+to make a single class accessible from any other class. Singleton made working with the User significantly easier.
+
+Some changes I wish I could've made include:
+
+- **Deck** implements **Iterable\<Card\>**: The Deck class is mostly used to store a list of cards, so being able to 
+iterate over the cards easily would be convenient, rather than calling a getter to get the list of cards every time. 
+- More **Singleton**: There were many classes in my GUI which I feel could have benefited from either being
+a Singleton class, or having some sort of static methods that could be accessed from any other class. For example, 
+if I updated a deck in EditDecksGUI, I would need to also update the visual of the User's owned cards in the ShopGUI. I accomplished
+this by passing a parameter of ShopGUI to EditDecksGUI, but in retrospect, I believe a Singleton would be appropriate here, 
+since I will only ever have one ShopGUI instantiated. This idea can be applied to most of the classes that extend the
+Panel class in the GUI package. 
+- **Abstracting** methods: I noticed many methods in my GUI package that had very similar functions, for example,
+I have many methods that all update a JScrollPane with slightly different uses, but it could be abstracted into one
+method which would reduce code duplication. Some abstraction I managed to implement in my code include methods
+to easily create panels, text, or buttons for GUI aspects, and creating an abstract class Player which both UserPlayer
+and EnemyPlayer extend. 

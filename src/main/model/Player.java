@@ -6,7 +6,7 @@ import static model.UserPlayer.*;
 
 // A class for any player in a battle. The player has a deck, hand, health, energy, and shield. It can play or draw a
 // card, take or heal damage.
-public class Player {
+public abstract class Player {
 
     protected Deck deck;            // player's selected deck for battle
     protected List<Card> hand;      // player's current hand of cards

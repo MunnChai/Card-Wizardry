@@ -71,7 +71,7 @@ class CardTest {
 
         List<String> attackAdjectives = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            attackAdjectives.add(Card.Adjectives.values()[i].name());
+            attackAdjectives.add(Card.CardAdjectives.values()[i].name());
         }
 
         int inAdjectivesCount = 0;
@@ -92,7 +92,7 @@ class CardTest {
 
         List<String> healAdjectives = new ArrayList<>();
         for (int i = 8; i < 16; i++) {
-            healAdjectives.add(Card.Adjectives.values()[i].name());
+            healAdjectives.add(Card.CardAdjectives.values()[i].name());
         }
 
         int inAdjectivesCount = 0;
@@ -113,7 +113,7 @@ class CardTest {
 
         List<String> shieldAdjectives = new ArrayList<>();
         for (int i = 16; i < 24; i++) {
-            shieldAdjectives.add(Card.Adjectives.values()[i].name());
+            shieldAdjectives.add(Card.CardAdjectives.values()[i].name());
         }
 
         int inAdjectivesCount = 0;
@@ -134,7 +134,7 @@ class CardTest {
 
         List<String> attackNouns = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            attackNouns.add(Card.Nouns.values()[i].name());
+            attackNouns.add(Card.CardNouns.values()[i].name());
         }
 
         int inNounsCount = 0;
@@ -155,7 +155,7 @@ class CardTest {
 
         List<String> healNouns = new ArrayList<>();
         for (int i = 8; i < 16; i++) {
-            healNouns.add(Card.Nouns.values()[i].name());
+            healNouns.add(Card.CardNouns.values()[i].name());
         }
 
         int inNounsCount = 0;
@@ -176,7 +176,7 @@ class CardTest {
 
         List<String> shieldNouns = new ArrayList<>();
         for (int i = 16; i < 24; i++) {
-            shieldNouns.add(Card.Nouns.values()[i].name());
+            shieldNouns.add(Card.CardNouns.values()[i].name());
         }
 
         int inNounsCount = 0;

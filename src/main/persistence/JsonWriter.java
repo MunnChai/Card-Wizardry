@@ -1,6 +1,5 @@
 package persistence;
 
-import model.User;
 import model.Writable;
 import org.json.*;
 import java.io.*;
